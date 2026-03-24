@@ -774,7 +774,7 @@ footer a:hover{color:var(--secondary)}
         </div>
       </div>
 
-      <!-- DREAPTA: formular -->
+<!-- DREAPTA: formular -->
       <div class="prog-form-card">
         <!-- Starea initiala: formular -->
         <div id="prog-form-content">
@@ -789,19 +789,19 @@ footer a:hover{color:var(--secondary)}
           <div class="form-row">
             <div class="form-group">
               <label for="prog-nume">Nume *</label>
-              <input type="text" id="prog-nume" placeholder="ex: Popescu" autocomplete="family-name">
+            <input type="text" id="prog-nume" name="nume" placeholder="ex: Popescu" autocomplete="family-name" required>
               <span class="field-error" id="err-nume">Introdu numele tau</span>
             </div>
             <div class="form-group">
               <label for="prog-prenume">Prenume *</label>
-              <input type="text" id="prog-prenume" placeholder="ex: Ion" autocomplete="given-name">
+            <input type="text" id="prog-prenume" name="prenume" placeholder="ex: Ion" autocomplete="given-name" required>
               <span class="field-error" id="err-prenume">Introdu prenumele tau</span>
             </div>
           </div>
 
           <div class="form-group">
             <label for="prog-email">Adresa de email *</label>
-            <input type="email" id="prog-email" placeholder="email@exemplu.ro" autocomplete="email">
+            <input type="email" id="prog-email" name="email" placeholder="email@exemplu.ro" autocomplete="email" required>
             <span class="field-error" id="err-email">Introdu un email valid</span>
           </div>
 
@@ -854,7 +854,8 @@ footer a:hover{color:var(--secondary)}
             <textarea id="prog-mesaj" placeholder="Descrie pe scurt situatia ta sau intrebarile pe care le ai..."></textarea>
           </div>
 
-          <button class="prog-submit" onclick="submitProgramare()" id="prog-btn">
+         
+<button type="button" class="prog-submit" id="prog-btn" onclick="submitProgramare()">
             <span id="prog-btn-text">📅 Trimite Programarea</span>
           </button>
           <p class="prog-privacy">
@@ -867,6 +868,7 @@ footer a:hover{color:var(--secondary)}
           <div class="prog-success-icon">✓</div>
           <h3>Programare trimisa cu succes!</h3>
           <p>Am primit solicitarea ta. Vei fi contactat in maxim <strong>24 ore</strong> pentru confirmare.</p>
+          <p style="font-size:16px;font-weight:700;color:#c2410c;margin-top:14px;">⚠️ Atentie! Email-ul de confirmare poate ajunge in folderul Spam sau Promotii. Te rugam sa verifici si acolo.</p>
           <div class="prog-success-ref" id="prog-ref-code">REF: #D4TAX-0000</div>
           <p style="font-size:13px;color:#9aa5b4;">Pastreaza codul de referinta pentru urmarire</p>
           <button class="prog-new-btn" onclick="resetForm()">➕ Alta programare</button>
@@ -912,7 +914,6 @@ footer a:hover{color:var(--secondary)}
       <a href="#blog">📝 Blog</a>
       <a href="#contact">📞 Contact</a>
       <a href="#programari">📅 Programari</a>
-      <a href="programari.html">🔐 Admin Programari</a>
       <a href="404.html">🔗 Pagina 404</a>
     </div>
   </div>
@@ -1058,15 +1059,17 @@ function validatePhone(phone) {
   return /^[0-9\s\+\-\(\)]{8,15}$/.test(phone.trim());
 }
 
-function submitProgramare() {
-  const nume    = document.getElementById('prog-nume').value.trim();
+const API_URL = 'https://tax-reserve-me.preview.emergentagent.com/api';
+
+async function submitProgramare() {
+  const nume = document.getElementById('prog-nume').value.trim();
   const prenume = document.getElementById('prog-prenume').value.trim();
-  const email   = document.getElementById('prog-email').value.trim();
-  const tel     = document.getElementById('prog-tel').value.trim();
-  const data    = document.getElementById('prog-data').value;
-  const ora     = document.getElementById('prog-ora').value;
-  const serviciu= document.getElementById('prog-serviciu').value;
-  const mesaj   = document.getElementById('prog-mesaj').value.trim();
+  const email = document.getElementById('prog-email').value.trim();
+  const tel = document.getElementById('prog-tel').value.trim();
+  const data = document.getElementById('prog-data').value;
+  const ora = document.getElementById('prog-ora').value;
+  const serviciu = document.getElementById('prog-serviciu').value;
+  const mesaj = document.getElementById('prog-mesaj').value.trim();
 
   let valid = true;
   const today = new Date(); today.setHours(0,0,0,0);
@@ -1084,44 +1087,48 @@ function submitProgramare() {
 
   if (!valid) {
     showProgToast('Completeaza corect toate campurile obligatorii', true);
-    // scroll to first error
     const firstErr = document.querySelector('#programari .form-group input.error, #programari .form-group select.error');
     if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
 
-  // Salveaza in localStorage
   const btn = document.getElementById('prog-btn');
   const btnText = document.getElementById('prog-btn-text');
   btn.disabled = true;
   btnText.textContent = '⏳ Se trimite...';
 
-  setTimeout(() => {
-    const ref = generateRef();
-    const programare = {
-      id: Date.now(),
-      ref,
-      nume, prenume, email, tel, data, ora, serviciu, mesaj,
-      status: 'pending', // pending | approved | rejected
-      creat: new Date().toISOString()
-    };
+  try {
+    const response = await fetch(API_URL + '/programare', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nume: nume,
+        prenume: prenume,
+        email: email,
+        telefon: tel,
+        data: data,
+        ora: ora,
+        serviciu: serviciu,
+        mesaj: mesaj
+      })
+    });
 
-    const list = getProgramari();
-    list.unshift(programare);
-    saveProgramari(list);
-
-    // Arata success
+    if (!response.ok) throw new Error('Eroare server');
+    const result = await response.json();
+    
     document.getElementById('prog-form-content').style.display = 'none';
-    const suc = document.getElementById('prog-success');
-    suc.style.display = 'block';
-    document.getElementById('prog-ref-code').textContent = 'REF: ' + ref;
+    document.getElementById('prog-success').style.display = 'block';
+    document.getElementById('prog-ref-code').textContent = 'REF: ' + result.ref;
+    showProgToast('Programare trimisa! Verifica email-ul pentru confirmare.');
 
-    btn.disabled = false;
-    btnText.textContent = '📅 Trimite Programarea';
-    showProgToast('Programare inregistrata cu succes!');
-  }, 1000);
+  } catch (error) {
+    console.error('Error:', error);
+    showProgToast('Eroare la trimitere. Incearca din nou.', true);
+  }
+
+  btn.disabled = false;
+  btnText.textContent = '📅 Trimite Programarea';
 }
-
 function resetForm() {
   document.getElementById('prog-form-content').style.display = 'block';
   document.getElementById('prog-success').style.display = 'none';
@@ -1233,6 +1240,8 @@ function hideTyping(){const t=document.getElementById('typingEl');if(t)t.remove(
 
 async function sendExpert(){if(!expertMode)return;const inp=document.getElementById('expert-input');const txt=inp.value.trim();if((!txt&&!attachedFile)||expertBusy)return;let displayHtml='';let apiContent=[];if(attachedFile){const file=attachedFile;const isImg=file.type.startsWith('image/');const b64=await fileToBase64(file);if(isImg){displayHtml+=`<img src="${b64}" class="bubble-img" alt="${file.name}">`;apiContent.push({type:'image',source:{type:'base64',media_type:file.type,data:b64.split(',')[1]}});}else{const ext=file.name.split('.').pop().toUpperCase();const icons={PDF:'📄',DOC:'📝',DOCX:'📝',XLS:'📊',XLSX:'📊',TXT:'📃'};displayHtml+=`<div class="bubble-file-row"><span class="bubble-file-icon">${icons[ext]||'📎'}</span><span class="bubble-file-info">${file.name}</span></div>`;if(file.type==='application/pdf'){apiContent.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:b64.split(',')[1]}});}else{apiContent.push({type:'text',text:`[Utilizatorul a atasat fisierul: ${file.name}]`});}}}if(txt){displayHtml+=(displayHtml?'<br>':'')+txt;apiContent.push({type:'text',text:txt});}if(!apiContent.length)return;addWaMessage(displayHtml,'user');inp.value='';inp.style.height='auto';clearFile();expertBusy=true;document.getElementById('expert-send').disabled=true;showTyping();expertHistory.push({role:'user',content:apiContent.length===1&&apiContent[0].type==='text'?apiContent[0].text:apiContent});try{const resp=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:'Esti expertul virtual al firmei d4riusTAX ADVICE S.R.L din Targoviste, Romania. Firma ofera contabilitate si consultanta financiara cu peste 15 ani experienta. Esti prietenos, profesional, concis. Specializare: contabilitate, TVA, CAS, CASS, ANAF, D112, D300, SRL, PFA, ONG, salarizare, optimizare fiscala legala. Daca utilizatorul trimite imagini sau documente, analizeaza-le si raspunde relevant. Contact firma: +40 770 430 731.',messages:expertHistory})});if(!resp.ok)throw new Error('HTTP '+resp.status);const data=await resp.json();hideTyping();let reply='';for(const block of data.content){if(block.type==='text')reply+=block.text;}expertHistory.push({role:'assistant',content:reply});addWaMessage(reply.replace(/\n/g,'<br>'),'bot');}catch(err){hideTyping();addWaMessage('⚠️ Eroare conexiune. Contacteaza-ne la <a href="tel:+40770430731" style="color:#6366f1;font-weight:700">+40 770 430 731</a>','bot');}expertBusy=false;document.getElementById('expert-send').disabled=false;document.getElementById('expert-input').focus();}
 function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(new Error('Read failed'));r.readAsDataURL(file);});}
+
+
 </script>
 </body>
 </html>
