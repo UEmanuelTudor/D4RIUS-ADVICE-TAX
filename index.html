@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -14,7 +16,7 @@
 <link rel="icon" type="image/png" href="D4RIUS TAX.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="protect.js"></script>
+<!-- Script removed - file doesn't exist -->
 <style>
 :root{--primary:#14314d;--secondary:#ff7a18;--dark:#0b1b2b;--light:#f5f7fb;--text:#333;--radius:20px;}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
@@ -1238,10 +1240,48 @@ function clearFile(){attachedFile=null;pendingFile=null;const strip=document.get
 function showTyping(){const msgs=document.getElementById('chatbot-messages');const row=document.createElement('div');row.className='wa-typing-row';row.id='typingEl';const av=document.createElement('div');av.className='wa-av bot-av';av.innerHTML=`<img src="D4RIUS TAX.png" alt="logo" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.innerHTML='🏢'">`;const bbl=document.createElement('div');bbl.className='typing-bbl';bbl.innerHTML='<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';row.appendChild(av);row.appendChild(bbl);msgs.appendChild(row);msgs.scrollTop=msgs.scrollHeight;}
 function hideTyping(){const t=document.getElementById('typingEl');if(t)t.remove();}
 
-async function sendExpert(){if(!expertMode)return;const inp=document.getElementById('expert-input');const txt=inp.value.trim();if((!txt&&!attachedFile)||expertBusy)return;let displayHtml='';let apiContent=[];if(attachedFile){const file=attachedFile;const isImg=file.type.startsWith('image/');const b64=await fileToBase64(file);if(isImg){displayHtml+=`<img src="${b64}" class="bubble-img" alt="${file.name}">`;apiContent.push({type:'image',source:{type:'base64',media_type:file.type,data:b64.split(',')[1]}});}else{const ext=file.name.split('.').pop().toUpperCase();const icons={PDF:'📄',DOC:'📝',DOCX:'📝',XLS:'📊',XLSX:'📊',TXT:'📃'};displayHtml+=`<div class="bubble-file-row"><span class="bubble-file-icon">${icons[ext]||'📎'}</span><span class="bubble-file-info">${file.name}</span></div>`;if(file.type==='application/pdf'){apiContent.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:b64.split(',')[1]}});}else{apiContent.push({type:'text',text:`[Utilizatorul a atasat fisierul: ${file.name}]`});}}}if(txt){displayHtml+=(displayHtml?'<br>':'')+txt;apiContent.push({type:'text',text:txt});}if(!apiContent.length)return;addWaMessage(displayHtml,'user');inp.value='';inp.style.height='auto';clearFile();expertBusy=true;document.getElementById('expert-send').disabled=true;showTyping();expertHistory.push({role:'user',content:apiContent.length===1&&apiContent[0].type==='text'?apiContent[0].text:apiContent});try{const resp=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:'Esti expertul virtual al firmei d4riusTAX ADVICE S.R.L din Targoviste, Romania. Firma ofera contabilitate si consultanta financiara cu peste 15 ani experienta. Esti prietenos, profesional, concis. Specializare: contabilitate, TVA, CAS, CASS, ANAF, D112, D300, SRL, PFA, ONG, salarizare, optimizare fiscala legala. Daca utilizatorul trimite imagini sau documente, analizeaza-le si raspunde relevant. Contact firma: +40 770 430 731.',messages:expertHistory})});if(!resp.ok)throw new Error('HTTP '+resp.status);const data=await resp.json();hideTyping();let reply='';for(const block of data.content){if(block.type==='text')reply+=block.text;}expertHistory.push({role:'assistant',content:reply});addWaMessage(reply.replace(/\n/g,'<br>'),'bot');}catch(err){hideTyping();addWaMessage('⚠️ Eroare conexiune. Contacteaza-ne la <a href="tel:+40770430731" style="color:#6366f1;font-weight:700">+40 770 430 731</a>','bot');}expertBusy=false;document.getElementById('expert-send').disabled=false;document.getElementById('expert-input').focus();}
+async function sendExpert(){if(!expertMode)return;const inp=document.getElementById('expert-input');const txt=inp.value.trim();if((!txt&&!attachedFile)||expertBusy)return;let displayHtml='';let apiContent=[];if(attachedFile){const file=attachedFile;const isImg=file.type.startsWith('image/');const b64=await fileToBase64(file);if(isImg){displayHtml+=`<img src="${b64}" class="bubble-img" alt="${file.name}">`;apiContent.push({type:'image',source:{type:'base64',media_type:file.type,data:b64.split(',')[1]}});}else{const ext=file.name.split('.').pop().toUpperCase();const icons={PDF:'📄',DOC:'📝',DOCX:'📝',XLS:'📊',XLSX:'📊',TXT:'📃'};displayHtml+=`<div class="bubble-file-row"><span class="bubble-file-icon">${icons[ext]||'📎'}</span><span class="bubble-file-info">${file.name}</span></div>`;if(file.type==='application/pdf'){apiContent.push({type:'document',source:{type:'base64',media_type:'application/pdf',data:b64.split(',')[1]}});}else{apiContent.push({type:'text',text:`[Utilizatorul a atasat fisierul: ${file.name}]`});}}}if(txt){displayHtml+=(displayHtml?'<br>':'')+txt;apiContent.push({type:'text',text:txt});}if(!apiContent.length)return;addWaMessage(displayHtml,'user');inp.value='';inp.style.height='auto';clearFile();expertBusy=true;document.getElementById('expert-send').disabled=true;showTyping();expertHistory.push({role:'user',content:apiContent.length===1&&apiContent[0].type==='text'?apiContent[0].text:apiContent});try{const resp=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1024,system:'Esti expertul virtual al firmei d4riusTAX ADVICE S.R.L din Targoviste, Romania. Firma ofera contabilitate si consultanta financiara cu peste 15 ani experienta. Esti prietenos, profesional, concis. Specializare: contabilitate, TVA, CAS, CASS, ANAF, D112, D300, SRL, PFA, ONG, salarizare, optimizare fiscala legala. Daca utilizatorul trimite imagini sau documente, analizeaza-le si raspunde relevant. DATE DE CONTACT FIRMA (OBLIGATORIU SA LE FURNIZEZI CAND SUNT CERUTE): Email: contact@d4riustax.advice.uetcompany.ro | Telefon: +40 770 430 731 | Adresa: Targoviste, Dambovita | Program: Luni-Vineri 10:00-18:00, Sambata-Duminica 11:00-18:00. IMPORTANT: Cand cineva intreaba de email, adresa, telefon sau orice date de contact, furnizeaza-le DIRECT si COMPLET fara sa trimiti utilizatorul sa sune undeva.',messages:expertHistory})});if(!resp.ok)throw new Error('HTTP '+resp.status);const data=await resp.json();hideTyping();let reply='';for(const block of data.content){if(block.type==='text')reply+=block.text;}expertHistory.push({role:'assistant',content:reply});addWaMessage(reply.replace(/\n/g,'<br>'),'bot');}catch(err){hideTyping();addWaMessage('⚠️ Eroare conexiune. Contacteaza-ne la <a href="tel:+40770430731" style="color:#6366f1;font-weight:700">+40 770 430 731</a>','bot');}expertBusy=false;document.getElementById('expert-send').disabled=false;document.getElementById('expert-input').focus();}
 function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(new Error('Read failed'));r.readAsDataURL(file);});}
 
 
+</script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
 </script>
 </body>
 </html>
