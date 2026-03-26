@@ -1,457 +1,265 @@
-
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
-<title>Admin Programări - d4riusTAX</title>
+<title>Admin d4riusTAX v4.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="stylesheet">
 <style>
-:root{--primary:#14314d;--secondary:#ff7a18;--dark:#0b1b2b;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;}
+:root{--primary:#14314d;--secondary:#ff7a18;--dark:#0b1b2b;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--blue:#3b82f6;}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-body{background:#f0f2f5;min-height:100vh;}
+body{background:#f0f2f5;min-height:100vh;color:#333;}
 
 /* LOGIN */
 #login-page{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,var(--primary),var(--dark));}
-.login-box{background:#fff;padding:40px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.3);width:100%;max-width:380px;}
-.login-box h1{color:var(--primary);font-size:24px;margin-bottom:8px;text-align:center;}
-.login-box p{color:#888;text-align:center;margin-bottom:24px;font-size:14px;}
-.login-box input{width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:12px;font-size:14px;margin-bottom:14px;outline:none;transition:.3s;}
-.login-box input:focus{border-color:var(--secondary);}
-.login-box button{width:100%;padding:14px;background:linear-gradient(135deg,var(--secondary),#ff9a3c);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:.3s;}
-.login-box button:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(255,122,24,.4);}
-.login-error{color:var(--red);font-size:13px;text-align:center;margin-bottom:10px;display:none;}
+.login-box{background:#fff;padding:40px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.3);width:100%;max-width:380px;text-align:center;}
+.login-box h1{color:var(--primary);font-size:24px;margin-bottom:20px;}
+.login-box input{width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:12px;margin-bottom:14px;outline:none;}
+.login-box button{width:100%;padding:14px;background:var(--secondary);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;}
 
 /* ADMIN PANEL */
 #admin-panel{display:none;}
 .topbar{background:linear-gradient(135deg,var(--primary),var(--dark));padding:16px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
 .topbar h1{color:#fff;font-size:20px;}
 .topbar h1 span{color:var(--secondary);}
-.topbar button{background:rgba(255,255,255,.15);color:#fff;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:600;transition:.3s;}
-.topbar button:hover{background:rgba(255,255,255,.25);}
+.logout-btn{background:rgba(255,255,255,0.1);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;}
 
 .tabs{display:flex;background:#fff;border-bottom:2px solid #e0e0e0;padding:0 24px;gap:4px;}
-.tab{padding:16px 24px;cursor:pointer;font-weight:600;color:#888;border-bottom:3px solid transparent;transition:.3s;position:relative;}
-.tab:hover{color:var(--primary);}
+.tab{padding:16px 24px;cursor:pointer;font-weight:600;color:#888;border-bottom:3px solid transparent;position:relative;}
 .tab.active{color:var(--secondary);border-bottom-color:var(--secondary);}
-.tab .badge{position:absolute;top:8px;right:8px;background:var(--secondary);color:#fff;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:700;}
+.tab .badge{position:absolute;top:8px;right:-5px;background:var(--secondary);color:#fff;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:700;}
 
 .content{padding:24px;max-width:1400px;margin:0 auto;}
 
-/* ADD CLIENT FORM */
-.add-form{background:#fff;border-radius:16px;padding:24px;margin-bottom:24px;box-shadow:0 4px 15px rgba(0,0,0,.08);}
-.add-form h3{color:var(--primary);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
-.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;}
-.form-grid input,.form-grid select{padding:12px;border:2px solid #e8ecf4;border-radius:10px;font-size:14px;outline:none;transition:.3s;}
-.form-grid input:focus,.form-grid select:focus{border-color:var(--secondary);}
-.add-btn{background:linear-gradient(135deg,var(--green),#16a34a);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-weight:700;cursor:pointer;transition:.3s;}
-.add-btn:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(34,197,94,.4);}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px;}
+.stat-card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,0.08);border-left:5px solid var(--primary);}
+.stat-card .num{font-size:32px;font-weight:800;color:var(--primary);}
+
+/* FORM */
+.add-form{background:#fff;border-radius:16px;padding:24px;margin-bottom:24px;box-shadow:0 4px 15px rgba(0,0,0,0.08);}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+.form-grid input, .form-grid select, .form-grid textarea{padding:12px;border:2px solid #e8ecf4;border-radius:10px;font-size:14px;outline:none;}
+.form-grid textarea{grid-column: span 2;}
+
+/* TOOLS */
+.tools{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;}
+.search-box{padding:12px 20px;border:2px solid #e8ecf4;border-radius:10px;width:300px;outline:none;background:#fff;}
 
 /* TABLE */
-.table-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.08);}
-.table-header{padding:20px 24px;border-bottom:1px solid #e8ecf4;display:flex;justify-content:space-between;align-items:center;}
-.table-header h3{color:var(--primary);}
-.search-box{padding:10px 16px;border:2px solid #e8ecf4;border-radius:10px;width:250px;outline:none;}
-.search-box:focus{border-color:var(--secondary);}
-
+.table-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.08);}
 table{width:100%;border-collapse:collapse;}
-th{background:#f8faff;padding:14px 16px;text-align:left;font-size:12px;text-transform:uppercase;color:#888;letter-spacing:.5px;font-weight:700;}
-td{padding:14px 16px;border-bottom:1px solid #f0f0f0;font-size:14px;}
-tr:hover{background:#fafbff;}
-.ref-code{font-weight:700;color:var(--primary);font-size:12px;}
-.client-name{font-weight:600;color:#333;}
-.client-email{color:#888;font-size:13px;}
-.date-time{color:var(--secondary);font-weight:600;}
-.service-tag{background:#eef2ff;color:#4f46e5;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+th{background:#f8faff;padding:14px 16px;text-align:left;font-size:11px;text-transform:uppercase;color:#888;font-weight:800;}
+td{padding:16px;border-bottom:1px solid #f0f0f0;vertical-align:top;}
+
+/* STATUS TAGS */
+.status-tag {padding:4px 8px; border-radius:6px; font-size:10px; font-weight:800; text-transform:uppercase;}
+.st-active {background:#e0f2fe; color:#0369a1;}
+.st-done {background:#dcfce7; color:#16a34a;}
+.st-cancel {background:#fef3c7; color:#d97706;}
+.st-trash {background:#fee2e2; color:#dc2626;}
 
 .actions{display:flex;gap:6px;}
-.actions button{padding:8px 12px;border:none;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;transition:.3s;}
-.btn-green{background:#dcfce7;color:#16a34a;}
-.btn-green:hover{background:#16a34a;color:#fff;}
-.btn-yellow{background:#fef3c7;color:#d97706;}
-.btn-yellow:hover{background:#d97706;color:#fff;}
-.btn-red{background:#fee2e2;color:#dc2626;}
-.btn-red:hover{background:#dc2626;color:#fff;}
-.btn-restore{background:#e0e7ff;color:#4f46e5;}
-.btn-restore:hover{background:#4f46e5;color:#fff;}
-.btn-delete{background:#fecaca;color:#991b1b;}
-.btn-delete:hover{background:#991b1b;color:#fff;}
-
-.empty-state{text-align:center;padding:60px;color:#888;}
-.empty-state span{font-size:48px;display:block;margin-bottom:16px;}
-
-.tab-content{display:none;}
-.tab-content.active{display:block;}
-
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px;}
-.stat-card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.08);}
-.stat-card h4{color:#888;font-size:12px;text-transform:uppercase;margin-bottom:8px;}
-.stat-card .num{font-size:32px;font-weight:800;color:var(--primary);}
-.stat-card.active .num{color:var(--green);}
-.stat-card.ended .num{color:var(--yellow);}
-.stat-card.trash .num{color:var(--red);}
-
-@media(max-width:768px){
-  .tabs{overflow-x:auto;padding:0 12px;}
-  .tab{padding:12px 16px;font-size:13px;white-space:nowrap;}
-  .content{padding:16px;}
-  .form-grid{grid-template-columns:1fr;}
-  .table-header{flex-direction:column;gap:12px;}
-  .search-box{width:100%;}
-  table{font-size:12px;}
-  th,td{padding:10px 8px;}
-  .actions{flex-wrap:wrap;}
-}
+.actions button{padding:8px 12px;border:none;border-radius:8px;cursor:pointer;font-size:10px;font-weight:700; transition: 0.2s;}
+.btn-green{background:var(--green); color:#fff;}
+.btn-yellow{background:var(--yellow); color:#fff;}
+.btn-red{background:var(--red); color:#fff;}
+.btn-blue{background:var(--blue); color:#fff;}
+.btn-restore {background:#e2e8f0; color:#475569;}
 </style>
 </head>
 <body>
 
-<!-- LOGIN PAGE -->
 <div id="login-page">
   <div class="login-box">
-    <h1>🔐 Admin Panel</h1>
-    <p>d4riusTAX ADVICE S.R.L</p>
-    <div class="login-error" id="login-error">Credențiale invalide!</div>
-    <input type="text" id="login-user" placeholder="Utilizator" autocomplete="username">
-    <input type="password" id="login-pass" placeholder="Parolă" autocomplete="current-password">
-    <button onclick="doLogin()">Intră în panou</button>
+    <h1>🔐 Admin d4riusTAX</h1>
+    <input type="text" id="log-user" placeholder="Utilizator">
+    <input type="password" id="log-pass" placeholder="Parolă">
+    <button onclick="checkAuth()">AUTENTIFICARE</button>
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
 <div id="admin-panel">
   <div class="topbar">
-    <h1>📋 Admin <span>Programări</span></h1>
-    <button onclick="doLogout()">🚪 Ieșire</button>
+    <h1>📋 Admin <span>Panel v4.0</span></h1>
+    <button class="logout-btn" onclick="location.reload()">IEȘIRE</button>
   </div>
 
   <div class="tabs">
-    <div class="tab active" data-tab="dashboard" onclick="switchTab('dashboard')">
-      📊 Dashboard
-      <span class="badge" id="badge-active">0</span>
-    </div>
-    <div class="tab" data-tab="ended" onclick="switchTab('ended')">
-      ✅ Terminate/Anulate
-      <span class="badge" id="badge-ended">0</span>
-    </div>
-    <div class="tab" data-tab="trash" onclick="switchTab('trash')">
-      🗑️ Coș de gunoi
-      <span class="badge" id="badge-trash">0</span>
-    </div>
+    <div class="tab active" id="t-active" onclick="switchTab('active')">📊 Dashboard <span class="badge" id="b-active">0</span></div>
+    <div class="tab" id="t-ended" onclick="switchTab('ended')">✅ Finalizate/Anulate <span class="badge" id="b-ended">0</span></div>
+    <div class="tab" id="t-trash" onclick="switchTab('trash')">🗑️ Coș de gunoi <span class="badge" id="b-trash">0</span></div>
   </div>
 
   <div class="content">
-    <!-- DASHBOARD TAB -->
-    <div class="tab-content active" id="tab-dashboard">
-      <div class="stats">
-        <div class="stat-card active"><h4>Programări Active</h4><div class="num" id="stat-active">0</div></div>
-        <div class="stat-card ended"><h4>Terminate/Anulate</h4><div class="num" id="stat-ended">0</div></div>
-        <div class="stat-card trash"><h4>În coș</h4><div class="num" id="stat-trash">0</div></div>
-      </div>
+    <div class="stats">
+      <div class="stat-card"><h4>Active</h4><div class="num" id="s-active">0</div></div>
+      <div class="stat-card" style="border-left-color:var(--green)"><h4>Total Servit</h4><div class="num" id="s-ended">0</div></div>
+    </div>
 
-      <div class="add-form">
-        <h3>➕ Adaugă client manual</h3>
-        <div class="form-grid">
-          <input type="text" id="add-nume" placeholder="Nume *">
-          <input type="text" id="add-prenume" placeholder="Prenume *">
-          <input type="email" id="add-email" placeholder="Email *">
-          <input type="tel" id="add-tel" placeholder="Telefon *">
-          <input type="date" id="add-data">
-          <select id="add-ora">
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00" selected>14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-          </select>
-          <select id="add-serviciu">
-            <option value="Contabilitate primara">Contabilitate primară</option>
-            <option value="Salarizare">Salarizare</option>
-            <option value="Consultanta">Consultanță</option>
-            <option value="Infiintare SRL">Înființare SRL</option>
-            <option value="Infiintare PFA">Înființare PFA</option>
-            <option value="Alta">Alta</option>
-          </select>
-          <button class="add-btn" onclick="addClient()">➕ Adaugă</button>
-        </div>
+    <div id="form-section" class="add-form">
+      <h3 style="margin-bottom:15px; color:var(--primary)">➕ Adăugare Programare</h3>
+      <div class="form-grid">
+        <input type="text" id="in-nume" placeholder="Nume Client *">
+        <input type="text" id="in-ref" value="D4TAX-" oninput="if(!this.value.startsWith('D4TAX-'))this.value='D4TAX-'">
+        <input type="email" id="in-email" placeholder="Email">
+        <input type="tel" id="in-tel" placeholder="Telefon">
+        <input type="date" id="in-data">
+        <select id="in-ora">
+            <option value="">Alege Ora (Fixă)</option>
+            <option value="08:00">08:00</option><option value="09:00">09:00</option>
+            <option value="10:00">10:00</option><option value="11:00">11:00</option>
+            <option value="12:00">12:00</option><option value="13:00">13:00</option>
+            <option value="14:00">14:00</option><option value="15:00">15:00</option>
+            <option value="16:00">16:00</option><option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+        </select>
+        <textarea id="in-obs" placeholder="Note suplimentare..."></textarea>
       </div>
-
-      <div class="table-card">
-        <div class="table-header">
-          <h3>📅 Programări Active</h3>
-          <input type="text" class="search-box" placeholder="🔍 Caută..." oninput="filterTable(this.value)">
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Ref</th>
-              <th>Client</th>
-              <th>Contact</th>
-              <th>Data/Ora</th>
-              <th>Serviciu</th>
-              <th>Acțiuni</th>
-            </tr>
-          </thead>
-          <tbody id="table-active"></tbody>
-        </table>
-        <div class="empty-state" id="empty-active" style="display:none;">
-          <span>📭</span>
-          <p>Nu există programări active</p>
-        </div>
+      <div style="text-align:right; margin-top:15px;">
+        <button onclick="saveClient()" style="background:var(--green); color:#fff; border:none; padding:12px 35px; border-radius:10px; font-weight:700; cursor:pointer;">SALVEAZĂ</button>
       </div>
     </div>
 
-    <!-- ENDED TAB -->
-    <div class="tab-content" id="tab-ended">
-      <div class="table-card">
-        <div class="table-header">
-          <h3>✅ Programări Terminate / Anulate</h3>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Ref</th>
-              <th>Client</th>
-              <th>Contact</th>
-              <th>Data/Ora</th>
-              <th>Status</th>
-              <th>Acțiuni</th>
-            </tr>
-          </thead>
-          <tbody id="table-ended"></tbody>
-        </table>
-        <div class="empty-state" id="empty-ended" style="display:none;">
-          <span>📋</span>
-          <p>Nu există programări terminate</p>
-        </div>
-      </div>
+    <div class="tools">
+        <input type="text" id="search-input" class="search-box" placeholder="🔍 Caută după nume sau REF..." oninput="render()">
+        <div style="font-size:12px; font-weight:600; color:#888;">Orar: <span style="color:var(--secondary)">08:00 - 18:00</span></div>
     </div>
 
-    <!-- TRASH TAB -->
-    <div class="tab-content" id="tab-trash">
-      <div class="table-card">
-        <div class="table-header">
-          <h3>🗑️ Coș de Gunoi</h3>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Ref</th>
-              <th>Client</th>
-              <th>Contact</th>
-              <th>Data/Ora</th>
-              <th>Acțiuni</th>
-            </tr>
-          </thead>
-          <tbody id="table-trash"></tbody>
-        </table>
-        <div class="empty-state" id="empty-trash" style="display:none;">
-          <span>🗑️</span>
-          <p>Coșul este gol</p>
-        </div>
-      </div>
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Identitate</th>
+            <th>Contact</th>
+            <th>Programare</th>
+            <th>Status / Detalii</th>
+            <th>Acțiuni</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
     </div>
   </div>
 </div>
 
 <script>
-const API = 'https://contab-demo-1.preview.emergentagent.com/api';
-let allData = [];
+const _u = "YWRtaW4="; const _p = "ZDRyaXVzdGF4MjAyNiE=";
+let clients = JSON.parse(localStorage.getItem('dtax_v4')) || [];
+let currentView = 'active';
 
-// LOGIN
-function doLogin() {
-  const user = document.getElementById('login-user').value;
-  const pass = document.getElementById('login-pass').value;
-  
-  fetch(API + '/admin/login', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({username: user, password: pass})
-  })
-  .then(r => {
-    if (!r.ok) throw new Error('Invalid');
-    return r.json();
-  })
-  .then(() => {
-    sessionStorage.setItem('logged', '1');
-    document.getElementById('login-page').style.display = 'none';
-    document.getElementById('admin-panel').style.display = 'block';
-    loadData();
-  })
-  .catch(() => {
-    document.getElementById('login-error').style.display = 'block';
-  });
+function checkAuth() {
+    if(btoa(document.getElementById('log-user').value) === _u && btoa(document.getElementById('log-pass').value) === _p) {
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('admin-panel').style.display = 'block';
+        render();
+    }
 }
 
-function doLogout() {
-  sessionStorage.removeItem('logged');
-  location.reload();
+function saveClient() {
+    const n = document.getElementById('in-nume').value;
+    const o = document.getElementById('in-ora').value;
+    if(!n || !o) return alert("Numele și Ora sunt obligatorii!");
+
+    clients.push({
+        id: Date.now(),
+        nume: n,
+        ref: document.getElementById('in-ref').value,
+        email: document.getElementById('in-email').value || '-',
+        tel: document.getElementById('in-tel').value || '-',
+        data: document.getElementById('in-data').value || '-',
+        ora: o,
+        obs: document.getElementById('in-obs').value || '',
+        status: 'active',
+        meta_info: '' // Ora plecare sau Motiv anulare
+    });
+    update();
+    document.querySelectorAll('.form-grid input:not(#in-ref), select, textarea').forEach(i => i.value = '');
 }
 
-// CHECK SESSION
-if (sessionStorage.getItem('logged') === '1') {
-  document.getElementById('login-page').style.display = 'none';
-  document.getElementById('admin-panel').style.display = 'block';
-  loadData();
+function changeStatus(id, newStatus) {
+    let meta = "";
+    if(newStatus === 'done') {
+        meta = prompt("Ora de plecare a clientului:", "12:00");
+        if(meta === null) return;
+    } else if(newStatus === 'cancel') {
+        meta = prompt("Motivul anulării (Ex: Nu a răspuns, A reprogramat):", "Nu a mai venit");
+        if(meta === null) return;
+    }
+
+    clients = clients.map(c => c.id === id ? {...c, status: newStatus, meta_info: meta} : c);
+    update();
 }
 
-document.getElementById('login-pass').addEventListener('keypress', e => {
-  if (e.key === 'Enter') doLogin();
-});
-
-// TABS
-function switchTab(tab) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
-  document.getElementById('tab-' + tab).classList.add('active');
+function permanentDelete(id) {
+    if(confirm("Ștergi definitiv această înregistrare?")) {
+        clients = clients.filter(c => c.id !== id);
+        updateStorage();
+    }
 }
 
-// LOAD DATA
-function loadData() {
-  fetch(API + '/admin/programari')
-    .then(r => r.json())
-    .then(data => {
-      allData = data;
-      renderAll();
-    })
-    .catch(err => console.error(err));
+function switchTab(v) {
+    currentView = v;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('t-' + v).classList.add('active');
+    document.getElementById('form-section').style.display = v === 'active' ? 'block' : 'none';
+    render();
 }
 
-function renderAll() {
-  const active = allData.filter(p => !p.status || p.status === 'active');
-  const ended = allData.filter(p => p.status === 'completed' || p.status === 'cancelled');
-  const trash = allData.filter(p => p.status === 'trash');
+function render() {
+    const body = document.getElementById('table-body');
+    const search = document.getElementById('search-input').value.toLowerCase();
+    body.innerHTML = '';
+    
+    clients.filter(c => {
+        let matchTab = (currentView === 'active' ? c.status === 'active' : (currentView === 'ended' ? (c.status === 'done' || c.status === 'cancel') : c.status === 'trash'));
+        let matchSearch = c.nume.toLowerCase().includes(search) || c.ref.toLowerCase().includes(search);
+        return matchTab && matchSearch;
+    }).forEach(c => {
+        let statusHtml = '';
+        if(c.status === 'active') statusHtml = '<span class="status-tag st-active">Confirmat</span>';
+        else if(c.status === 'done') statusHtml = `<span class="status-tag st-done">Finalizat • Plecare: ${c.meta_info}</span>`;
+        else if(c.status === 'cancel') statusHtml = `<span class="status-tag st-cancel">Anulat • Motiv: ${c.meta_info}</span>`;
+        else statusHtml = '<span class="status-tag st-trash">În Coș</span>';
 
-  // Stats
-  document.getElementById('stat-active').textContent = active.length;
-  document.getElementById('stat-ended').textContent = ended.length;
-  document.getElementById('stat-trash').textContent = trash.length;
-  document.getElementById('badge-active').textContent = active.length;
-  document.getElementById('badge-ended').textContent = ended.length;
-  document.getElementById('badge-trash').textContent = trash.length;
+        let actions = '';
+        if(c.status === 'active') {
+            actions = `<button class="btn-green" onclick="changeStatus(${c.id}, 'done')">A VENIT</button>
+                       <button class="btn-yellow" onclick="changeStatus(${c.id}, 'cancel')">ANULAT</button>
+                       <button class="btn-red" onclick="changeStatus(${c.id}, 'trash')">🗑️</button>`;
+        } else if(c.status === 'trash') {
+            actions = `<button class="btn-restore" onclick="changeStatus(${c.id}, 'active')">RESTAURARE</button>
+                       <button class="btn-red" style="background:#000" onclick="permanentDelete(${c.id})">DEL FINAL</button>`;
+        } else {
+            // Tab Finalizate/Anulate
+            actions = `<button class="btn-restore" onclick="changeStatus(${c.id}, 'active')">RESTAURARE</button>
+                       <button class="btn-red" onclick="changeStatus(${c.id}, 'trash')">🗑️ COȘ</button>`;
+        }
 
-  // Active table
-  const tbActive = document.getElementById('table-active');
-  tbActive.innerHTML = active.map(p => `
-    <tr>
-      <td><span class="ref-code">${p.ref_code || '-'}</span></td>
-      <td><span class="client-name">${p.to_name || p.prenume + ' ' + p.nume || '-'}</span></td>
-      <td>
-        <div class="client-email">${p.to_email || '-'}</div>
-        <div style="font-size:12px;color:#888;">${p.telefon || ''}</div>
-      </td>
-      <td><span class="date-time">${p.data_programare || '-'}<br>${p.ora_programare || ''}</span></td>
-      <td><span class="service-tag">${p.serviciu || '-'}</span></td>
-      <td class="actions">
-        <button class="btn-green" onclick="setStatus('${p.ref_code}','completed')" title="A venit">✓ Venit</button>
-        <button class="btn-yellow" onclick="setStatus('${p.ref_code}','cancelled')" title="Nu a venit">✗ Absent</button>
-        <button class="btn-red" onclick="setStatus('${p.ref_code}','cancelled')" title="Anulat">🚫 Anulat</button>
-      </td>
-    </tr>
-  `).join('');
-  document.getElementById('empty-active').style.display = active.length ? 'none' : 'block';
+        body.innerHTML += `
+            <tr>
+                <td><strong>${c.nume}</strong><br><small style="color:var(--secondary);font-weight:700">${c.ref}</small></td>
+                <td style="font-size:12px;">📧 ${c.email}<br>📞 ${c.tel}</td>
+                <td>📅 ${c.data}<br>🕒 <strong>${c.ora}</strong></td>
+                <td>${statusHtml}<br><p style="font-size:11px; color:#666; margin-top:5px;">${c.obs}</p></td>
+                <td><div class="actions">${actions}</div></td>
+            </tr>`;
+    });
 
-  // Ended table
-  const tbEnded = document.getElementById('table-ended');
-  tbEnded.innerHTML = ended.map(p => `
-    <tr>
-      <td><span class="ref-code">${p.ref_code || '-'}</span></td>
-      <td><span class="client-name">${p.to_name || '-'}</span></td>
-      <td><div class="client-email">${p.to_email || '-'}</div></td>
-      <td><span class="date-time">${p.data_programare || '-'}</span></td>
-      <td><span class="service-tag" style="background:${p.status==='completed'?'#dcfce7':'#fef3c7'};color:${p.status==='completed'?'#16a34a':'#d97706'}">${p.status==='completed'?'✓ Terminat':'✗ Anulat'}</span></td>
-      <td class="actions">
-        <button class="btn-restore" onclick="setStatus('${p.ref_code}','active')">↩ Restaurează</button>
-        <button class="btn-delete" onclick="setStatus('${p.ref_code}','trash')">🗑️ Șterge</button>
-      </td>
-    </tr>
-  `).join('');
-  document.getElementById('empty-ended').style.display = ended.length ? 'none' : 'block';
-
-  // Trash table
-  const tbTrash = document.getElementById('table-trash');
-  tbTrash.innerHTML = trash.map(p => `
-    <tr>
-      <td><span class="ref-code">${p.ref_code || '-'}</span></td>
-      <td><span class="client-name">${p.to_name || '-'}</span></td>
-      <td><div class="client-email">${p.to_email || '-'}</div></td>
-      <td><span class="date-time">${p.data_programare || '-'}</span></td>
-      <td class="actions">
-        <button class="btn-restore" onclick="setStatus('${p.ref_code}','active')">↩ Restaurează</button>
-        <button class="btn-delete" onclick="deletePermanent('${p.ref_code}')">❌ Șterge definitiv</button>
-      </td>
-    </tr>
-  `).join('');
-  document.getElementById('empty-trash').style.display = trash.length ? 'none' : 'block';
+    const b = {
+        act: clients.filter(x => x.status === 'active').length,
+        end: clients.filter(x => x.status === 'done' || x.status === 'cancel').length,
+        trsh: clients.filter(x => x.status === 'trash').length
+    };
+    document.getElementById('b-active').innerText = b.act;
+    document.getElementById('b-ended').innerText = b.end;
+    document.getElementById('b-trash').innerText = b.trsh;
+    document.getElementById('s-active').innerText = b.act;
+    document.getElementById('s-ended').innerText = clients.filter(x => x.status === 'done').length;
 }
 
-function setStatus(ref, status) {
-  fetch(API + '/admin/programari/' + encodeURIComponent(ref), {
-    method: 'PUT',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({status: status})
-  })
-  .then(r => r.json())
-  .then(() => loadData())
-  .catch(err => alert('Eroare: ' + err));
-}
-
-function deletePermanent(ref) {
-  if (!confirm('Ștergi definitiv această programare?')) return;
-  fetch(API + '/admin/programari/' + encodeURIComponent(ref), {method: 'DELETE'})
-    .then(r => r.json())
-    .then(() => loadData())
-    .catch(err => alert('Eroare: ' + err));
-}
-
-function addClient() {
-  const data = {
-    nume: document.getElementById('add-nume').value,
-    prenume: document.getElementById('add-prenume').value,
-    email: document.getElementById('add-email').value,
-    telefon: document.getElementById('add-tel').value,
-    data_programare: document.getElementById('add-data').value,
-    ora_programare: document.getElementById('add-ora').value,
-    serviciu: document.getElementById('add-serviciu').value,
-    mesaj: ''
-  };
-  
-  if (!data.nume || !data.prenume || !data.email || !data.telefon) {
-    alert('Completează câmpurile obligatorii!');
-    return;
-  }
-
-  fetch(API + '/admin/programari', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(data)
-  })
-  .then(r => r.json())
-  .then(res => {
-    alert('Client adăugat! Ref: ' + res.ref_code);
-    document.getElementById('add-nume').value = '';
-    document.getElementById('add-prenume').value = '';
-    document.getElementById('add-email').value = '';
-    document.getElementById('add-tel').value = '';
-    loadData();
-  })
-  .catch(err => alert('Eroare: ' + err));
-}
-
-function filterTable(q) {
-  q = q.toLowerCase();
-  document.querySelectorAll('#table-active tr').forEach(tr => {
-    tr.style.display = tr.textContent.toLowerCase().includes(q) ? '' : 'none';
-  });
-}
-
-// Set min date
-document.getElementById('add-data').min = new Date().toISOString().split('T')[0];
+function update() { localStorage.setItem('dtax_v4', JSON.stringify(clients)); render(); }
+function updateStorage() { update(); }
 </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"7f7b0fd8732c4326aae4b9d58d5c514a","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>

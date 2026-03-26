@@ -1075,7 +1075,7 @@ async function submitProgramare() {
   localStorage.setItem('d4tax_programari', JSON.stringify(existing));
 
   try {
-const response = await fetch('https://contab-demo-1.preview.emergentagent.com/api/send-confirmation', {
+const response = await fetch('https://proud-union-a480d4rriustax.d4riusfn7.workers.dev/api/send-confirmation', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1148,7 +1148,7 @@ document.getElementById('lb-img').addEventListener('touchmove',function(e){e.pre
 document.getElementById('lb-img').addEventListener('touchend',function(){if(lbScale<1){lbScale=1;lbAnimate();}});
 document.getElementById('lb-img-wrap').addEventListener('wheel',function(e){e.preventDefault();const delta=e.deltaY>0?.85:1.18;lbScale=Math.min(4,Math.max(1,lbScale*delta));if(lbScale<=1){lbTranslateX=0;lbTranslateY=0;document.getElementById('lb-img').classList.remove('zoomed');}else document.getElementById('lb-img').classList.add('zoomed');lbAnimate();},{passive:false});
 
-const WORKER_URL='https://lucky-water-3cdf.dragandarius731.workers.dev';
+const WORKER_URL='https://proud-union-a480d4rriustax.d4riusfn7.workers.dev';
 let expertMode=false,expertHistory=[],expertBusy=false,pendingFile=null,attachedFile=null;
 const CHAT_KEY='chatbot_session';
 
