@@ -399,6 +399,45 @@ function saveSession(d)   { localStorage.setItem(SESSION_KEY, JSON.stringify(d))
 function clearSession()   { localStorage.removeItem(SESSION_KEY); }
 function getProgramari()  { try { return JSON.parse(localStorage.getItem(PROG_KEY) || '[]'); } catch(e) { return []; } }
 function saveProgramari(l){ localStorage.setItem(PROG_KEY, JSON.stringify(l)); }
+function getProgramareKey(p) {
+
+
+
+  if (!p) return '';
+  if (p.ref) return 'ref:' + String(p.ref).trim().toLowerCase();
+  if (p.id) return 'id:' + String(p.id).trim().toLowerCase();
+  return [
+    (p.email || p.userEmail || '').trim().toLowerCase(),
+    (p.serviciu || '').trim().toLowerCase(),
+    (p.data || '').trim().toLowerCase(),
+    (p.ora || '').trim().toLowerCase()
+  ].join('|');
+}
+
+function mergeProgramari(serverList, localList) {
+  const map = new Map();
+
+  localList.forEach(p => {
+    const key = getProgramareKey(p);
+    if (key) map.set(key, { ...p });
+  });
+
+  serverList.forEach(p => {
+    const key = getProgramareKey(p);
+    if (!key) return;
+
+    const existing = map.get(key) || {};
+
+    map.set(key, {
+      ...p,
+      deleted: !!existing.deleted,
+      id: p.id || existing.id || p.ref || key
+    });
+  });
+
+  return Array.from(map.values());
+}
+
 
 function showAlert(msg, type) {
   const el = document.getElementById('alertBox');
@@ -476,30 +515,34 @@ function belongsToUser(p, emailUser) {
 async function renderProgramari() {
   const sesiune = getSession();
   if (!sesiune || !sesiune.email) return;
-  // Sincronizeaza de pe server
-try {
-  const resp = await fetch(
-    'https://proud-union-a480d4rriustax.d4riusfn7.workers.dev/api/programari/get',
-    { headers: { 'Authorization': 'Bearer ' + sesiune.token } }
-  );
-  if (resp.ok) {
-    const data = await resp.json();
-    if (data.programari && data.programari.length > 0) {
-      // Merge server + local (fara duplicate)
+
+  try {
+    const resp = await fetch(
+      WORKER + '/api/programari/get',
+      { headers: { 'Authorization': 'Bearer ' + sesiune.token } }
+    );
+
+    if (resp.ok) {
+      const data = await resp.json();
       const local = getProgramari();
-      const serverIds = new Set(data.programari.map(p => p.id || p.ref));
-      const onlyLocal = local.filter(p => !serverIds.has(p.id) && !serverIds.has(p.ref));
-      saveProgramari([...data.programari, ...onlyLocal]);
+      const serverList = Array.isArray(data.programari) ? data.programari : [];
+      const merged = mergeProgramari(serverList, local);
+      saveProgramari(merged);
     }
+  } catch (e) {
+    console.warn('Sync failed, using local', e);
   }
-} catch(e) { console.warn('Sync failed, using local', e); }
 
   const emailUser = sesiune.email.trim().toLowerCase();
-  const toate     = getProgramari();
+  const toate = getProgramari();
 
   let modified = false;
-  toate.forEach(p => {
-    if (!p.id) { p.id = 'prg_' + Date.now() + '_' + Math.random().toString(36).slice(2,7); modified = true; }
+  toate.forEach((p, index) => {
+    const stableId = p.id || p.ref || getProgramareKey(p) || ('prg_' + index + '_' + (p.created || Date.now()));
+    if (p.id !== stableId) {
+      p.id = stableId;
+      modified = true;
+    }
   });
   if (modified) saveProgramari(toate);
 
@@ -513,9 +556,9 @@ try {
   _filteredCache = filtered;
 
   const active = toate.filter(p => belongsToUser(p, emailUser) && !p.deleted);
-  document.getElementById('statTotal').textContent     = active.length;
+  document.getElementById('statTotal').textContent = active.length;
   document.getElementById('statConfirmed').textContent = active.filter(p => p.status === 'confirmed').length;
-  document.getElementById('statDone').textContent      = active.filter(p => p.status === 'done' || p.status === 'finalizata').length;
+  document.getElementById('statDone').textContent = active.filter(p => p.status === 'done' || p.status === 'finalizata').length;
 
   const lista = document.getElementById('progList');
 
@@ -533,19 +576,15 @@ try {
   }
 
   const icons = {
-    'Contabilitate primara':'📊','Salarizare & Pontaje':'💼',
-    'Consultanta in afaceri':'💡','Infiintare firma SRL':'🏢',
-    'Infiintare firma PFA':'👤','Infiintare ONG':'🤝',
-    'Optimizare fiscala':'📈','Consultanta TVA':'🧾','Alta / Nu stiu inca':'❓'
-  };
-
-  const statusMap = {
-    new:        ['status-new',       '🔵 Noua'],
-    confirmed:  ['status-confirmed', '✅ Confirmata'],
-    pending:    ['status-pending',   '⏳ In asteptare'],
-    done:       ['status-done',      '🏆 Finalizata'],
-    finalizata: ['status-done',      '🏆 Finalizata'],
-    cancelled:  ['status-cancelled', '❌ Anulata'],
+    'Contabilitate primara':'📊',
+    'Salarizare & Pontaje':'💼',
+    'Consultanta in afaceri':'💡',
+    'Infiintare firma SRL':'🏢',
+    'Infiintare firma PFA':'👤',
+    'Infiintare ONG':'🤝',
+    'Optimizare fiscala':'📈',
+    'Consultanta TVA':'🧾',
+    'Alta / Nu stiu inca':'❓'
   };
 
   lista.innerHTML = `
@@ -596,24 +635,42 @@ try {
   });
 }
 
+
+ 
 /* ===== STERGE / RESTAUREAZA ===== */
 function actionProgramare(localIdx, action) {
   const target = _filteredCache[localIdx];
   if (!target) return;
+
   const toate = getProgramari();
-  const globalIdx = toate.findIndex(p => p.id === target.id);
-  if (globalIdx === -1) return;
+  const targetKey = getProgramareKey(target);
+
+  let changed = false;
+
+  toate.forEach(p => {
+    if (getProgramareKey(p) === targetKey) {
+      if (action === 'delete') {
+        p.deleted = true;
+      } else {
+        delete p.deleted;
+      }
+      changed = true;
+    }
+  });
+
+  if (!changed) return;
+
+  saveProgramari(toate);
+
   if (action === 'delete') {
-    toate[globalIdx].deleted = true;
-    saveProgramari(toate);
     showToast('🗑️ Programare mutata in cos!');
   } else {
-    delete toate[globalIdx].deleted;
-    saveProgramari(toate);
     showToast('✅ Programare restaurata!');
   }
+
   renderProgramari();
 }
+
 
 /* ===== SALVEAZA PROFIL ===== */
 async function salveazaProfil() {
