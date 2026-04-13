@@ -3,201 +3,317 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Termeni si conditii - d4riusTAX ADVICE S.R.L</title>
-  <meta name="description" content="Termeni si conditii de utilizare pentru website-ul d4riusTAX ADVICE S.R.L.">
+  <title>Termeni și Condiții — d4riusTAX ADVICE S.R.L</title>
+  <meta property="og:image" content="https://www.d4riustaxadvice.ro/logo.png">
+  <meta name="description" content="Termenii și condițiile de utilizare ale site-ului d4riusTAX ADVICE S.R.L.">
   <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/png" href="D4RIUS TAX.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --primary:#14314d;
       --secondary:#ff7a18;
+      --dark:#0b1b2b;
       --text:#1f2937;
       --muted:#6b7280;
-      --bg:#f8fafc;
+      --bg:#f5f7fb;
       --card:#ffffff;
       --border:#e5e7eb;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial,sans-serif;
-      color:var(--text);
-      background:var(--bg);
-      line-height:1.7;
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.75;}
+    a{color:var(--secondary);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+
+    .wrap{max-width:860px;margin:0 auto;padding:32px 16px 64px;}
+
+    .back-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,var(--primary),var(--dark));
+      color:#fff;padding:12px 26px;border-radius:50px;
+      font-size:14px;font-weight:700;text-decoration:none;
+      transition:.3s;margin-bottom:20px;
+      box-shadow:0 6px 20px rgba(20,49,77,.25);
     }
-    .wrap{
-      max-width:920px;
-      margin:0 auto;
-      padding:24px 16px 48px;
-    }
+    .back-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(20,49,77,.35);text-decoration:none;}
+
+    /* HERO */
     .hero{
-      background:linear-gradient(135deg,var(--primary),#0b1b2b);
-      color:#fff;
-      border-radius:14px;
-      padding:24px;
-      margin-bottom:16px;
+      background:linear-gradient(135deg,var(--primary),var(--dark));
+      color:#fff;border-radius:18px;padding:36px 32px;margin-bottom:20px;
+      position:relative;overflow:hidden;
     }
-    .hero h1{
-      margin:0 0 8px;
-      font-size:30px;
-      line-height:1.2;
+    .hero::before{
+      content:'';position:absolute;top:-60px;right:-60px;
+      width:300px;height:300px;
+      background:radial-gradient(circle,rgba(255,122,24,.15) 0%,transparent 70%);
+      border-radius:50%;pointer-events:none;
     }
-    .hero p{
-      margin:0;
-      color:#dbe5ef;
+    .hero-badge{
+      display:inline-block;
+      background:rgba(255,122,24,.2);border:1px solid rgba(255,122,24,.4);
+      color:#ff9a3c;font-size:12px;font-weight:700;letter-spacing:.6px;
+      text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:16px;
     }
+    .hero h1{font-size:28px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+    .hero .subtitle{color:#c5d4e3;font-size:15px;}
+    .hero .date{margin-top:14px;color:#8faec9;font-size:13px;}
+
+    /* CARD */
     .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:18px;
-      margin-bottom:12px;
+      background:var(--card);border:1px solid var(--border);border-radius:16px;
+      padding:24px 28px;margin-bottom:14px;
+      box-shadow:0 2px 12px rgba(0,0,0,.05);transition:.2s;
     }
-    h2{
-      margin:0 0 10px;
-      color:var(--primary);
-      font-size:22px;
+    .card:hover{box-shadow:0 4px 20px rgba(0,0,0,.09);}
+    .card-header{
+      display:flex;align-items:center;gap:14px;
+      margin-bottom:16px;padding-bottom:14px;border-bottom:1.5px solid #f0f4ff;
     }
-    p{margin:0 0 10px}
-    ul{margin:8px 0 0 20px}
-    li{margin:4px 0}
-    .muted{color:var(--muted)}
-    .note{
-      background:#fff7ed;
-      border-left:4px solid var(--secondary);
-      border-radius:8px;
-      padding:10px 12px;
-      margin-top:10px;
+    .card-icon{
+      width:44px;height:44px;border-radius:12px;
+      background:linear-gradient(135deg,var(--secondary),#ff9a3c);
+      display:flex;align-items:center;justify-content:center;
+      font-size:20px;flex-shrink:0;box-shadow:0 4px 12px rgba(255,122,24,.25);
     }
-    a{
-      color:var(--secondary);
-      text-decoration:none;
-      font-weight:700;
+    .card-icon.blue{background:linear-gradient(135deg,#3b82f6,#6366f1);}
+    .card-icon.green{background:linear-gradient(135deg,#22c55e,#16a34a);}
+    .card-icon.purple{background:linear-gradient(135deg,#8b5cf6,#6366f1);}
+    .card-icon.red{background:linear-gradient(135deg,#ef4444,#dc2626);}
+    .card-num{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--secondary);margin-bottom:2px;}
+    h2{font-size:17px;font-weight:700;color:var(--primary);margin:0;}
+    p{margin:0 0 10px;font-size:15px;}
+    p:last-child{margin-bottom:0;}
+    ul{margin:8px 0 0 18px;}
+    li{margin:5px 0;font-size:15px;}
+    strong{font-weight:600;color:#1a2e40;}
+
+    /* INFO BOX */
+    .info-box{
+      background:#fff8f2;border-left:4px solid var(--secondary);
+      border-radius:0 10px 10px 0;padding:12px 16px;margin-top:14px;
+      font-size:14px;color:#7c4d1a;
     }
-    .footer{
-      text-align:center;
-      color:var(--muted);
-      font-size:13px;
-      margin-top:8px;
+    .info-box.green{background:#f0fdf4;border-left-color:#22c55e;color:#166534;}
+    .info-box.blue{background:#eff6ff;border-left-color:#3b82f6;color:#1e40af;}
+    .info-box.red{background:#fff1f2;border-left-color:#ef4444;color:#9f1239;}
+
+    /* FOOTER */
+    .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);}
+    .footer a{color:var(--secondary);font-weight:600;}
+
+    @media(max-width:600px){
+      .wrap{padding:20px 12px 48px;}
+      .hero{padding:24px 20px;}
+      .hero h1{font-size:22px;}
+      .card{padding:18px 16px;}
+      .card-header{flex-direction:column;align-items:flex-start;gap:8px;}
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <section class="hero">
-      <h1>Termeni si conditii</h1>
-      <p>d4riusTAX ADVICE S.R.L</p>
-      <p class="muted">Ultima actualizare: 31.03.2026</p>
-    </section>
+<div class="wrap">
 
-    <section class="card">
-      <h2>1. Datele operatorului</h2>
-      <p><strong>D4RIUS TAX ADVICE S.R.L.</strong></p>
-      <p>CUI: <strong>RO536742</strong></p>
-      <p>Nr. Reg. Com.: <strong>J2026006054009</strong></p>
-      <p>Sediu social: <strong>Strada Magrini, nr. 2, Valea Voievozilor, judetul Dambovita, Romania</strong></p>
-      <p>Email: <strong>contact@d4riustax.advice.uetcompany.ro</strong></p>
-      <p>Telefon: <strong>+40 770 430 731</strong></p>
-    </section>
+  <a href="index.html" class="back-btn">← Înapoi la pagina principală</a>
 
-    <section class="card">
-      <h2>2. Domeniu de aplicare</h2>
-      <p>Acesti termeni reglementeaza utilizarea website-ului si a functionalitatilor sale, inclusiv formularul de programare, comunicarile electronice si interfata de chat disponibila pe site.</p>
-    </section>
-
-    <section class="card">
-      <h2>3. Scopul site-ului</h2>
-      <p>Website-ul are rol de prezentare a serviciilor oferite de d4riusTAX ADVICE S.R.L si de facilitare a contactului cu utilizatorii interesati de o programare sau de informatii generale.</p>
-    </section>
-
-    <section class="card">
-      <h2>4. Servicii prezentate</h2>
-      <ul>
-        <li>Contabilitate primara.</li>
-        <li>Salarizare si servicii conexe.</li>
-        <li>Consultanta in afaceri si management.</li>
-        <li>Informatii generale privind aspecte financiare si fiscale.</li>
-        <li>Asistenta pentru infiintare entitati, dupa caz.</li>
-      </ul>
-      <div class="note">
-        Informatiile publicate pe site au caracter general si orientativ. Acestea nu inlocuiesc analiza profesionala personalizata realizata in functie de situatia concreta a fiecarui client.
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>5. Programari si comunicare</h2>
-      <ul>
-        <li>Transmiterea formularului reprezinta o solicitare de programare, nu confirmarea automata si definitiva a unei intalniri.</li>
-        <li>Confirmarea, reprogramarea sau anularea se comunica prin email si/sau telefon.</li>
-        <li>Utilizatorul are obligatia sa furnizeze date corecte, complete si actualizate.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>6. Preturi si contractare</h2>
-      <ul>
-        <li>Tarifele serviciilor se comunica individual, in functie de complexitatea situatiei concrete.</li>
-        <li>Publicarea informatiilor pe site nu constituie, prin ea insasi, o oferta ferma pentru orice situatie particulara.</li>
-        <li>Raportul contractual se stabileste prin acordul partilor, in conditiile legii.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>7. Obligatiile utilizatorului</h2>
-      <ul>
-        <li>Sa utilizeze site-ul in mod legal si cu buna-credinta.</li>
-        <li>Sa nu transmita informatii false, continut ilicit, defaimator, abuziv sau care incalca drepturile altor persoane.</li>
-        <li>Sa nu incerce compromiterea securitatii site-ului, a infrastructurii tehnice sau a functionalitatilor acestuia.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>8. Proprietate intelectuala</h2>
-      <p>Continutul site-ului, inclusiv texte, logo, elemente grafice, structura si design, apartine d4riusTAX ADVICE S.R.L si/sau partenerilor sai, dupa caz, si este protejat de legislatia aplicabila.</p>
-      <p>Este interzisa copierea, distribuirea, modificarea sau utilizarea continutului in scop comercial fara acordul prealabil scris al titularului drepturilor.</p>
-    </section>
-
-    <section class="card">
-      <h2>9. Limitarea raspunderii</h2>
-      <p>Operatorul depune eforturi rezonabile pentru a mentine informatiile corecte si actualizate si pentru a asigura functionarea site-ului, fara a garanta functionarea neintrerupta sau lipsa absoluta a erorilor tehnice.</p>
-      <p>In limitele permise de lege, operatorul nu raspunde pentru prejudicii indirecte rezultate din utilizarea sau imposibilitatea utilizarii site-ului.</p>
-    </section>
-
-    <section class="card">
-      <h2>10. Linkuri catre terti</h2>
-      <p>Website-ul poate contine linkuri catre site-uri sau servicii ale unor terte parti. Operatorul nu controleaza continutul, politicile si practicile acestor terte parti si nu isi asuma raspunderea pentru acestea.</p>
-    </section>
-
-    <section class="card">
-      <h2>11. Date cu caracter personal</h2>
-      <p>Prelucrarea datelor cu caracter personal se realizeaza conform Politicii de confidentialitate si Politicii de cookies, disponibile pe site.</p>
-      <p>
-        <a href="politica-confidentialitate.html">Politica de confidentialitate</a> |
-        <a href="politica-cookies.html">Politica de cookies</a>
-      </p>
-    </section>
-
-    <section class="card">
-      <h2>12. Forta majora</h2>
-      <p>Niciuna dintre parti nu raspunde pentru neexecutarea obligatiilor, daca aceasta este cauzata de un eveniment de forta majora, in conditiile legii.</p>
-    </section>
-
-    <section class="card">
-      <h2>13. Lege aplicabila si jurisdictie</h2>
-      <p>Acesti termeni sunt guvernati de legea romana. Orice litigiu va fi solutionat pe cale amiabila, iar in caz de esec, de instantele competente din Romania.</p>
-    </section>
-
-    <section class="card">
-      <h2>14. Modificarea termenilor</h2>
-      <p>Operatorul poate actualiza periodic acesti termeni. Versiunea curenta este publicata pe aceasta pagina, impreuna cu data ultimei actualizari.</p>
-    </section>
-
-    <section class="card">
-      <h2>15. Contact</h2>
-      <p>Pentru solicitari comerciale sau juridice, ne poti contacta la: <strong>contact@d4riustax.advice.uetcompany.ro</strong></p>
-      <p><a href="index.html">Inapoi la pagina principala</a></p>
-    </section>
-
-    <div class="footer">© 2026 d4riusTAX ADVICE S.R.L</div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">📄 Actualizat 2026</div>
+    <h1>Termeni și Condiții</h1>
+    <p class="subtitle">d4riusTAX ADVICE S.R.L — condițiile de utilizare ale site-ului și serviciilor noastre</p>
+    <p class="date">Ultima actualizare: 15.04.2026</p>
   </div>
+  <!-- 1. OPERATORUL -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🏢</div>
+      <div>
+        <div class="card-num">Secțiunea 1</div>
+        <h2>Cine suntem — operatorul datelor</h2>
+      </div>
+    </div>
+    <p>Societatea responsabilă cu prelucrarea datelor tale personale este:</p>
+    <table class="contact-table">
+      <tr><td>Denumire</td><td><strong>D4RIUS TAX ADVICE S.R.L.</strong></td></tr>
+      <tr><td>CUI</td><td>RO53619742</td></tr>
+      <tr><td>Reg. Com.</td><td>J2026006054009</td></tr>
+      <tr><td>Sediu social</td><td>Strada Măgrini, nr. 2, Valea Voievozilor, județul Dâmbovița, România</td></tr>
+      <tr><td>Email</td><td><a href="mailto:contact@d4riustax.advice.uetcompany.ro">contact@d4riustax.advice.uetcompany.ro</a></td></tr>
+      <tr><td>Telefon</td><td><a href="tel:+40770430731">+40 770 430 731</a></td></tr>
+    </table>
+  </div>
+
+  <!-- 2. ACCEPTAREA TERMENILOR -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">✅</div>
+      <div>
+        <div class="card-num">Secțiunea 2</div>
+        <h2>Acceptarea termenilor</h2>
+      </div>
+    </div>
+    <p>Prin utilizarea acestui site — inclusiv prin navigare, completarea unui formular sau crearea unui cont — ești de acord cu acești termeni și condiții.</p>
+    <p>Dacă nu ești de acord cu oricare dintre prevederile de mai jos, te rugăm să nu folosești site-ul.</p>
+    <div class="info-box blue">
+      Acești termeni se aplică tuturor vizitatorilor, utilizatorilor înregistrați și persoanelor care solicită serviciile noastre prin intermediul site-ului.
+    </div>
+  </div>
+
+  <!-- 3. SERVICIILE SITE-ULUI -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📊</div>
+      <div>
+        <div class="card-num">Secțiunea 3</div>
+        <h2>Ce oferim prin acest site</h2>
+      </div>
+    </div>
+    <p>Prin intermediul site-ului poți:</p>
+    <ul>
+      <li>Solicita o programare pentru o consultație (gratuită la prima întâlnire)</li>
+      <li>Afla informații despre serviciile noastre de contabilitate și consultanță</li>
+      <li>Folosi asistentul virtual pentru întrebări generale</li>
+      <li>Crea un cont pentru a-ți urmări programările</li>
+    </ul>
+    <div class="info-box">
+      Informațiile publicate pe site au caracter general și orientativ. Ele nu constituie consultanță fiscală sau juridică individualizată și nu înlocuiesc o discuție directă cu un specialist.
+    </div>
+  </div>
+
+  <!-- 4. PROGRAMARI -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon green">📅</div>
+      <div>
+        <div class="card-num">Secțiunea 4</div>
+        <h2>Programări și consultații</h2>
+      </div>
+    </div>
+    <p>Prin completarea formularului de programare, soliciți o întâlnire cu echipa noastră. Programarea devine confirmată doar după ce primești un email de confirmare din partea noastră.</p>
+    <ul>
+      <li><strong>Prima consultație</strong> este gratuită, cu durata de 30–60 minute.</li>
+      <li>Ne rezervăm dreptul de a <strong>reprograma sau anula</strong> o programare în cazuri excepționale, cu notificarea ta prealabilă.</li>
+      <li>Dacă nu te poți prezenta, te rugăm să ne anunți cu cel puțin <strong>24 de ore înainte</strong> pentru a elibera intervalul.</li>
+      <li>Neprezentarea fără anunț prealabil poate duce la imposibilitatea de a mai beneficia de consultația gratuită.</li>
+    </ul>
+    <div class="info-box green">
+      Programarea prin site nu reprezintă un contract de prestări servicii. Un contract se încheie separat, după consultație, dacă ambele părți convin continuarea colaborării.
+    </div>
+  </div>
+
+  <!-- 5. CONTUL DE UTILIZATOR -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon purple">👤</div>
+      <div>
+        <div class="card-num">Secțiunea 5</div>
+        <h2>Contul de utilizator</h2>
+      </div>
+    </div>
+    <p>Poți crea opțional un cont pentru a-ți urmări programările. Prin crearea contului, ești responsabil pentru:</p>
+    <ul>
+      <li>Furnizarea unor date corecte și actualizate</li>
+      <li>Păstrarea confidențialității parolei tale</li>
+      <li>Orice activitate realizată din contul tău</li>
+    </ul>
+    <p style="margin-top:10px;">Ne rezervăm dreptul de a suspenda sau șterge conturi care furnizează informații false sau care utilizează platforma în mod abuziv.</p>
+    <div class="info-box">
+      Dacă suspectezi că cineva a accesat contul tău fără permisiune, contactează-ne imediat la <a href="mailto:contact@d4riustax.advice.uetcompany.ro"><strong>contact@d4riustax.advice.uetcompany.ro</strong></a>.
+    </div>
+  </div>
+
+  <!-- 6. ASISTENTUL VIRTUAL -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">🤖</div>
+      <div>
+        <div class="card-num">Secțiunea 6</div>
+        <h2>Asistentul virtual</h2>
+      </div>
+    </div>
+    <p>Site-ul dispune de un asistent virtual alimentat de inteligență artificială, destinat răspunsurilor la întrebări generale despre serviciile noastre, fiscalitate și contabilitate.</p>
+    <ul>
+      <li>Răspunsurile asistentului au caracter <strong>informativ general</strong> și nu constituie consultanță fiscală sau juridică.</li>
+      <li>Nu ne asumăm răspunderea pentru decizii luate exclusiv pe baza răspunsurilor din chat.</li>
+      <li>Te rugăm să nu introduci în chat date personale sensibile (CNP, date bancare etc.).</li>
+    </ul>
+  </div>
+
+  <!-- 7. PROPRIETATE INTELECTUALA -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">©️</div>
+      <div>
+        <div class="card-num">Secțiunea 7</div>
+        <h2>Proprietate intelectuală</h2>
+      </div>
+    </div>
+    <p>Toate conținuturile de pe acest site — texte, logo-uri, grafice, structura paginilor — aparțin <strong>D4RIUS TAX ADVICE S.R.L.</strong> sau sunt folosite cu acordul titularilor de drepturi.</p>
+    <p>Este interzisă copierea, reproducerea sau distribuirea oricărui conținut de pe site fără acordul nostru scris prealabil.</p>
+  </div>
+
+  <!-- 8. LIMITAREA RASPUNDERII -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon red">⚠️</div>
+      <div>
+        <div class="card-num">Secțiunea 8</div>
+        <h2>Limitarea răspunderii</h2>
+      </div>
+    </div>
+    <p>Depunem eforturi constante pentru ca informațiile de pe site să fie corecte și actualizate, însă nu garantăm că sunt complete sau lipsite de erori în orice moment.</p>
+    <ul>
+      <li>Nu răspundem pentru <strong>întreruperi tehnice</strong> temporare ale site-ului.</li>
+      <li>Nu răspundem pentru decizii luate pe baza informațiilor generale publicate pe site, fără o consultație directă cu un specialist.</li>
+      <li>Nu răspundem pentru conținutul site-urilor externe spre care pot exista linkuri pe site-ul nostru.</li>
+    </ul>
+    <div class="info-box red">
+      Răspunderea noastră față de clienți pentru serviciile contractate este reglementată prin contractul de prestări servicii semnat separat, nu prin acești termeni.
+    </div>
+  </div>
+
+  <!-- 9. MODIFICARI -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔄</div>
+      <div>
+        <div class="card-num">Secțiunea 9</div>
+        <h2>Modificări ale termenilor</h2>
+      </div>
+    </div>
+    <p>Ne rezervăm dreptul de a actualiza acești termeni oricând, fără notificare prealabilă. Versiunea curentă este întotdeauna publicată pe această pagină cu data ultimei actualizări.</p>
+    <p>Continuarea utilizării site-ului după publicarea unor modificări reprezintă acceptarea noilor termeni.</p>
+  </div>
+
+  
+
+  <!-- CONTACT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon green">📞</div>
+      <div>
+        <div class="card-num">Contact</div>
+        <h2>Întrebări despre acești termeni?</h2>
+      </div>
+    </div>
+    <p>Dacă ai nelămuriri legate de acești termeni și condiții, ne poți contacta oricând:</p>
+    <ul>
+      <li>📧 <a href="mailto:contact@d4riustax.advice.uetcompany.ro"><strong>contact@d4riustax.advice.uetcompany.ro</strong></a></li>
+      <li>📞 <a href="tel:+40770430731"><strong>+40 770 430 731</strong></a></li>
+      <li>📍 Strada Măgrini, nr. 2, Valea Voievozilor, Dâmbovița</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 <strong>d4riusTAX ADVICE S.R.L</strong> — Toate drepturile rezervate</p>
+    <p style="margin-top:8px;">
+      <a href="index.html">Pagina principală</a> &nbsp;·&nbsp;
+      <a href="politica-confidentialitate.html">Politică confidențialitate</a> &nbsp;·&nbsp;
+      <a href="politica-cookies.html">Politică cookies</a>
+    </p>
+  </div>
+
+</div>
 </body>
 </html>

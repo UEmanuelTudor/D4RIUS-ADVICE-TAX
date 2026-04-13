@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
-<title>Admin d4riusTAX v4.0</title>
+<title>Gestionare programari v4.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <style>
 :root{--primary:#14314d;--secondary:#ff7a18;--dark:#0b1b2b;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--blue:#3b82f6;}
@@ -81,7 +81,7 @@ td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-siz
 .st-trash{background:#fee2e2;color:#dc2626;}
 
 /* ===== ACTION BUTTONS ===== */
-.actions{display:flex;gap:6px;flex-wrap:wrap;}
+.actions{display:flex;gap:6px;flex-wrap:nowrap;}
 .actions button{padding:7px 10px;border:none;border-radius:8px;cursor:pointer;font-size:10px;font-weight:700;transition:.2s;}
 .actions button:hover{opacity:.85;transform:translateY(-1px);}
 .btn-green{background:var(--green);color:#fff;}
@@ -92,6 +92,8 @@ td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-siz
 /* ===== TOAST ===== */
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:600;z-index:9999;display:none;box-shadow:0 8px 30px rgba(0,0,0,.3);border-left:4px solid var(--green);white-space:nowrap;max-width:90vw;text-align:center;}
 #toast.error{border-left-color:var(--red);}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 0 0 rgba(34,197,94,0.5);}50%{opacity:0.8;transform:scale(1.2);box-shadow:0 0 0 5px rgba(34,197,94,0);}}
+@keyframes spin{to{transform:rotate(360deg);}}
 
 /* ===== MODAL ===== */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-end;justify-content:center;padding:0;}
@@ -184,7 +186,17 @@ td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-siz
     </div>
   </div>
 </div>
-
+<!-- MODAL DETALII -->
+<div class="modal-overlay" id="modal-detail">
+  <div class="modal" style="border-radius:16px;max-width:480px;">
+    <div style="background:linear-gradient(135deg,var(--primary),var(--dark));margin:-24px -20px 20px;padding:20px 24px;border-radius:16px 16px 0 0;display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="color:#fff;margin:0;">📋 Detalii Programare</h3>
+      <button onclick="closeModal('modal-detail')" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;">✕</button>
+    </div>
+    <div id="detail-rows"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;" id="detail-actions"></div>
+  </div>
+</div>
 <!-- LOGIN -->
 <div id="login-page">
   <div class="login-box">
@@ -237,7 +249,16 @@ td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-siz
 
     <div class="tools">
       <input type="search" id="search-input" class="search-box" placeholder="🔍 Caută după nume sau REF..." oninput="render()">
-      <div class="orar-info">Orar: <span style="color:var(--secondary)">08:00 - 18:00</span></div>
+    <div style="display:flex;align-items:center;gap:12px;">
+  <button id="reload-btn" onclick="manualReload()" style="background:var(--primary);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px;">
+    <span id="reload-icon" style="display:inline-block;">↻</span> Reîncarcă
+  </button>
+  <div style="display:inline-flex;align-items:center;gap:5px;background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700;">
+    <div style="width:8px;height:8px;background:#22c55e;border-radius:50%;animation:livePulse 1.5s ease-in-out infinite;"></div>
+    Live
+  </div>
+  <div class="orar-info">Orar: <span style="color:var(--secondary)">08:00 - 18:00</span></div>
+</div>
     </div>
 
     <!-- DESKTOP TABLE -->
@@ -283,7 +304,7 @@ async function checkAuth() {
       document.getElementById('login-page').style.display = 'none';
       document.getElementById('admin-panel').style.display = 'block';
       loadFromCloud();
-      setInterval(loadFromCloud, 30000);
+      setInterval(loadFromCloud, 60000);
     } else {
       _fail++;
       if (_fail >= 3) { _lock = Date.now() + 30000; _fail = 0; showToast('🔒 Blocat 30 secunde!', true); }
@@ -300,10 +321,32 @@ let pendingActionId = null;
 
 async function loadFromCloud() {
   try {
-    const r = await fetch(WORKER_URL + '/api/admin/clients');
+    const creds = btoa('d4riusadmin' + ':' + 'd4riustaxadvice2026!');
+    const r = await fetch(WORKER_URL + '/api/admin/programari', {
+      headers: { 'Authorization': 'Basic ' + creds }
+    });
     const d = await r.json();
     if (d.ok) {
-      clients = d.clients || [];
+const priority = {'done':4,'cancelled':3,'trash':2,'confirmed':1,'new':0};
+const byRef = {};
+for (const p of (d.programari || [])) {
+  const ref = p.ref || p.id;
+  const curr = priority[p.status] ?? 0;
+  const prev = priority[(byRef[ref] || {}).status] ?? -1;
+  if (!byRef[ref] || curr > prev) byRef[ref] = p;
+}
+clients = Object.values(byRef).map(p => ({
+  id: p.id || p.ref || Date.now(),
+  nume: [p.prenume, p.nume].filter(Boolean).join(' ') || p.nume || (p.email || '').split('@')[0],
+  ref: p.ref || '—',
+  email: p.email || p.userEmail || '',
+  tel: p.telefon || p.tel || '-',
+  data: p.data || '-',
+  ora: p.ora || '-',
+  obs: p.mesaj || '',
+  status: p.status === 'done' ? 'done' : p.status === 'cancelled' ? 'cancel' : p.status === 'trash' ? 'trash' : 'active',
+  meta_info: ''
+}));
       try { localStorage.setItem('dtax_v4_backup', JSON.stringify(clients)); } catch(e) {}
     }
   } catch(e) {
@@ -314,13 +357,22 @@ async function loadFromCloud() {
 
 async function saveToCloud() {
   try { localStorage.setItem('dtax_v4_backup', JSON.stringify(clients)); } catch(e) {}
+}
+
+async function applyStatus(id, kvStatus) {
+const c = clients.find(x => String(x.id) === String(id));
+  if (!c) return;
   try {
-    await fetch(WORKER_URL + '/api/admin/clients', {
+    const creds = btoa('d4riusadmin' + ':' + 'd4riustaxadvice2026!');
+    const emailKey = (c.email && c.email.includes('@')) ? c.email : 'noemail';
+    const res = await fetch(WORKER_URL + '/api/admin/programari/status', {
       method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ clients })
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Basic ' + creds },
+      body: JSON.stringify({ key: `prog:${emailKey}:${c.ref}`, ref: c.ref, status: kvStatus })
     });
-  } catch(e) { showToast('⚠️ Salvat doar local!', true); }
+    const d = await res.json();
+    if (!d.ok) showToast('⚠️ Nu s-a salvat: ' + (d.error || 'eroare'), true);
+  } catch(e) { showToast('⚠️ Eroare salvare!', true); }
 }
 
 // ===== TOAST =====
@@ -336,29 +388,45 @@ function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); pendingActionId = null; }
 
 // ===== SAVE =====
-function saveClient() {
+async function saveClient() {
   const n = document.getElementById('in-nume').value.trim();
   const o = document.getElementById('in-ora').value;
   if (!n || !o) return showToast('⚠️ Numele și Ora sunt obligatorii!', true);
-  clients.push({
-    id: Date.now(), nume: n,
-    ref:   document.getElementById('in-ref').value,
-    email: document.getElementById('in-email').value.trim() || '',
+  const ref = document.getElementById('in-ref').value;
+  const email = document.getElementById('in-email').value.trim() || '';
+  const newClient = {
+    id: Date.now(), nume: n, ref, email,
     tel:   document.getElementById('in-tel').value.trim() || '-',
     data:  document.getElementById('in-data').value || '-',
     ora: o, obs: document.getElementById('in-obs').value.trim() || '',
     status: 'active', meta_info: ''
-  });
-  update();
+  };
+  clients.push(newClient);
+  render();
   document.querySelectorAll('.form-grid input:not(#in-ref), .form-grid select, .form-grid textarea').forEach(i => i.value='');
   document.getElementById('in-ref').value = 'D4TAX-';
-  showToast('✅ Programare salvată!');
+  try {
+    const creds = btoa('d4riusadmin' + ':' + 'd4riustaxadvice2026!');
+    const progData = {
+      id: String(newClient.id), ref, email, userEmail: email,
+      nume: n, tel: newClient.tel, data: newClient.data,
+      ora: o, mesaj: newClient.obs, status: 'confirmed',
+      created: new Date().toISOString()
+    };
+    const res = await fetch(WORKER_URL + '/api/admin/programari/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Basic ' + creds },
+      body: JSON.stringify(progData)
+    });
+    const d = await res.json();
+    d.ok ? showToast('✅ Programare salvată în cloud!') : showToast('⚠️ Salvat local, eroare cloud: ' + (d.error||''), true);
+  } catch(e) { showToast('⚠️ Salvat local, fără cloud!', true); }
 }
 
 // ===== CHANGE STATUS =====
-function changeStatus(id, newStatus) {
+async function changeStatus(id, newStatus) {
   pendingActionId = id;
-  const c = clients.find(x => x.id === id);
+const c = clients.find(x => String(x.id) === String(id));
   if (!c) return;
   if (newStatus === 'cancel') {
     document.getElementById('modal-cancel-email-preview').textContent = c.email || 'fără email';
@@ -368,19 +436,22 @@ function changeStatus(id, newStatus) {
     document.getElementById('modal-done-email-preview').textContent = c.email || 'fără email';
     document.getElementById('modal-done-ora').value = '';
     openModal('modal-done');
-  } else {
-    clients = clients.map(x => x.id===id ? {...x, status: newStatus, meta_info:''} : x);
-    update();
+} else {
+   const kvStatus = newStatus === 'active' ? 'confirmed' : newStatus === 'trash' ? 'trash' : 'cancelled';
+   clients = clients.map(x => String(x.id)===String(id) ? {...x, status: newStatus, meta_info:''} : x);
+    render();
+    await applyStatus(id, kvStatus);
   }
 }
 
 async function confirmCancel() {
   const id = pendingActionId;
-  const c  = clients.find(x => x.id===id);
+const c  = clients.find(x => String(x.id) === String(id));
   const motiv = document.getElementById('modal-cancel-motiv').value.trim() || 'Nu a mai venit';
   closeModal('modal-cancel');
-  clients = clients.map(x => x.id===id ? {...x, status:'cancel', meta_info:motiv} : x);
-  update();
+clients = clients.map(x => String(x.id)===String(id) ? {...x, status:'cancel', meta_info:motiv} : x);
+  render();
+  await applyStatus(id, 'cancelled');
   if (c.email && c.email.includes('@')) {
     showToast('📧 Se trimite email...');
     try {
@@ -394,11 +465,12 @@ async function confirmCancel() {
 
 async function confirmDone() {
   const id = pendingActionId;
-  const c  = clients.find(x => x.id===id);
+const c  = clients.find(x => String(x.id) === String(id));
   const ora = document.getElementById('modal-done-ora').value || '-';
   closeModal('modal-done');
-  clients = clients.map(x => x.id===id ? {...x, status:'done', meta_info:ora} : x);
-  update();
+clients = clients.map(x => String(x.id)===String(id) ? {...x, status:'done', meta_info:ora} : x);
+  render();
+  await applyStatus(id, 'done');
   if (c.email && c.email.includes('@')) {
     showToast('📧 Se trimite email...');
     try {
@@ -431,17 +503,17 @@ function statusHtml(c) {
   return '<span class="status-tag st-trash">Coș</span>';
 }
 function actionsHtml(c, mobile=false) {
-  const cls = mobile ? '' : '';
   if (c.status==='active') return `
-    <button class="btn-green" onclick="changeStatus(${c.id},'done')">✅ A VENIT</button>
-    <button class="btn-yellow" onclick="changeStatus(${c.id},'cancel')">❌ ANULAT</button>
-    <button class="btn-red" onclick="changeStatus(${c.id},'trash')">🗑️</button>`;
+    <button class="btn-green" onclick="changeStatus('${c.id}','done')">✅ A VENIT</button>
+    <button class="btn-yellow" onclick="changeStatus('${c.id}','cancel')">❌ ANULAT</button>
+    <button class="btn-restore" onclick="openDetail('${c.id}')">📋 DETALII</button>
+    <button class="btn-red" onclick="changeStatus('${c.id}','trash')">🗑️</button>`;
   if (c.status==='trash') return `
-    <button class="btn-restore" onclick="changeStatus(${c.id},'active')">♻️ RESTAURARE</button>
-    <button class="btn-red" style="background:#000" onclick="permanentDelete(${c.id})">💀 DEL</button>`;
+    <button class="btn-restore" onclick="changeStatus('${c.id}','active')">♻️ RESTAURARE</button>
+    <button class="btn-red" style="background:#000" onclick="permanentDelete('${c.id}')">💀 DEL</button>`;
   return `
-    <button class="btn-restore" onclick="changeStatus(${c.id},'active')">♻️ RESTAURARE</button>
-    <button class="btn-red" onclick="changeStatus(${c.id},'trash')">🗑️ COȘ</button>`;
+    <button class="btn-restore" onclick="changeStatus('${c.id}','active')">♻️ RESTAURARE</button>
+    <button class="btn-red" onclick="changeStatus('${c.id}','trash')">🗑️ COȘ</button>`;
 }
 
 function render() {
@@ -500,6 +572,43 @@ function render() {
 }
 
 function update() { render(); saveToCloud(); }
+async function manualReload() {
+  const btn = document.getElementById('reload-btn');
+  const icon = document.getElementById('reload-icon');
+  btn.style.opacity = '0.7';
+  btn.style.pointerEvents = 'none';
+  icon.style.animation = 'spin 0.7s linear infinite';
+  await loadFromCloud();
+  icon.style.animation = '';
+  btn.style.opacity = '1';
+  btn.style.pointerEvents = 'auto';
+  showToast('✅ Pagina a fost reîncărcată cu succes!');
+}
+function openDetail(id) {
+const c = clients.find(x => String(x.id) === String(id));
+  if (!c) return;
+  const row = (label, val) => `
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #f1f5f9;font-size:14px;">
+      <span style="color:#64748b;width:100px;flex-shrink:0;font-weight:500;">${label}</span>
+      <span style="color:#1e293b;font-weight:600;flex:1;">${val}</span>
+    </div>`;
+  document.getElementById('detail-rows').innerHTML =
+    row('Referință', `<span style="font-family:monospace;color:var(--primary);letter-spacing:.8px;">${c.ref}</span>`) +
+    row('Client', c.nume) +
+    row('Email', c.email && c.email.includes('@') ? `<a href="mailto:${c.email}" style="color:var(--secondary);">${c.email}</a>` : 'fără email') +
+    row('Telefon', c.tel !== '-' ? `<a href="tel:${c.tel}" style="color:var(--secondary);">${c.tel}</a>` : '-') +
+    row('Data', c.data) +
+    row('Ora', c.ora) +
+    row('Status', statusHtml(c)) +
+    row('Note', c.obs || '<em style="color:#aaa">fără note</em>');
+  document.getElementById('detail-actions').innerHTML = `
+    ${c.status==='active' ? `
+      <button class="btn-green" style="padding:10px 16px;border:none;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;" onclick="closeModal('modal-detail');changeStatus('${c.id}','done')">✅ Finalizat</button>
+      <button class="btn-yellow" style="padding:10px 16px;border:none;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;" onclick="closeModal('modal-detail');changeStatus('${c.id}','cancel')">❌ Anulează</button>` : ''}
+    <a href="tel:${c.tel}" style="padding:10px 16px;background:#f0f9ff;color:#0369a1;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;">📞 Sună</a>
+    <a href="mailto:${c.email}" style="padding:10px 16px;background:#faf5ff;color:#7c3aed;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;">✉️ Email</a>`;
+  openModal('modal-detail');
+}
 </script>
 </body>
 </html>

@@ -3,186 +3,314 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Politica de cookies - d4riusTAX ADVICE S.R.L</title>
-  <meta name="description" content="Politica de cookies pentru website-ul d4riusTAX ADVICE S.R.L.">
+  <title>Politica de Cookies — d4riusTAX ADVICE S.R.L</title>
+  <meta property="og:image" content="https://www.d4riustaxadvice.ro/logo.png">
+  <meta name="description" content="Politica de cookies pentru d4riusTAX ADVICE S.R.L — ce cookie-uri folosim și cum le poți gestiona.">
   <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/png" href="D4RIUS TAX.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --primary:#14314d;
       --secondary:#ff7a18;
+      --dark:#0b1b2b;
       --text:#1f2937;
       --muted:#6b7280;
-      --bg:#f8fafc;
+      --bg:#f5f7fb;
       --card:#ffffff;
       --border:#e5e7eb;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial,sans-serif;
-      color:var(--text);
-      background:var(--bg);
-      line-height:1.7;
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.75;}
+    a{color:var(--secondary);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+
+    .wrap{max-width:860px;margin:0 auto;padding:32px 16px 64px;}
+
+    .back-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,var(--primary),var(--dark));
+      color:#fff;padding:12px 26px;border-radius:50px;
+      font-size:14px;font-weight:700;text-decoration:none;
+      transition:.3s;margin-bottom:20px;
+      box-shadow:0 6px 20px rgba(20,49,77,.25);
     }
-    .wrap{
-      max-width:920px;
-      margin:0 auto;
-      padding:24px 16px 48px;
-    }
+    .back-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(20,49,77,.35);text-decoration:none;}
+
+    /* HERO */
     .hero{
-      background:linear-gradient(135deg,var(--primary),#0b1b2b);
-      color:#fff;
-      border-radius:14px;
-      padding:24px;
-      margin-bottom:16px;
+      background:linear-gradient(135deg,var(--primary),var(--dark));
+      color:#fff;border-radius:18px;padding:36px 32px;margin-bottom:20px;
+      position:relative;overflow:hidden;
     }
-    .hero h1{
-      margin:0 0 8px;
-      font-size:30px;
-      line-height:1.2;
+    .hero::before{
+      content:'';position:absolute;top:-60px;right:-60px;
+      width:300px;height:300px;
+      background:radial-gradient(circle,rgba(255,122,24,.15) 0%,transparent 70%);
+      border-radius:50%;pointer-events:none;
     }
-    .hero p{
-      margin:0;
-      color:#dbe5ef;
+    .hero-badge{
+      display:inline-block;
+      background:rgba(255,122,24,.2);border:1px solid rgba(255,122,24,.4);
+      color:#ff9a3c;font-size:12px;font-weight:700;letter-spacing:.6px;
+      text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:16px;
     }
+    .hero h1{font-size:28px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+    .hero .subtitle{color:#c5d4e3;font-size:15px;}
+    .hero .date{margin-top:14px;color:#8faec9;font-size:13px;}
+
+    /* CARD */
     .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:18px;
-      margin-bottom:12px;
+      background:var(--card);border:1px solid var(--border);border-radius:16px;
+      padding:24px 28px;margin-bottom:14px;
+      box-shadow:0 2px 12px rgba(0,0,0,.05);transition:.2s;
     }
-    h2{
-      margin:0 0 10px;
-      color:var(--primary);
-      font-size:22px;
+    .card:hover{box-shadow:0 4px 20px rgba(0,0,0,.09);}
+    .card-header{
+      display:flex;align-items:center;gap:14px;
+      margin-bottom:16px;padding-bottom:14px;border-bottom:1.5px solid #f0f4ff;
     }
-    p{margin:0 0 10px}
-    ul{margin:8px 0 0 20px}
-    li{margin:4px 0}
-    .muted{color:var(--muted)}
-    .note{
-      background:#fff7ed;
-      border-left:4px solid var(--secondary);
-      border-radius:8px;
-      padding:10px 12px;
-      margin-top:10px;
+    .card-icon{
+      width:44px;height:44px;border-radius:12px;
+      background:linear-gradient(135deg,var(--secondary),#ff9a3c);
+      display:flex;align-items:center;justify-content:center;
+      font-size:20px;flex-shrink:0;box-shadow:0 4px 12px rgba(255,122,24,.25);
     }
-    a{
-      color:var(--secondary);
-      text-decoration:none;
-      font-weight:700;
+    .card-icon.blue{background:linear-gradient(135deg,#3b82f6,#6366f1);}
+    .card-icon.green{background:linear-gradient(135deg,#22c55e,#16a34a);}
+    .card-num{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--secondary);margin-bottom:2px;}
+    h2{font-size:17px;font-weight:700;color:var(--primary);margin:0;}
+    p{margin:0 0 10px;font-size:15px;}
+    p:last-child{margin-bottom:0;}
+    ul{margin:8px 0 0 18px;}
+    li{margin:5px 0;font-size:15px;}
+    strong{font-weight:600;color:#1a2e40;}
+
+    /* INFO BOX */
+    .info-box{
+      background:#fff8f2;border-left:4px solid var(--secondary);
+      border-radius:0 10px 10px 0;padding:12px 16px;margin-top:14px;
+      font-size:14px;color:#7c4d1a;
     }
-    table{
-      width:100%;
-      border-collapse:collapse;
-      margin-top:10px;
-      font-size:14px;
+    .info-box.green{background:#f0fdf4;border-left-color:#22c55e;color:#166534;}
+
+    /* COOKIE TABLE */
+    .cookie-table{width:100%;border-collapse:collapse;margin-top:12px;border-radius:10px;overflow:hidden;}
+    .cookie-table th{background:#f8faff;padding:10px 14px;text-align:left;font-size:12px;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:2px solid #e8edf8;}
+    .cookie-table td{padding:11px 14px;font-size:14px;border-bottom:1px solid #f0f4ff;vertical-align:top;}
+    .cookie-table tr:last-child td{border-bottom:none;}
+    .cookie-table td:first-child{font-weight:600;color:var(--primary);width:160px;}
+
+    /* TYPE BADGE */
+    .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+    .badge-req{background:#dcfce7;color:#16a34a;}
+    .badge-func{background:#dbeafe;color:#1d4ed8;}
+    .badge-anal{background:#fef3c7;color:#d97706;}
+
+    /* BROWSER GRID */
+    .browser-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:14px;}
+    .browser-item{
+      background:#f8faff;border:1px solid #e8edf8;border-radius:10px;
+      padding:14px;text-align:center;transition:.2s;
     }
-    th,td{
-      border:1px solid var(--border);
-      text-align:left;
-      padding:10px;
-      vertical-align:top;
-    }
-    th{
-      background:#f3f4f6;
-    }
-    .footer{
-      text-align:center;
-      color:var(--muted);
-      font-size:13px;
-      margin-top:8px;
+    .browser-item:hover{border-color:var(--secondary);background:#fff;}
+    .browser-item a{font-size:13px;font-weight:700;color:var(--primary);display:block;margin-top:6px;}
+    .browser-item .b-icon{font-size:24px;display:block;}
+
+    /* FOOTER */
+    .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);}
+    .footer a{color:var(--secondary);font-weight:600;}
+
+    @media(max-width:600px){
+      .wrap{padding:20px 12px 48px;}
+      .hero{padding:24px 20px;}
+      .hero h1{font-size:22px;}
+      .card{padding:18px 16px;}
+      .card-header{flex-direction:column;align-items:flex-start;gap:8px;}
+      .cookie-table td:first-child{width:110px;}
+      .browser-grid{grid-template-columns:1fr 1fr;}
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <section class="hero">
-      <h1>Politica de cookies</h1>
-      <p>d4riusTAX ADVICE S.R.L</p>
-      <p class="muted">Ultima actualizare: 31.03.2026</p>
-    </section>
+<div class="wrap">
 
-    <section class="card">
-      <h2>1. Ce sunt cookie-urile si tehnologiile similare</h2>
-      <p>Cookie-urile sunt fisiere mici stocate in browser sau pe dispozitivul utilizatorului. Site-ul poate utiliza si tehnologii similare, precum localStorage sau sessionStorage, pentru functionarea unor functionalitati.</p>
-    </section>
+  <a href="index.html" class="back-btn">← Înapoi la pagina principală</a>
 
-    <section class="card">
-      <h2>2. Ce folosim pe acest site</h2>
-      <p>Site-ul d4riusTAX ADVICE S.R.L poate utiliza mecanisme tehnice precum cookie-uri, localStorage si sessionStorage pentru functionarea corecta a paginilor, memorarea unor optiuni si afisarea anumitor functionalitati.</p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Tip</th>
-            <th>Scop</th>
-            <th>Exemple</th>
-            <th>Necesita consimtamant</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Strict necesare</td>
-            <td>Functionarea de baza a site-ului si a unor elemente de interfata</td>
-            <td>Retinerea optiunii privind bannerul de cookies, functionarea unor componente tehnice</td>
-            <td>Nu, in masura in care sunt strict necesare</td>
-          </tr>
-          <tr>
-            <td>Preferinte / functionale</td>
-            <td>Memorarea unor alegeri facute de utilizator in browser</td>
-            <td>Sesiune chat, stari UI, preferinte locale</td>
-            <td>Da, daca nu sunt strict necesare</td>
-          </tr>
-          <tr>
-            <td>Statistice / marketing</td>
-            <td>Analiza traficului sau publicitate</td>
-            <td>Google Analytics, Meta Pixel sau alte servicii similare, daca vor fi instalate in viitor</td>
-            <td>Da, inainte de activare</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="note">
-        In forma actuala, daca adaugi instrumente de analiza trafic sau marketing, acestea trebuie activate numai dupa obtinerea consimtamantului, acolo unde legea o cere.
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>3. Durata de stocare</h2>
-      <p>Durata de stocare variaza in functie de scopul fiecarei tehnologii utilizate. Unele date pot fi pastrate doar pe durata sesiunii, iar altele pana la stergerea lor manuala din browser sau pana la expirare.</p>
-    </section>
-
-    <section class="card">
-      <h2>4. Cum poti controla cookie-urile si stocarea locala</h2>
-      <ul>
-        <li>Poti accepta sau refuza anumite categorii, in functie de configurarea site-ului.</li>
-        <li>Poti sterge cookie-urile din setarile browserului.</li>
-        <li>Poti sterge localStorage si sessionStorage din browser.</li>
-        <li>Poti seta browserul sa blocheze anumite cookie-uri sau sa te anunte cand acestea sunt plasate.</li>
-      </ul>
-      <p>Daca dezactivezi componentele strict necesare, anumite functii ale site-ului pot sa nu functioneze corect.</p>
-    </section>
-
-    <section class="card">
-      <h2>5. Temei legal</h2>
-      <p>Utilizarea cookie-urilor si a tehnologiilor similare se face in conformitate cu legislatia aplicabila, inclusiv normele privind protectia datelor si regulile ePrivacy aplicabile in Romania.</p>
-    </section>
-
-    <section class="card">
-      <h2>6. Legatura cu datele personale</h2>
-      <p>In masura in care cookie-urile sau tehnologiile similare duc la prelucrarea datelor cu caracter personal, se aplica si prevederile Politicii de confidentialitate.</p>
-      <p><a href="politica-confidentialitate.html">Vezi Politica de confidentialitate</a></p>
-    </section>
-
-    <section class="card">
-      <h2>7. Contact</h2>
-      <p>Pentru intrebari legate de cookie-uri si tehnologii similare, ne poti scrie la: <strong>contact@d4riustax.advice.uetcompany.ro</strong>.</p>
-      <p><a href="index.html">Inapoi la pagina principala</a></p>
-    </section>
-
-    <div class="footer">© 2026 d4riusTAX ADVICE S.R.L</div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">🍪 Transparent & Simplu</div>
+    <h1>Politica de Cookies</h1>
+    <p class="subtitle">d4riusTAX ADVICE S.R.L — ce cookie-uri folosim și de ce</p>
+    <p class="date">Ultima actualizare: 15.04.2026</p>
   </div>
+
+  <!-- 1. CE SUNT COOKIES -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🍪</div>
+      <div>
+        <div class="card-num">Secțiunea 1</div>
+        <h2>Ce sunt cookie-urile</h2>
+      </div>
+    </div>
+    <p>Cookie-urile sunt fișiere mici de text pe care un site le salvează în browserul tău atunci când îl vizitezi. Ele permit site-ului să-și amintească anumite informații despre tine — de exemplu, că ai acceptat cookie-urile sau că ești autentificat.</p>
+    <p>Cookie-urile nu sunt programe și nu pot accesa sau modifica fișierele de pe calculatorul tău.</p>
+  </div>
+
+  <!-- 2. CE COOKIES FOLOSIM -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📋</div>
+      <div>
+        <div class="card-num">Secțiunea 2</div>
+        <h2>Ce cookie-uri folosim</h2>
+      </div>
+    </div>
+    <p>Folosim exclusiv cookie-uri și mecanisme tehnice similare (<code>localStorage</code>) strict necesare pentru funcționarea site-ului:</p>
+    <table class="cookie-table">
+      <thead>
+        <tr><th>Denumire</th><th>Tip</th><th>Scopul</th><th>Durată</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>cookie_consent</td>
+          <td><span class="badge badge-req">Necesar</span></td>
+          <td>Reține dacă ai acceptat sau refuzat cookie-urile</td>
+          <td>1 an</td>
+        </tr>
+        <tr>
+          <td>d4tax_session</td>
+          <td><span class="badge badge-func">Funcțional</span></td>
+          <td>Menține sesiunea ta de login activ dacă ai cont</td>
+          <td>7 zile</td>
+        </tr>
+        <tr>
+          <td>chatbot_session</td>
+          <td><span class="badge badge-func">Funcțional</span></td>
+          <td>Păstrează istoricul conversației din chat pe durata sesiunii</td>
+          <td>Sesiune (se șterge la închiderea browserului)</td>
+        </tr>
+        <tr>
+          <td>d4tax_programari</td>
+          <td><span class="badge badge-func">Funcțional</span></td>
+          <td>Backup local pentru programările tale (stocat pe dispozitivul tău)</td>
+          <td>Persistent (până la ștergere manuală)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box green" style="margin-top:14px;">
+      Nu folosim cookie-uri de publicitate, tracking sau analiză comportamentală. Nu există reclame pe site și nu urmărim activitatea ta pe alte site-uri.
+    </div>
+  </div>
+
+  <!-- 3. COOKIES TERTE PARTI -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">🌐</div>
+      <div>
+        <div class="card-num">Secțiunea 3</div>
+        <h2>Cookie-uri de la terți</h2>
+      </div>
+    </div>
+    <p>Site-ul nostru folosește fonturi de la <strong>Google Fonts</strong> (fonts.googleapis.com). La încărcarea paginii, browserul tău contactează serverele Google pentru a descărca fonturile. Google poate seta propriile cookie-uri conform politicii lor de confidențialitate.</p>
+    <p>Nu folosim Google Analytics, Facebook Pixel sau alte instrumente de tracking de la terți.</p>
+    <div class="info-box">
+      Dacă vrei să eviți complet cookie-urile Google Fonts, poți bloca domeniul <code>fonts.googleapis.com</code> din setările browserului tău.
+    </div>
+  </div>
+
+  <!-- 4. CONSIMTAMANT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">✅</div>
+      <div>
+        <div class="card-num">Secțiunea 4</div>
+        <h2>Consimțământul tău</h2>
+      </div>
+    </div>
+    <p>La prima vizită pe site, îți apare un banner prin care poți alege să <strong>Accepți</strong> sau să <strong>Refuzi</strong> cookie-urile.</p>
+    <ul>
+      <li>Dacă <strong>accepți</strong> — toate cookie-urile de mai sus sunt active.</li>
+      <li>Dacă <strong>refuzi</strong> — stocăm doar preferința ta (că ai refuzat), fără alte cookie-uri.</li>
+    </ul>
+    <p style="margin-top:10px;">Poți să îți schimbi opțiunea oricând ștergând cookie-urile din browser — la următoarea vizită vei vedea din nou banner-ul.</p>
+    <div class="info-box">
+      Cookie-urile strict necesare pentru funcționarea site-ului (cum ar fi sesiunea de login) sunt active indiferent de alegerea ta, deoarece fără ele site-ul nu poate funcționa corect.
+    </div>
+  </div>
+
+  <!-- 5. CUM SA STERGI -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon green">🗑️</div>
+      <div>
+        <div class="card-num">Secțiunea 5</div>
+        <h2>Cum poți gestiona sau șterge cookie-urile</h2>
+      </div>
+    </div>
+    <p>Poți controla și șterge cookie-urile direct din browser. Iată cum ajungi la setări în cele mai populare browsere:</p>
+    <div class="browser-grid">
+      <div class="browser-item">
+        <span class="b-icon">🌍</span>
+        <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a>
+      </div>
+      <div class="browser-item">
+        <span class="b-icon">🦊</span>
+        <a href="https://support.mozilla.org/ro/kb/stergeti-cookie-urile-firefox" target="_blank" rel="noopener">Mozilla Firefox</a>
+      </div>
+      <div class="browser-item">
+        <span class="b-icon">🧭</span>
+        <a href="https://support.apple.com/ro-ro/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a>
+      </div>
+      <div class="browser-item">
+        <span class="b-icon">🔵</span>
+        <a href="https://support.microsoft.com/ro-ro/microsoft-edge/ștergerea-cookie-urilor-în-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:14px;">
+      Atenție: ștergerea cookie-urilor te va deconecta din contul tău și va reseta preferințele de pe site.
+    </div>
+  </div>
+
+  <!-- 6. ACTUALIZARI -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔄</div>
+      <div>
+        <div class="card-num">Secțiunea 6</div>
+        <h2>Actualizări ale acestei politici</h2>
+      </div>
+    </div>
+    <p>Această politică poate fi actualizată periodic. Versiunea curentă este întotdeauna publicată pe această pagină, cu data ultimei actualizări menționată în antet.</p>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📞</div>
+      <div>
+        <div class="card-num">Contact</div>
+        <h2>Întrebări despre cookies?</h2>
+      </div>
+    </div>
+    <p>Dacă ai întrebări despre modul în care folosim cookie-urile, ne poți contacta:</p>
+    <ul>
+      <li>📧 <a href="mailto:contact@d4riustax.advice.uetcompany.ro"><strong>contact@d4riustax.advice.uetcompany.ro</strong></a></li>
+      <li>📞 <a href="tel:+40770430731"><strong>+40 770 430 731</strong></a></li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 <strong>d4riusTAX ADVICE S.R.L</strong> — Toate drepturile rezervate</p>
+    <p style="margin-top:8px;">
+      <a href="index.html">Pagina principală</a> &nbsp;·&nbsp;
+      <a href="politica-confidentialitate.html">Politică confidențialitate</a> &nbsp;·&nbsp;
+      <a href="termeni-si-conditii.html">Termeni și condiții</a>
+    </p>
+  </div>
+
+</div>
 </body>
 </html>

@@ -3,237 +3,422 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Politica de confidentialitate - d4riusTAX ADVICE S.R.L</title>
-  <meta name="description" content="Politica de confidentialitate pentru d4riusTAX ADVICE S.R.L">
+  <title>Politica de confidențialitate — d4riusTAX ADVICE S.R.L</title>
+  <meta property="og:image" content="https://www.d4riustaxadvice.ro/logo.png">
+  <meta name="description" content="Politica de confidențialitate pentru d4riusTAX ADVICE S.R.L — cum îți protejăm datele personale.">
   <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/png" href="D4RIUS TAX.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --primary:#14314d;
       --secondary:#ff7a18;
+      --dark:#0b1b2b;
       --text:#1f2937;
       --muted:#6b7280;
-      --bg:#f8fafc;
+      --bg:#f5f7fb;
       --card:#ffffff;
       --border:#e5e7eb;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial,sans-serif;
-      color:var(--text);
-      background:var(--bg);
-      line-height:1.7;
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.75;}
+    a{color:var(--secondary);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+
+    .wrap{max-width:860px;margin:0 auto;padding:32px 16px 64px;}
+
+    /* BACK BTN */
+    .back-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,var(--primary),var(--dark));
+      color:#fff;padding:12px 26px;border-radius:50px;
+      font-size:14px;font-weight:700;text-decoration:none;
+      transition:.3s;margin-bottom:20px;
+      box-shadow:0 6px 20px rgba(20,49,77,.25);
     }
-    .wrap{
-      max-width:920px;
-      margin:0 auto;
-      padding:24px 16px 48px;
-    }
+    .back-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(20,49,77,.35);text-decoration:none;}
+
+    /* HERO */
     .hero{
-      background:linear-gradient(135deg,var(--primary),#0b1b2b);
-      color:#fff;
-      border-radius:14px;
-      padding:24px;
-      margin-bottom:16px;
+      background:linear-gradient(135deg,var(--primary),var(--dark));
+      color:#fff;border-radius:18px;padding:36px 32px;margin-bottom:20px;
+      position:relative;overflow:hidden;
     }
-    .hero h1{
-      margin:0 0 8px;
-      font-size:30px;
-      line-height:1.2;
+    .hero::before{
+      content:'';position:absolute;top:-60px;right:-60px;
+      width:300px;height:300px;
+      background:radial-gradient(circle,rgba(255,122,24,.15) 0%,transparent 70%);
+      border-radius:50%;pointer-events:none;
     }
-    .hero p{
-      margin:0;
-      color:#dbe5ef;
+    .hero-badge{
+      display:inline-block;
+      background:rgba(255,122,24,.2);border:1px solid rgba(255,122,24,.4);
+      color:#ff9a3c;font-size:12px;font-weight:700;letter-spacing:.6px;
+      text-transform:uppercase;padding:5px 14px;border-radius:50px;margin-bottom:16px;
     }
+    .hero h1{font-size:28px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+    .hero .subtitle{color:#c5d4e3;font-size:15px;}
+    .hero .date{margin-top:14px;color:#8faec9;font-size:13px;}
+
+    /* CARD */
     .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:18px;
-      margin-bottom:12px;
+      background:var(--card);border:1px solid var(--border);border-radius:16px;
+      padding:24px 28px;margin-bottom:14px;
+      box-shadow:0 2px 12px rgba(0,0,0,.05);transition:.2s;
     }
-    h2{
-      margin:0 0 10px;
-      color:var(--primary);
-      font-size:22px;
+    .card:hover{box-shadow:0 4px 20px rgba(0,0,0,.09);}
+    .card-header{
+      display:flex;align-items:center;gap:14px;
+      margin-bottom:16px;padding-bottom:14px;border-bottom:1.5px solid #f0f4ff;
     }
-    p{margin:0 0 10px}
-    ul{margin:8px 0 0 20px}
-    li{margin:4px 0}
-    .muted{color:var(--muted)}
-    .note{
-      background:#fff7ed;
-      border-left:4px solid var(--secondary);
-      border-radius:8px;
-      padding:10px 12px;
-      margin-top:10px;
+    .card-icon{
+      width:44px;height:44px;border-radius:12px;
+      background:linear-gradient(135deg,var(--secondary),#ff9a3c);
+      display:flex;align-items:center;justify-content:center;
+      font-size:20px;flex-shrink:0;box-shadow:0 4px 12px rgba(255,122,24,.25);
     }
-    a{
-      color:var(--secondary);
-      text-decoration:none;
-      font-weight:700;
+    .card-icon.blue{background:linear-gradient(135deg,#3b82f6,#6366f1);}
+    .card-icon.green{background:linear-gradient(135deg,#22c55e,#16a34a);}
+    .card-icon.purple{background:linear-gradient(135deg,#8b5cf6,#6366f1);}
+    .card-num{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--secondary);margin-bottom:2px;}
+    h2{font-size:17px;font-weight:700;color:var(--primary);margin:0;}
+    p{margin:0 0 10px;font-size:15px;}
+    p:last-child{margin-bottom:0;}
+    ul{margin:8px 0 0 18px;}
+    li{margin:5px 0;font-size:15px;}
+    strong{font-weight:600;color:#1a2e40;}
+
+    /* INFO BOX */
+    .info-box{
+      background:#fff8f2;border-left:4px solid var(--secondary);
+      border-radius:0 10px 10px 0;padding:12px 16px;margin-top:14px;
+      font-size:14px;color:#7c4d1a;
     }
-    .footer{
-      text-align:center;
-      color:var(--muted);
-      font-size:13px;
-      margin-top:8px;
-    }
-    code{
-      background:#f3f4f6;
-      padding:2px 6px;
-      border-radius:6px;
-      font-size:13px;
+    .info-box.green{background:#f0fdf4;border-left-color:#22c55e;color:#166534;}
+    .info-box.blue{background:#eff6ff;border-left-color:#3b82f6;color:#1e40af;}
+
+    /* CONTACT TABLE */
+    .contact-table{width:100%;border-collapse:collapse;margin-top:4px;}
+    .contact-table tr td{padding:8px 0;font-size:15px;border-bottom:1px solid #f0f4ff;vertical-align:top;}
+    .contact-table tr:last-child td{border-bottom:none;}
+    .contact-table td:first-child{color:var(--muted);font-weight:500;width:140px;font-size:13px;}
+
+    /* RETENTION TABLE */
+    .ret-table{width:100%;border-collapse:collapse;margin-top:12px;border-radius:10px;overflow:hidden;}
+    .ret-table th{background:#f8faff;padding:10px 14px;text-align:left;font-size:12px;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:2px solid #e8edf8;}
+    .ret-table td{padding:10px 14px;font-size:14px;border-bottom:1px solid #f0f4ff;}
+    .ret-table tr:last-child td{border-bottom:none;}
+    .ret-table td:last-child{font-weight:700;color:var(--primary);}
+
+    /* RIGHTS GRID */
+    .rights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:10px;}
+    .right-item{background:#f8faff;border:1px solid #e8edf8;border-radius:10px;padding:12px 14px;transition:.2s;}
+    .right-item:hover{border-color:var(--secondary);background:#fff;}
+    .right-item .right-icon{font-size:18px;margin-bottom:4px;display:block;}
+    .right-item .right-title{font-size:13px;font-weight:700;color:var(--primary);}
+    .right-item .right-desc{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.5;}
+
+    /* FOOTER */
+    .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);}
+    .footer a{color:var(--secondary);font-weight:600;}
+
+    @media(max-width:600px){
+      .wrap{padding:20px 12px 48px;}
+      .hero{padding:24px 20px;}
+      .hero h1{font-size:22px;}
+      .card{padding:18px 16px;}
+      .card-header{flex-direction:column;align-items:flex-start;gap:8px;}
+      .contact-table td:first-child{width:100px;}
+      .rights-grid{grid-template-columns:1fr 1fr;}
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <section class="hero">
-      <h1>Politica de confidentialitate</h1>
-      <p>d4riusTAX ADVICE S.R.L</p>
-      <p class="muted">Ultima actualizare: 31.03.2026</p>
-    </section>
+<div class="wrap">
 
-    <section class="card">
-      <h2>1. Operatorul datelor</h2>
-      <p><strong>D4RIUS TAX ADVICE S.R.L.</strong></p>
-      <p>CUI: <strong>RO53619742</strong></p>
-      <p>Nr. Reg. Com.: <strong>J2026006054009</strong></p>
-      <p>Sediu social: <strong>Strada Magrini, nr. 2, Valea Voievozilor, judetul Dambovita, Romania</strong></p>
-      <p>Email: <strong>contact@d4riustax.advice.uetcompany.ro</strong></p>
-      <p>Telefon: <strong>+40 770 430 731</strong></p>
-    </section>
+  <a href="index.html" class="back-btn">← Înapoi la pagina principală</a>
 
-    <section class="card">
-      <h2>2. Ce date prelucram</h2>
-      <ul>
-        <li>Nume si prenume.</li>
-        <li>Adresa de email.</li>
-        <li>Numar de telefon.</li>
-        <li>Data si ora programarii, serviciul selectat, mesajul optional si statusul programarii.</li>
-        <li>Identificator intern de referinta al programarii.</li>
-        <li>Date tehnice minime necesare functionarii site-ului, inclusiv date stocate prin localStorage si/sau sessionStorage pentru functii tehnice.</li>
-        <li>Date transmise prin chat, inclusiv eventuale fisiere sau imagini incarcate voluntar de utilizator.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>3. Cum colectam datele</h2>
-      <ul>
-        <li>Direct de la utilizator, prin formularul de programare disponibil pe site.</li>
-        <li>Prin comunicari directe cu operatorul, inclusiv prin telefon sau email.</li>
-        <li>Prin utilizarea componentei de chat disponibila pe site.</li>
-        <li>In panoul intern de administrare, unde anumite date pot fi introduse manual de operator in scop operational.</li>
-      </ul>
-      <div class="note">
-        Datele introduse in agenda interna sunt utilizate exclusiv pentru gestionarea programarilor, comunicarea cu clientii si evidenta operationala interna.
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>4. Scopuri si temeiuri legale</h2>
-      <ul>
-        <li>Preluarea si administrarea solicitarilor de programare: demersuri precontractuale si/sau executarea contractului.</li>
-        <li>Comunicari operationale privind confirmarea, reprogramarea sau anularea: interes legitim si/sau executarea contractului.</li>
-        <li>Gestionarea solicitarilor transmise prin chat sau prin alte mijloace de contact: interes legitim si/sau demersuri precontractuale.</li>
-        <li>Respectarea obligatiilor legale aplicabile, inclusiv financiar-contabile: obligatie legala.</li>
-        <li>Apararea drepturilor si intereselor legitime ale operatorului in caz de dispute sau litigii: interes legitim.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>5. Fluxul datelor pentru programari si email</h2>
-      <ul>
-        <li>Datele completate in formular pot fi transmise catre endpoint-ul tehnic al operatorului, inclusiv prin infrastructura de tip Cloudflare Worker.</li>
-        <li>Pentru confirmarile operationale se poate utiliza un serviciu de trimitere email, inclusiv SendGrid.</li>
-        <li>Pentru gestionarea operationala a solicitarilor poate exista transmitere email catre adrese interne/operationale ale operatorului, inclusiv in copie, acolo unde este necesar pentru administrarea programarilor.</li>
-        <li>In functie de operatiunile efectuate intern, se pot transmite mesaje de confirmare, anulare sau finalizare a programarilor.</li>
-      </ul>
-      <div class="note">
-        Datele incluse in comunicarile operationale pot cuprinde numele, adresa de email, telefonul, codul de referinta, data, ora, serviciul selectat, mesajul utilizatorului, motivul anularii sau alte informatii strict necesare pentru gestionarea programarii.
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>6. Fluxul datelor pentru chat AI</h2>
-      <ul>
-        <li>Mesajele transmise prin chat pot fi procesate prin infrastructura tehnica a operatorului si transmise catre furnizorul AI utilizat pentru generarea raspunsurilor.</li>
-        <li>Daca utilizatorul alege sa incarce fisiere sau imagini in chat, aceste date pot fi transmise pentru analiza in acelasi scop.</li>
-        <li>Recomandam sa nu fie introduse in chat date sensibile sau excesive daca acestea nu sunt strict necesare.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>7. Destinatari / imputerniciti</h2>
-      <ul>
-        <li>Cloudflare, pentru infrastructura tehnica si functionarea endpoint-urilor/API-urilor utilizate.</li>
-        <li>SendGrid, pentru transmiterea comunicarilor prin email.</li>
-        <li>Furnizorul AI utilizat pentru componenta de chat, inclusiv Anthropic, daca acesta este activ in configuratia tehnica a site-ului.</li>
-        <li>Personalul autorizat al operatorului.</li>
-        <li>Autoritati publice sau institutii competente, atunci cand exista obligatie legala.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>8. Transferuri internationale</h2>
-      <p>Unii furnizori tehnici pot prelucra date in afara Spatiului Economic European. In astfel de situatii, operatorul urmareste utilizarea mecanismelor legale aplicabile pentru protectia datelor, dupa caz.</p>
-    </section>
-
-    <section class="card">
-      <h2>9. Stocare locala in panoul intern</h2>
-      <ul>
-        <li>Anumite date operationale pot fi stocate local in browserul operatorului, in cadrul unui instrument intern de administrare.</li>
-        <li>Accesul la dispozitivul de administrare trebuie limitat la persoane autorizate.</li>
-        <li>Operatorul aplica masuri organizationale rezonabile, precum restrictionarea accesului la dispozitiv si controlul accesului intern.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>10. Perioada de stocare</h2>
-      <ul>
-        <li>Datele de programare sunt pastrate, de regula, pana la 24 luni de la ultima interactiune, daca legea nu impune un termen diferit.</li>
-        <li>Datele necesare pentru indeplinirea obligatiilor legale sunt pastrate conform termenelor prevazute de lege.</li>
-        <li>Datele stocate local in browser raman pana la stergerea manuala, resetarea browserului/dispozitivului sau pana la expirarea functionala a acestora.</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>11. Drepturile persoanei vizate</h2>
-      <p>Persoanele vizate beneficiaza, in conditiile legii, de dreptul de acces, rectificare, stergere, restrictionare, opozitie, portabilitate si de dreptul de a depune plangere la autoritatea competenta pentru protectia datelor.</p>
-      <p>Pentru exercitarea drepturilor, ne poti contacta la <strong>contact@d4riustax.advice.uetcompany.ro</strong>.</p>
-    </section>
-
-    <section class="card">
-      <h2>12. Securitate</h2>
-      <p>Operatorul aplica masuri tehnice si organizatorice rezonabile pentru protectia datelor. Cu toate acestea, nicio metoda de transmitere sau stocare electronica nu poate garanta securitate absoluta.</p>
-      <div class="note">
-        Recomandare tehnica: credentialele, cheile API si alte elemente sensibile trebuie pastrate in mecanisme securizate, nu in cod public.
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>13. Incidente de securitate</h2>
-      <p>In cazul unui incident de securitate cu impact asupra datelor personale, operatorul va analiza situatia si va adopta masurile necesare potrivit legislatiei aplicabile.</p>
-    </section>
-
-    <section class="card">
-      <h2>14. Decizii automate si profilare</h2>
-      <p>Site-ul nu este destinat luarii unor decizii automate cu efect juridic asupra persoanelor vizate si nu urmareste profilarea in scop de marketing automatizat.</p>
-    </section>
-
-    <section class="card">
-      <h2>15. Cookie-uri si date tehnice</h2>
-      <p>Site-ul utilizeaza mecanisme tehnice necesare functionarii, inclusiv stocare locala pentru anumite functionalitati. Pentru detalii suplimentare, vezi <a href="politica-cookies.html">Politica de cookies</a>.</p>
-    </section>
-
-    <section class="card">
-      <h2>16. Actualizari ale politicii</h2>
-      <p>Aceasta politica poate fi actualizata periodic. Versiunea curenta este publicata pe aceasta pagina, impreuna cu data ultimei actualizari.</p>
-      <p><a href="index.html">Inapoi la pagina principala</a></p>
-    </section>
-
-    <div class="footer">© 2026 d4riusTAX ADVICE S.R.L</div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">🔒 GDPR Conform</div>
+    <h1>Politica de confidențialitate</h1>
+    <p class="subtitle">d4riusTAX ADVICE S.R.L — modul în care îți protejăm datele personale</p>
+    <p class="date">Ultima actualizare: 15.04.2026</p>
   </div>
+
+  <!-- 1. OPERATORUL -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🏢</div>
+      <div>
+        <div class="card-num">Secțiunea 1</div>
+        <h2>Cine suntem — operatorul datelor</h2>
+      </div>
+    </div>
+    <p>Societatea responsabilă cu prelucrarea datelor tale personale este:</p>
+    <table class="contact-table">
+      <tr><td>Denumire</td><td><strong>D4RIUS TAX ADVICE S.R.L.</strong></td></tr>
+      <tr><td>CUI</td><td>RO53619742</td></tr>
+      <tr><td>Reg. Com.</td><td>J2026006054009</td></tr>
+      <tr><td>Sediu social</td><td>Strada Măgrini, nr. 2, Valea Voievozilor, județul Dâmbovița, România</td></tr>
+      <tr><td>Email</td><td><a href="mailto:contact@d4riustax.advice.uetcompany.ro">contact@d4riustax.advice.uetcompany.ro</a></td></tr>
+      <tr><td>Telefon</td><td><a href="tel:+40770430731">+40 770 430 731</a></td></tr>
+    </table>
+  </div>
+
+  <!-- 2. CE DATE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📋</div>
+      <div>
+        <div class="card-num">Secțiunea 2</div>
+        <h2>Ce date personale prelucrăm</h2>
+      </div>
+    </div>
+    <p>În funcție de modul în care interacționezi cu noi, putem prelucra:</p>
+    <ul>
+      <li><strong>Date de identificare:</strong> nume și prenume.</li>
+      <li><strong>Date de contact:</strong> adresă de email și număr de telefon.</li>
+      <li><strong>Detalii programare:</strong> data și ora dorită, serviciul ales, mesajul opțional, statusul și codul de referință al programării.</li>
+      <li><strong>Mesaje din chat:</strong> întrebările sau informațiile pe care alegi să ni le transmiți prin asistentul virtual, inclusiv fișiere sau imagini dacă le încarci voluntar.</li>
+    </ul>
+    <div class="info-box">
+      Nu colectăm date sensibile (CNP, date medicale, date bancare detaliate etc.) prin site. Te rugăm să nu introduci astfel de informații în formulare sau în chat.
+    </div>
+  </div>
+
+  <!-- 3. CUM COLECTAM -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📥</div>
+      <div>
+        <div class="card-num">Secțiunea 3</div>
+        <h2>Cum colectăm datele</h2>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Prin formularul de programare</strong> — când soliciți o consultație pe site.</li>
+      <li><strong>Prin chat</strong> — când folosești asistentul virtual și alegi să ne adresezi întrebări sau să încarci documente.</li>
+      <li><strong>Prin email sau telefon</strong> — dacă ne contactezi direct.</li>
+      <li><strong>Intern</strong> — echipa noastră poate adăuga sau actualiza date în cadrul gestionării programărilor.</li>
+    </ul>
+  </div>
+
+  <!-- 4. DE CE PRELUCRĂM -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">🎯</div>
+      <div>
+        <div class="card-num">Secțiunea 4</div>
+        <h2>De ce folosim datele tale</h2>
+      </div>
+    </div>
+    <p>Folosim datele tale exclusiv pentru:</p>
+    <ul>
+      <li>Confirmarea și gestionarea programărilor tale</li>
+      <li>Trimiterea notificărilor de confirmare, modificare sau anulare a programării</li>
+      <li>Contactarea ta pentru detalii legate de serviciile solicitate</li>
+      <li>Îmbunătățirea calității serviciilor noastre</li>
+      <li>Respectarea obligațiilor legale și fiscale</li>
+    </ul>
+    <div class="info-box green">
+      Nu folosim datele tale pentru publicitate, nu le vindem și nu le transmitem niciunei terțe părți în afara celor strict necesare pentru funcționarea serviciului.
+    </div>
+  </div>
+
+  <!-- 5. EMAIL CONFIRMARE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📧</div>
+      <div>
+        <div class="card-num">Secțiunea 5</div>
+        <h2>Confirmările prin email</h2>
+      </div>
+    </div>
+    <p>Când faci o programare pe site, îți trimitem automat un email de confirmare cu detaliile rezervate (dată, oră, serviciu, cod de referință).</p>
+    <p>Dacă programarea este modificată sau anulată — fie de tine, fie de noi — îți trimitem o notificare la adresa de email furnizată.</p>
+    <p>Pentru trimiterea emailurilor folosim un serviciu extern profesional (SendGrid). Datele transmise includ doar informațiile strict necesare: numele tău, emailul, detaliile programării și codul de referință.</p>
+    <div class="info-box">
+      Emailurile de confirmare pot ajunge uneori în folderul <strong>Spam</strong> sau <strong>Promoții</strong>. Te rugăm să verifici și acolo dacă nu găsești confirmarea în Inbox.
+    </div>
+  </div>
+
+  <!-- 6. CHAT AI -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon purple">🤖</div>
+      <div>
+        <div class="card-num">Secțiunea 6</div>
+        <h2>Asistentul virtual (chat)</h2>
+      </div>
+    </div>
+    <p>Site-ul nostru dispune de un asistent virtual care poate răspunde întrebărilor tale despre serviciile d4riusTAX, programări, fiscalitate și contabilitate.</p>
+    <p>Mesajele transmise prin chat sunt procesate printr-un serviciu de inteligență artificială furnizat de un terț (Anthropic). Dacă încarci fișiere sau imagini, acestea sunt transmise aceluiași serviciu exclusiv pentru a genera un răspuns relevant.</p>
+    <div class="info-box">
+      Te rugăm să nu introduci în chat date personale sensibile care nu sunt necesare — de exemplu, CNP, date bancare sau documente confidențiale detaliate.
+    </div>
+  </div>
+
+  <!-- 7. DESTINATARI -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🤝</div>
+      <div>
+        <div class="card-num">Secțiunea 7</div>
+        <h2>Cui transmitem datele</h2>
+      </div>
+    </div>
+    <p>Datele tale nu se vând și nu se transmit în scop publicitar. Le putem transmite exclusiv:</p>
+    <ul>
+      <li><strong>SendGrid</strong> — pentru trimiterea emailurilor de confirmare/notificare.</li>
+      <li><strong>Anthropic</strong> — pentru procesarea mesajelor din asistentul virtual.</li>
+      <li><strong>Cloudflare</strong> — infrastructura tehnică pe care rulează platforma noastră.</li>
+      <li><strong>Echipei noastre</strong> — personalul autorizat care gestionează programările.</li>
+    </ul>
+    <div class="info-box blue">
+      Toți furnizorii externi sunt obligați contractual să protejeze datele tale și să le folosească exclusiv pentru serviciul pentru care au fost angajați.
+    </div>
+  </div>
+
+  <!-- 8. CÂT TIMP PĂSTRĂM -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon blue">🗓️</div>
+      <div>
+        <div class="card-num">Secțiunea 8</div>
+        <h2>Cât timp păstrăm datele</h2>
+      </div>
+    </div>
+    <p>Păstrăm datele tale doar atât cât este necesar:</p>
+    <table class="ret-table">
+      <thead>
+        <tr><th>Tipul datelor</th><th>Durata</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Date programare</td><td>3 ani de la data programării</td></tr>
+        <tr><td>Date cont utilizator</td><td>Până la ștergerea contului</td></tr>
+        <tr><td>Sesiuni active (login)</td><td>7 zile de la autentificare</td></tr>
+        <tr><td>Cod resetare parolă</td><td>15 minute de la generare</td></tr>
+        <tr><td>Documente contabile</td><td>10 ani (obligație legală)</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:14px;color:var(--muted);">La expirarea acestor termene, datele sunt șterse sau anonimizate ireversibil.</p>
+  </div>
+
+  <!-- 9. SECURITATE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔐</div>
+      <div>
+        <div class="card-num">Secțiunea 9</div>
+        <h2>Cum îți protejăm datele</h2>
+      </div>
+    </div>
+    <ul>
+      <li>Toate comunicațiile sunt criptate prin <strong>HTTPS</strong>.</li>
+      <li>Parolele sunt stocate exclusiv criptat — niciodată în text clar.</li>
+      <li>Token-urile de sesiune sunt unice, generate aleatoriu și expiră automat.</li>
+      <li>Accesul la panoul de administrare este protejat și blocat după tentative repetate eșuate.</li>
+      <li>Datele sunt stocate pe infrastructura Cloudflare, certificată la standarde internaționale de securitate.</li>
+    </ul>
+  </div>
+
+  <!-- 10. DREPTURILE TALE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon green">⚖️</div>
+      <div>
+        <div class="card-num">Secțiunea 10</div>
+        <h2>Drepturile tale</h2>
+      </div>
+    </div>
+    <p>Ai control deplin asupra datelor tale personale. Poți oricând:</p>
+    <div class="rights-grid">
+      <div class="right-item">
+        <span class="right-icon">📄</span>
+        <div class="right-title">Să ceri acces</div>
+        <div class="right-desc">Să afli ce date deținem despre tine.</div>
+      </div>
+      <div class="right-item">
+        <span class="right-icon">✏️</span>
+        <div class="right-title">Să corectezi</div>
+        <div class="right-desc">Să ceri corectarea datelor incorecte.</div>
+      </div>
+      <div class="right-item">
+        <span class="right-icon">🗑️</span>
+        <div class="right-title">Să ștergi</div>
+        <div class="right-desc">Să ceri ștergerea datelor tale.</div>
+      </div>
+      <div class="right-item">
+        <span class="right-icon">📦</span>
+        <div class="right-title">Să exporți</div>
+        <div class="right-desc">Să primești datele tale într-un format utilizabil.</div>
+      </div>
+      <div class="right-item">
+        <span class="right-icon">🚫</span>
+        <div class="right-title">Să te opui</div>
+        <div class="right-desc">Să obiectezi față de anumite prelucrări.</div>
+      </div>
+      <div class="right-item">
+        <span class="right-icon">↩️</span>
+        <div class="right-title">Să retragi acordul</div>
+        <div class="right-desc">Oricând, fără nicio consecință.</div>
+      </div>
+    </div>
+    <div class="info-box" style="margin-top:16px;">
+      Pentru orice solicitare legată de datele tale, scrie-ne la <a href="mailto:contact@d4riustax.advice.uetcompany.ro"><strong>contact@d4riustax.advice.uetcompany.ro</strong></a>. Răspundem în maxim 30 de zile.
+    </div>
+  </div>
+
+  <!-- 11. COOKIES -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🍪</div>
+      <div>
+        <div class="card-num">Secțiunea 11</div>
+        <h2>Cookie-uri și preferințe tehnice</h2>
+      </div>
+    </div>
+    <p>Site-ul folosește cookie-uri și mecanisme tehnice similare necesare pentru funcționare — de exemplu, pentru a reține preferințele tale sau pentru a menține sesiunea de chat activă.</p>
+    <p>Pentru detalii complete despre tipurile de cookie-uri utilizate și cum le poți gestiona, consultă <a href="politica-cookies.html"><strong>Politica de Cookies</strong></a>.</p>
+  </div>
+
+  <!-- 12. DECIZII AUTOMATE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🤔</div>
+      <div>
+        <div class="card-num">Secțiunea 12</div>
+        <h2>Decizii automate și profilare</h2>
+      </div>
+    </div>
+    <p>Nu utilizăm datele tale pentru decizii automate cu efect semnificativ asupra ta și nu realizăm profilare în scopuri de marketing.</p>
+    <p>Asistentul virtual de pe site nu ia decizii în locul tău — rolul său este exclusiv informativ.</p>
+  </div>
+
+  <!-- 13. ACTUALIZARI -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔄</div>
+      <div>
+        <div class="card-num">Secțiunea 13</div>
+        <h2>Actualizări ale acestei politici</h2>
+      </div>
+    </div>
+    <p>Această politică poate fi actualizată periodic pentru a reflecta modificări legislative sau operaționale. Versiunea curentă este întotdeauna publicată pe această pagină, cu data ultimei actualizări menționată în antet.</p>
+    <p>Pentru modificări importante, te vom anunța prin email dacă ai un cont activ sau printr-un anunț vizibil pe site.</p>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 <strong>d4riusTAX ADVICE S.R.L</strong> — Toate drepturile rezervate</p>
+    <p style="margin-top:8px;">
+      <a href="index.html">Pagina principală</a> &nbsp;·&nbsp;
+      <a href="politica-cookies.html">Politică cookies</a> &nbsp;·&nbsp;
+      <a href="termeni-si-conditii.html">Termeni și condiții</a>
+    </p>
+  </div>
+
+</div>
 </body>
 </html>

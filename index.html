@@ -10,7 +10,7 @@
 <meta property="og:title" content="d4riusTAX ADVICE S.R.L – Contabilitate & Consultanță Financiară">
 <meta property="og:description" content="Firmă de contabilitate și consultanță financiară cu experiență reală. Contactează‑ne pentru soluții personalizate.">
 <meta property="og:image" content="https://www.d4riustaxadvice.ro/logo.png">
-<meta property="og:url" content="https://www.d4riustaxadvice.ro">
+<meta property="og:url" content="https://www.d4riustax.advice.uetcompany.ro.ro">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="D4RIUS TAX.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,10 @@ html{scroll-behavior:smooth}
 body{background:#fff;color:var(--text);line-height:1.7;padding-top:100px;}
 .container{width:90%;max-width:1200px;margin:auto;}
 img{max-width:100%;display:block}
+*, *::before, *::after { box-sizing: border-box; }
+body, section, header, .container, .hero, .hero-grid { max-width: 100%; }
+h1, h2, h3, p, a, span { overflow-wrap: anywhere; }
+
 header{background:linear-gradient(135deg,var(--primary),var(--dark));position:fixed;top:0;left:0;right:0;z-index:999;backdrop-filter:blur(6px);box-shadow:0 15px 40px rgba(0,0,0,.25);}
 .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:20px;}
 .brand{color:#fff;font-size:22px;font-weight:800;cursor:pointer;text-decoration:none;}
@@ -536,23 +540,117 @@ label[for="prog-consimtamant"]{
   .prog-wrap{grid-template-columns:1fr;gap:40px;}
 }
 @media(max-width:600px){
-  html,body{max-width:100%;overflow-x:hidden;}
-  body{padding-top:70px;}
-  .container{width:92%;padding:0 4px;}
-  .nav{flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:10px 0;gap:8px;}
-  .brand{font-size:15px;order:1;}
-  .logo-box{order:2;}
-  .logo-box img{height:46px;}
-  nav{order:3;width:100%;}
-  nav ul{flex-wrap:wrap;justify-content:center;gap:10px;padding:6px 0;}
-  nav a{font-size:13px;}
-  nav a.nav-prog{padding:6px 14px;font-size:13px;}
-  .hero{padding:50px 0 40px;}
-  h1{font-size:24px;line-height:1.3;}
-  .hero p{font-size:14px;}
-  .btn{padding:12px 26px;font-size:14px;}
-  .hero-grid{gap:28px;}
-  .hero-grid img{max-width:100%;border-radius:12px;}
+  html,body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+body{
+  padding-top:140px;
+}
+
+
+  .container{
+    width:min(100% - 24px, 1200px);
+    margin:auto;
+    padding:0;
+  }
+
+  header{
+    overflow:hidden;
+  }
+
+  .nav{
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    padding:10px 0;
+    gap:10px;
+  }
+
+  .brand{
+    order:1;
+    min-width:0;
+    font-size:clamp(13px, 4vw, 16px);
+    line-height:1.2;
+    word-break:break-word;
+  }
+
+  .logo-box{
+    order:2;
+    justify-self:end;
+  }
+
+  .logo-box img{
+    height:46px;
+  }
+
+  nav{
+    order:3;
+    grid-column:1 / -1;
+    width:100%;
+    min-width:0;
+  }
+
+  nav ul{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    padding:6px 0;
+  }
+
+  nav li{
+    min-width:0;
+  }
+
+  nav a{
+    font-size:13px;
+  }
+
+  nav a.nav-prog{
+    padding:8px 14px;
+    font-size:13px;
+  }
+
+  .hero{
+    padding:42px 0 36px;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+    gap:24px;
+    text-align:center;
+  }
+
+  h1{
+    font-size:clamp(18px, 7vw, 24px);
+    line-height:1.25;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+    hyphens:auto;
+  }
+
+  .hero p{
+    font-size:14px;
+    overflow-wrap:anywhere;
+  }
+
+  .btn{
+    width:100%;
+    max-width:100%;
+    padding:12px 18px;
+    font-size:14px;
+    text-align:center;
+  }
+
+  .hero-grid img{
+    width:100%;
+    max-width:100%;
+    border-radius:12px;
+  }
+
   h2{font-size:24px;}
   section{padding:50px 0;}
   .grid{grid-template-columns:1fr;gap:20px;}
@@ -582,6 +680,7 @@ label[for="prog-consimtamant"]{
   .form-row{grid-template-columns:1fr;}
   .prog-form-header{flex-direction:column;text-align:center;gap:10px;}
 }
+
 #cookie-banner{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,var(--dark),#000);color:#fff;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:99998;box-shadow:0 -4px 20px rgba(0,0,0,.3);flex-wrap:wrap;}
 #cookie-banner p{font-size:14px;color:#ccc;margin:0;flex:1;}
 #cookie-banner a{color:var(--secondary);text-decoration:none;font-weight:600;}
@@ -659,7 +758,7 @@ label[for="prog-consimtamant"]{
 <section class="hero">
 <div class="container hero-grid">
   <div>
-    <h1>CONSULTANTA ANALIZA RESURSE UMANE</h1>
+    <h1>CONSULTANTA,ANALIZA,RESURSE UMANE,CONTABILITATE SI CURSURI DE FORMARE PROFESIONALA</h1>
     <p>Experienta in domeniul financiar contabil de peste 15 ani.</p>
     <a href="#programari" class="btn">📅 Programeaza o Consultatie Gratuita</a>
   </div>
@@ -670,14 +769,61 @@ label[for="prog-consimtamant"]{
 <section id="servicii" class="reveal">
 <div class="container">
   <div class="section-title">
-    <h2>Serviciile Noastre</h2>
-    <p style="max-width:700px;margin:20px auto 0;color:#666;">Solutii complete de contabilitate si consultanta adaptate nevoilor afacerii tale</p>
+
+    <div class="section-title">
+      <h2>Serviciile Noastre</h2>
+      <p style="max-width:700px;margin:20px auto 0;color:#666;">
+        Solutii complete de contabilitate si consultanta adaptate nevoilor afacerii tale
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <!-- 1 -->
+      <div class="card">
+        <h3>✅ Infiintare firme</h3>
+        <p>SRL, PFA, ONG</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="card">
+        <h3>✅ Consultanta in afaceri</h3>
+        <p>- Suport decizional</p>
+        <p>- Organizare activitate economica si financiara</p>
+        <p>- Optimizare costuri</p>
+        <p>- Suport in depunere declaratii lunare, trimestriale + balanta</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="card">
+        <h3>✅ Resurse umane</h3>
+        <p>- Intocmire contracte de munca</p>
+        <p>- Acte aditionale, decizii de incetare</p>
+        <p>- Intocmire pontaje</p>
+        <p>- Evidenta platforma REGES online</p>
+        <p>- Suport intocmire declaratii: D112, D100</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="card">
+        <h3>✅ Contabilitate primara</h3>
+        <p>Organizare documente lunare</p>
+        <p>Pregatire documente lunare</p>
+        <p>Verificare si analiza financiara documente</p>
+      </div>
+
+      <!-- 5 -->
+      <div class="card">
+        <h3>✅ Cursuri formare profesionala & workshop-uri</h3>
+        <p>- Curs formator (online)</p>
+        <p>- Curs contabilitate primara + financiara</p>
+        <p>- Curs contabilitate cu aplicatii practice in SAGA</p>
+        <p>- Workshop-uri resurse umane si contabilitate (online sau fizic)</p>
+      </div>
+
+    </div>
   </div>
-  <div class="grid">
-    <div class="card"><h3>✅ Contabilitate primara</h3><p>Organizare documente lunare, pregatire documente lunare, verificare si analiza financiara documente.</p></div>
-    <div class="card"><h3>✅ Intocmire pontaje si salarizare</h3><p>State de plata si Reges online</p></div>
-    <div class="card"><h3>✅ Consultanta in afaceri</h3><p>Suport decizional</p></div>
-    <div class="card"><h3>✅ Infiintare firme</h3><p>SRL, PFA, ONG</p></div>
+</section>
   </div>
 </div>
 </section>
@@ -911,6 +1057,7 @@ label[for="prog-consimtamant"]{
               <option value="Infiintare ONG">Infiintare ONG</option>
               <option value="Optimizare fiscala">Optimizare fiscala</option>
               <option value="Consultanta TVA">Consultanta TVA</option>
+                            <option value="Consultanta TVA">Cursuri formare profesionala</option>
               <option value="Alta / Nu stiu inca">Alta / Nu stiu inca</option>
             </select>
             <span class="field-error" id="err-serviciu">Alege serviciul dorit</span>
