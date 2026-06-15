@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ro">
 <head>
@@ -66,6 +67,44 @@ header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: #
 .alert-box.show { display: block; }
 .alert-box.success { background: #f0fdf4; border: 1px solid #bbf7d0; color: var(--success); }
 .alert-box.error   { background: #fff5f5; border: 1px solid #fecaca; color: var(--danger); }
+
+/* BLOCKED PAGE */
+#blockedPage { display: none; min-height: 100vh; align-items: center; justify-content: center; padding: 100px 20px 60px; background: linear-gradient(160deg, #f8fafc 0%, #fff7f2 50%, #f0f6ff 100%); }
+.blocked-card { width: 100%; max-width: 480px; background: #fff; border: 2px solid #fecaca; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 40px rgba(220,38,38,.15); text-align: center; }
+.blocked-stripe { height: 6px; background: linear-gradient(90deg, #ef4444, #dc2626, #b91c1c); }
+.blocked-body { padding: 40px 36px 36px; }
+.blocked-icon { font-size: 64px; margin-bottom: 16px; display: block; }
+.blocked-title { font-size: 22px; font-weight: 800; color: #991b1b; margin-bottom: 8px; }
+.blocked-sub { font-size: 15px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+.blocked-reason-box { background: #fff5f5; border: 1.5px solid #fecaca; border-radius: 14px; padding: 16px 20px; margin-bottom: 24px; text-align: left; }
+.blocked-reason-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: #ef4444; margin-bottom: 6px; }
+.blocked-reason-text { font-size: 14px; color: #7f1d1d; font-weight: 600; line-height: 1.5; }
+.blocked-contact { background: #fff7f2; border: 1.5px solid #fed7aa; border-radius: 14px; padding: 16px 20px; margin-bottom: 28px; text-align: left; }
+.blocked-contact p { font-size: 13px; color: #92400e; margin: 0 0 8px; font-weight: 600; }
+.blocked-contact a { color: var(--accent); font-weight: 700; text-decoration: none; }
+.blocked-contact a:hover { text-decoration: underline; }
+.btn-blocked-logout { width: 100%; padding: 13px; border: none; border-radius: 12px; background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: .3s; box-shadow: 0 6px 20px rgba(239,68,68,.35); }
+.btn-blocked-logout:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(239,68,68,.5); }
+
+/* TIMEOUT specific */
+.blocked-card.timeout { border-color: #ddd6fe; }
+.blocked-card.timeout .blocked-stripe { background: linear-gradient(90deg, #8b5cf6, #7c3aed, #6d28d9); }
+.blocked-card.timeout .blocked-title { color: #5b21b6; }
+.blocked-card.timeout .blocked-reason-box { background: #faf5ff; border-color: #ddd6fe; }
+.blocked-card.timeout .blocked-reason-label { color: #8b5cf6; }
+.blocked-card.timeout .blocked-reason-text { color: #4c1d95; }
+.blocked-card.timeout .btn-blocked-logout { background: linear-gradient(135deg, #8b5cf6, #7c3aed); box-shadow: 0 6px 20px rgba(139,92,246,.35); }
+.blocked-card.timeout .btn-blocked-logout:hover { box-shadow: 0 10px 28px rgba(139,92,246,.5); }
+
+/* PENDING specific */
+.blocked-card.pending { border-color: #fde68a; }
+.blocked-card.pending .blocked-stripe { background: linear-gradient(90deg, #f59e0b, #d97706, #b45309); }
+.blocked-card.pending .blocked-title { color: #92400e; }
+.blocked-card.pending .blocked-reason-box { background: #fffbeb; border-color: #fde68a; }
+.blocked-card.pending .blocked-reason-label { color: #f59e0b; }
+.blocked-card.pending .blocked-reason-text { color: #78350f; }
+.blocked-card.pending .btn-blocked-logout { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 6px 20px rgba(245,158,11,.35); }
+.blocked-card.pending .btn-blocked-logout:hover { box-shadow: 0 10px 28px rgba(245,158,11,.5); }
 
 #dashboard { display: none; }
 .dash-wrap { max-width: 1000px; margin: auto; padding: 88px 24px 60px; }
@@ -146,24 +185,13 @@ tbody td { padding: 14px 20px; color: var(--text); vertical-align: middle; }
   .user-card-top { flex-direction: column; align-items: flex-start; }
   .prog-section-head { flex-direction: column; align-items: flex-start; }
   thead th:nth-child(4), tbody td:nth-child(4) { display: none; }
+  .blocked-body { padding: 28px 20px; }
 }
 @media (max-width: 480px) {
   .stats-row { grid-template-columns: 1fr; }
   .edit-row { flex-direction: column; }
   .btn-save { width: 100%; text-align: center; }
 }
-.settings-section { background: #fff; border: 1px solid var(--border); border-radius: 20px; box-shadow: 0 2px 12px rgba(0,0,0,.05); overflow: hidden; margin-top: 24px; }
-.settings-section-head { padding: 20px 24px; border-bottom: 1px solid var(--border); }
-.settings-section-head h3 { font-size: 16px; font-weight: 700; color: var(--primary); margin: 0; }
-.settings-row { display: flex; align-items: center; justify-content: space-between; padding: 24px; gap: 24px; flex-wrap: wrap; }
-.settings-row-info { display: flex; align-items: flex-start; gap: 12px; flex: 1; min-width: 200px; }
-.settings-row-icon { font-size: 20px; margin-top: 2px; flex-shrink: 0; }
-.settings-row-text h4 { font-size: 15px; font-weight: 700; color: var(--primary); margin: 0 0 4px; }
-.settings-row-text p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.5; }
-.settings-row-action { display: flex; align-items: center; gap: 16px; flex-shrink: 0; flex-wrap: wrap; }
-.settings-action-note { font-size: 13px; color: var(--muted); }
-.btn-danger { padding: 11px 22px; background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; border: none; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Outfit', sans-serif; transition: .25s; box-shadow: 0 4px 14px rgba(239,68,68,.35); white-space: nowrap; }
-.btn-danger:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(239,68,68,.5); }
 </style>
 </head>
 <body>
@@ -175,22 +203,20 @@ tbody td { padding: 14px 20px; color: var(--text); vertical-align: middle; }
   </div>
 </header>
 
+<!-- AUTH PAGE -->
 <div class="page" id="authPage">
   <div class="auth-card">
     <div class="auth-stripe"></div>
     <div class="auth-body">
-
       <div class="auth-logo">
         <img src="d4rius tax advice logo nou.png" alt="Logo" onerror="this.style.display='none'">
         <h1>Contul Meu</h1>
         <p>d4riusTAX ADVICE S.R.L</p>
       </div>
-
       <div class="tabs">
         <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">🔐 Autentificare</button>
         <button class="tab-btn" id="tabRegister" onclick="switchTab('register')">✨ Cont Nou</button>
       </div>
-
       <div class="alert-box" id="alertBox"></div>
 
       <!-- LOGIN -->
@@ -210,12 +236,10 @@ tbody td { padding: 14px 20px; color: var(--text); vertical-align: middle; }
         </button>
         <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--muted);">
           Nu ai cont?
-          <a href="#" onclick="switchTab('register');return false;"
-            style="color:var(--accent);font-weight:700;text-decoration:none;">Creaza-l gratuit →</a>
+          <a href="#" onclick="switchTab('register');return false;" style="color:var(--accent);font-weight:700;text-decoration:none;">Creaza-l gratuit →</a>
         </p>
         <p style="text-align:center;margin-top:8px;font-size:13px;">
-          <a href="#" onclick="switchTab('forgot');return false;"
-            style="color:var(--muted);font-weight:600;text-decoration:none;">🔑 Ai uitat parola?</a>
+          <a href="#" onclick="switchTab('forgot');return false;" style="color:var(--muted);font-weight:600;text-decoration:none;">🔑 Ai uitat parola?</a>
         </p>
       </div>
 
@@ -258,8 +282,7 @@ tbody td { padding: 14px 20px; color: var(--text); vertical-align: middle; }
         </button>
         <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--muted);">
           Ai deja cont?
-          <a href="#" onclick="switchTab('login');return false;"
-            style="color:var(--accent);font-weight:700;text-decoration:none;">Autentifica-te →</a>
+          <a href="#" onclick="switchTab('login');return false;" style="color:var(--accent);font-weight:700;text-decoration:none;">Autentifica-te →</a>
         </p>
       </div>
 
@@ -284,8 +307,7 @@ tbody td { padding: 14px 20px; color: var(--text); vertical-align: middle; }
           <span id="forgotBtnTxt">📧 Trimite Codul</span>
         </button>
         <p style="text-align:center;margin-top:14px;font-size:13px;">
-          <a href="#" onclick="switchTab('login');return false;"
-            style="color:var(--accent);font-weight:700;text-decoration:none;">← Inapoi la autentificare</a>
+          <a href="#" onclick="switchTab('login');return false;" style="color:var(--accent);font-weight:700;text-decoration:none;">← Inapoi la autentificare</a>
         </p>
       </div>
 
@@ -296,8 +318,7 @@ tbody td { padding: 14px 20px; color: var(--text); vertical-align: middle; }
         </p>
         <div class="form-group">
           <label for="rp-cod">Cod verificare (6 cifre)</label>
-          <input type="text" id="rp-cod" placeholder="123456" maxlength="6"
-            style="letter-spacing:8px;font-size:24px;font-weight:800;text-align:center;">
+          <input type="text" id="rp-cod" placeholder="123456" maxlength="6" style="letter-spacing:8px;font-size:24px;font-weight:800;text-align:center;">
           <div class="field-err" id="rp-err-cod">Cod invalid (6 cifre)</div>
         </div>
         <div class="form-group">
@@ -314,8 +335,7 @@ tbody td { padding: 14px 20px; color: var(--text); vertical-align: middle; }
           <span id="resetBtnTxt">🔐 Schimba Parola</span>
         </button>
         <p style="text-align:center;margin-top:14px;font-size:13px;">
-          <a href="#" onclick="switchTab('forgot');return false;"
-            style="color:var(--muted);font-weight:600;text-decoration:none;">← Inapoi</a>
+          <a href="#" onclick="switchTab('forgot');return false;" style="color:var(--muted);font-weight:600;text-decoration:none;">← Inapoi</a>
         </p>
       </div>
 
@@ -323,10 +343,31 @@ tbody td { padding: 14px 20px; color: var(--text); vertical-align: middle; }
   </div>
 </div>
 
+<!-- BLOCKED PAGE -->
+<div id="blockedPage" style="display:none;min-height:100vh;align-items:center;justify-content:center;padding:100px 20px 60px;background:linear-gradient(160deg,#f8fafc 0%,#fff7f2 50%,#f0f6ff 100%);">
+  <div class="blocked-card" id="blockedCard">
+    <div class="blocked-stripe"></div>
+    <div class="blocked-body">
+      <span class="blocked-icon" id="blockedIcon">🚫</span>
+      <div class="blocked-title" id="blockedTitle">Acces Restrictionat</div>
+      <div class="blocked-sub" id="blockedSub">Contul tau nu are acces la aceasta sectiune.</div>
+      <div class="blocked-reason-box" id="blockedReasonBox">
+        <div class="blocked-reason-label" id="blockedReasonLabel">Motiv</div>
+        <div class="blocked-reason-text" id="blockedReasonText">—</div>
+      </div>
+      <div class="blocked-contact">
+        <p>📞 Ai intrebari? Contacteaza-ne:</p>
+        <p>📱 <a href="tel:+40770430731">+40 770 430 731</a></p>
+        <p>✉️ <a href="mailto:contact@d4riustax.advice.uetcompany.ro">contact@d4riustax.advice.uetcompany.ro</a></p>
+      </div>
+      <button class="btn-blocked-logout" onclick="doLogout()">🚪 Deconectare</button>
+    </div>
+  </div>
+</div>
+
 <!-- DASHBOARD -->
 <div id="dashboard">
   <div class="dash-wrap">
-
     <div class="dash-topbar">
       <div class="dash-welcome">
         <h2>👋 Buna, <span id="dashName" style="color:var(--accent);">utilizator</span>!</h2>
@@ -392,7 +433,6 @@ tbody td { padding: 14px 20px; color: var(--text); vertical-align: middle; }
         <div class="loading"><div class="spinner"></div> Se incarca...</div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -406,50 +446,30 @@ let currentView   = 'active';
 let forgotEmail   = '';
 
 /* ===== HELPERS ===== */
-function getSession()     { try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch(e) { return null; } }
-function saveSession(d)   { localStorage.setItem(SESSION_KEY, JSON.stringify(d)); }
-function clearSession()   { localStorage.removeItem(SESSION_KEY); }
-function getProgramari()  { try { return JSON.parse(localStorage.getItem(PROG_KEY) || '[]'); } catch(e) { return []; } }
-function saveProgramari(l){ localStorage.setItem(PROG_KEY, JSON.stringify(l)); }
+function getSession()      { try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch(e) { return null; } }
+function saveSession(d)    { localStorage.setItem(SESSION_KEY, JSON.stringify(d)); }
+function clearSession()    { localStorage.removeItem(SESSION_KEY); }
+function getProgramari()   { try { return JSON.parse(localStorage.getItem(PROG_KEY) || '[]'); } catch(e) { return []; } }
+function saveProgramari(l) { localStorage.setItem(PROG_KEY, JSON.stringify(l)); }
+
 function getProgramareKey(p) {
-
-
-
   if (!p) return '';
   if (p.ref) return 'ref:' + String(p.ref).trim().toLowerCase();
-  if (p.id) return 'id:' + String(p.id).trim().toLowerCase();
-  return [
-    (p.email || p.userEmail || '').trim().toLowerCase(),
-    (p.serviciu || '').trim().toLowerCase(),
-    (p.data || '').trim().toLowerCase(),
-    (p.ora || '').trim().toLowerCase()
-  ].join('|');
+  if (p.id)  return 'id:'  + String(p.id).trim().toLowerCase();
+  return [(p.email||p.userEmail||'').trim().toLowerCase(),(p.serviciu||'').trim().toLowerCase(),(p.data||'').trim().toLowerCase(),(p.ora||'').trim().toLowerCase()].join('|');
 }
 
 function mergeProgramari(serverList, localList) {
   const map = new Map();
-
-  localList.forEach(p => {
-    const key = getProgramareKey(p);
-    if (key) map.set(key, { ...p });
-  });
-
+  localList.forEach(p => { const k = getProgramareKey(p); if (k) map.set(k, { ...p }); });
   serverList.forEach(p => {
-    const key = getProgramareKey(p);
-    if (!key) return;
-
-    const existing = map.get(key) || {};
-
-    map.set(key, {
-      ...p,
-      deleted: !!existing.deleted,
-      id: p.id || existing.id || p.ref || key
-    });
+    const k = getProgramareKey(p);
+    if (!k) return;
+    const ex = map.get(k) || {};
+    map.set(k, { ...p, deleted: !!ex.deleted, id: p.id || ex.id || p.ref || k });
   });
-
   return Array.from(map.values());
 }
-
 
 function showAlert(msg, type) {
   const el = document.getElementById('alertBox');
@@ -465,8 +485,63 @@ function showToast(msg) {
 }
 function setErr(id, show) { const el = document.getElementById(id); if(el) el.classList.toggle('show', show); }
 function clearErr(...ids) { ids.forEach(id => setErr(id, false)); }
-function validateEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
-function validatePhone(p) { return /^[0-9\s\+\-\(\)]{8,15}$/.test(p.trim()); }
+function validateEmail(e)  { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+function validatePhone(p)  { return /^[0-9\s\+\-\(\)]{8,15}$/.test(p.trim()); }
+
+/* ===== VERIFICARE STATUS CONT ===== */
+// Returneaza { blocked: true/false, type: 'banned'|'timeout'|'pending', reason, until }
+async function checkAccountStatus(token) {
+  try {
+    const resp = await fetch(WORKER + '/api/auth/me', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      return data;
+    }
+  } catch(e) {}
+  return null;
+}
+
+/* ===== ARATA PAGINA BLOCAT ===== */
+function showBlockedPage(type, reason, name, until) {
+  document.getElementById('authPage').style.display  = 'none';
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('blockedPage').style.display = 'flex';
+
+  const card  = document.getElementById('blockedCard');
+  const icon  = document.getElementById('blockedIcon');
+  const title = document.getElementById('blockedTitle');
+  const sub   = document.getElementById('blockedSub');
+  const rlabel= document.getElementById('blockedReasonLabel');
+  const rtext = document.getElementById('blockedReasonText');
+
+  // Reset clase
+  card.className = 'blocked-card';
+
+  if (type === 'banned') {
+    icon.textContent  = '🚫';
+    title.textContent = 'Cont Banat';
+    sub.textContent   = 'Contul tau a fost banat si nu mai are acces la platforma d4riusTAX.';
+    rlabel.textContent= 'Motiv ban';
+    rtext.textContent = reason || 'Cont refuzat de administrator.';
+  } else if (type === 'timeout') {
+    card.classList.add('timeout');
+    icon.textContent  = '⏰';
+    title.textContent = 'Cont Suspendat Temporar';
+    const untilDate = until ? new Date(until).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' }) : '—';
+    sub.textContent   = 'Contul tau este suspendat temporar pana pe ' + untilDate + '.';
+    rlabel.textContent= 'Motiv suspendare';
+    rtext.textContent = reason || 'Cont temporar suspendat.';
+  } else if (type === 'pending') {
+    card.classList.add('pending');
+    icon.textContent  = '⏳';
+    title.textContent = 'Cont in Asteptare';
+    sub.textContent   = 'Contul tau a fost creat dar nu a fost aprobat inca de administrator.';
+    rlabel.textContent= 'Status';
+    rtext.textContent = 'Contul tau este in curs de verificare. Vei fi notificat pe email cand va fi aprobat.';
+  }
+}
 
 /* ===== TAB AUTH ===== */
 function switchTab(tab) {
@@ -479,7 +554,6 @@ function switchTab(tab) {
   document.getElementById('tabRegister').className = 'tab-btn' + (tab === 'register' ? ' active' : '');
 }
 
-/* ===== SWITCH VIEW ===== */
 function switchView(view) {
   currentView = view;
   document.getElementById('tabActive').className = 'prog-tab' + (view === 'active' ? ' active' : '');
@@ -488,9 +562,47 @@ function switchView(view) {
 }
 
 /* ===== SHOW DASHBOARD ===== */
+let _statusPollInterval = null;
+
+function startStatusPolling() {
+  stopStatusPolling();
+  _statusPollInterval = setInterval(async () => {
+    const s = getSession();
+    if (!s || !s.token) { stopStatusPolling(); return; }
+    try {
+      const resp = await fetch(WORKER + '/api/auth/me', {
+        headers: { 'Authorization': 'Bearer ' + s.token }
+      });
+      if (!resp.ok) return;
+      const data = await resp.json();
+      if (!data.ok) return;
+      const now = new Date();
+      const status = data.accountStatus || 'active';
+      if (status === 'banned') {
+        stopStatusPolling();
+        showBlockedPage('banned', data.statusReason, s.name);
+      } else if (status === 'timeout' && data.timeoutUntil && new Date(data.timeoutUntil) > now) {
+        stopStatusPolling();
+        showBlockedPage('timeout', data.statusReason, s.name, data.timeoutUntil);
+      } else if (status === 'pending') {
+        stopStatusPolling();
+        showBlockedPage('pending', null, s.name);
+      }
+    } catch(e) {}
+  }, 30000);
+}
+
+function stopStatusPolling() {
+  if (_statusPollInterval) {
+    clearInterval(_statusPollInterval);
+    _statusPollInterval = null;
+  }
+}
+
 function showDashboard(session) {
-  document.getElementById('authPage').style.display  = 'none';
-  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('authPage').style.display    = 'none';
+  document.getElementById('blockedPage').style.display = 'none';
+  document.getElementById('dashboard').style.display   = 'block';
 
   const firstName = (session.name || '').split(' ')[0];
   const initials  = (session.name || '??').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
@@ -503,7 +615,7 @@ function showDashboard(session) {
   document.getElementById('editName').value           = session.name  || '';
   document.getElementById('editTel').value            = session.tel   || '';
 
-  if (session.created) {
+if (session.created) {
     const d = new Date(session.created);
     document.getElementById('dashCreated').textContent =
       d.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -513,236 +625,7 @@ function showDashboard(session) {
   document.getElementById('tabActive').className = 'prog-tab active';
   document.getElementById('tabCos').className    = 'prog-tab';
   renderProgramari();
-}
-
-/* ===== RENDER PROGRAMARI ===== */
-let _filteredCache = [];
-
-function belongsToUser(p, emailUser) {
-  const a = (p.userEmail || '').trim().toLowerCase();
-  const b = (p.email     || '').trim().toLowerCase();
-  return a === emailUser || b === emailUser;
-}
-
-async function renderProgramari() {
-  const sesiune = getSession();
-  if (!sesiune || !sesiune.email) return;
-
-  try {
-    const resp = await fetch(
-      WORKER + '/api/programari/get',
-      { headers: { 'Authorization': 'Bearer ' + sesiune.token } }
-    );
-
-    if (resp.ok) {
-      const data = await resp.json();
-      const local = getProgramari();
-      const serverList = Array.isArray(data.programari) ? data.programari : [];
-      const merged = mergeProgramari(serverList, local);
-      saveProgramari(merged);
-    }
-  } catch (e) {
-    console.warn('Sync failed, using local', e);
-  }
-
-  const emailUser = sesiune.email.trim().toLowerCase();
-  const toate = getProgramari();
-
-  let modified = false;
-  toate.forEach((p, index) => {
-    const stableId = p.id || p.ref || getProgramareKey(p) || ('prg_' + index + '_' + (p.created || Date.now()));
-    if (p.id !== stableId) {
-      p.id = stableId;
-      modified = true;
-    }
-  });
-  if (modified) saveProgramari(toate);
-
-  const filtered = toate
-    .filter(p => {
-      if (!belongsToUser(p, emailUser)) return false;
-      return currentView === 'cos' ? !!p.deleted : !p.deleted;
-    })
-    .sort((a, b) => new Date(b.created || 0) - new Date(a.created || 0));
-
-  _filteredCache = filtered;
-
-  const active = toate.filter(p => belongsToUser(p, emailUser) && !p.deleted);
-  document.getElementById('statTotal').textContent = active.length;
-  document.getElementById('statConfirmed').textContent = active.filter(p => p.status === 'confirmed').length;
-  document.getElementById('statDone').textContent = active.filter(p => p.status === 'done' || p.status === 'finalizata').length;
-
-  const lista = document.getElementById('progList');
-
-  if (!filtered.length) {
-    lista.innerHTML = `
-      <div class="empty-state">
-        <div class="e-icon">${currentView === 'cos' ? '🗑️' : '📅'}</div>
-        <h4>${currentView === 'cos' ? 'Cosul de gunoi e gol' : 'Nicio programare inca'}</h4>
-        <p>${currentView === 'cos'
-          ? 'Nu ai programari sterse.'
-          : 'Solicita-ti prima consultatie gratuita!<br>Apasa butonul de mai jos.'}</p>
-        ${currentView !== 'cos' ? '<a href="index.html#programari" class="btn-new-prog" style="margin:0 auto;display:inline-flex;">📅 Programeaza-te acum</a>' : ''}
-      </div>`;
-    return;
-  }
-
-  const icons = {
-    'Contabilitate primara':'📊',
-    'Salarizare & Pontaje':'💼',
-    'Consultanta in afaceri':'💡',
-    'Infiintare firma SRL':'🏢',
-    'Infiintare firma PFA':'👤',
-    'Infiintare ONG':'🤝',
-    'Optimizare fiscala':'📈',
-    'Consultanta TVA':'🧾',
-    'Alta / Nu stiu inca':'❓'
-  };
-
-  lista.innerHTML = `
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Serviciu</th>
-            <th>Data</th>
-            <th>Ora</th>
-            <th>Referinta</th>
-            <th>Actiune</th>
-          </tr>
-        </thead>
-        <tbody id="progTbody"></tbody>
-      </table>
-    </div>`;
-
-  const tbody = document.getElementById('progTbody');
-  filtered.forEach((p, localIdx) => {
-    const icon = icons[p.serviciu] || '📅';
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td class="td-serviciu">
-        ${icon} ${p.serviciu || '—'}
-        ${p.mesaj ? `<small>💬 ${p.mesaj.slice(0,50)}${p.mesaj.length > 50 ? '…' : ''}</small>` : ''}
-      </td>
-      <td style="white-space:nowrap;">📅 ${p.data || '—'}</td>
-      <td style="white-space:nowrap;">🕐 ${p.ora || '—'}</td>
-      <td><span class="ref-badge">${p.ref || '—'}</span></td>
-      <td></td>`;
-
-    const btnTd = tr.querySelector('td:last-child');
-    if (p.deleted) {
-      const btn = document.createElement('button');
-      btn.className = 'btn-restore';
-      btn.textContent = '↩️ Restaureaza';
-      btn.addEventListener('click', () => actionProgramare(localIdx, 'restore'));
-      btnTd.appendChild(btn);
-    } else {
-      const btn = document.createElement('button');
-      btn.className = 'btn-del';
-      btn.textContent = '🗑️ Sterge';
-      btn.addEventListener('click', () => actionProgramare(localIdx, 'delete'));
-      btnTd.appendChild(btn);
-    }
-    tbody.appendChild(tr);
-  });
-}
-
-
- 
-/* ===== STERGE / RESTAUREAZA ===== */
-function actionProgramare(localIdx, action) {
-  const target = _filteredCache[localIdx];
-  if (!target) return;
-
-  const toate = getProgramari();
-  const targetKey = getProgramareKey(target);
-
-  let changed = false;
-
-  toate.forEach(p => {
-    if (getProgramareKey(p) === targetKey) {
-      if (action === 'delete') {
-        p.deleted = true;
-      } else {
-        delete p.deleted;
-      }
-      changed = true;
-    }
-  });
-
-  if (!changed) return;
-
-  saveProgramari(toate);
-
-  if (action === 'delete') {
-    showToast('🗑️ Programare mutata in cos!');
-  } else {
-    showToast('✅ Programare restaurata!');
-  }
-
-  renderProgramari();
-}
-
-
-/* ===== SALVEAZA PROFIL ===== */
-async function salveazaProfil() {
-  const newName = document.getElementById('editName').value.trim();
-  const newTel  = document.getElementById('editTel').value.trim();
-  const msg     = document.getElementById('editMsg');
-
-  if (!newName) {
-    msg.textContent = '❌ Introdu un nume valid.';
-    msg.style.color = 'var(--danger)';
-    msg.style.display = 'block';
-    return;
-  }
-  if (!validatePhone(newTel)) {
-    msg.textContent = '❌ Introdu un telefon valid (minim 8 cifre).';
-    msg.style.color = 'var(--danger)';
-    msg.style.display = 'block';
-    return;
-  }
-
-  const s = getSession();
-
-  try {
-    const resp = await fetch(WORKER + '/api/auth/update-profile', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + s.token
-      },
-      body: JSON.stringify({ name: newName, tel: newTel })
-    });
-    const data = await resp.json();
-    if (!resp.ok) {
-      msg.textContent = '❌ ' + (data.error || 'Eroare la salvare.');
-      msg.style.color = 'var(--danger)';
-      msg.style.display = 'block';
-      return;
-    }
-  } catch(err) {
-    msg.textContent = '❌ Eroare de conexiune.';
-    msg.style.color = 'var(--danger)';
-    msg.style.display = 'block';
-    return;
-  }
-
-  s.name = newName;
-  s.tel  = newTel;
-  saveSession(s);
-
-  const initials = newName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
-  document.getElementById('dashFullName').textContent = newName;
-  document.getElementById('dashTel').textContent      = newTel;
-  document.getElementById('dashName').textContent     = newName.split(' ')[0];
-  document.getElementById('dashAvatar').textContent   = initials;
-
-  msg.textContent   = '✅ Profilul a fost actualizat pe toate dispozitivele!';
-  msg.style.color   = 'var(--success)';
-  msg.style.display = 'block';
-  setTimeout(() => { msg.style.display = 'none'; }, 3500);
-  showToast('✅ Profil actualizat!');
+  startStatusPolling();
 }
 
 /* ===== LOGIN ===== */
@@ -753,7 +636,7 @@ async function doLogin() {
   clearErr('l-err-email', 'l-err-pass');
   let ok = true;
   if (!validateEmail(email)) { setErr('l-err-email', true); ok = false; }
-  if (!pass) { setErr('l-err-pass', true); ok = false; }
+  if (!pass)                 { setErr('l-err-pass',  true); ok = false; }
   if (!ok) return;
 
   const btn = document.getElementById('loginBtn');
@@ -767,16 +650,37 @@ async function doLogin() {
       body: JSON.stringify({ email, password: pass })
     });
     const data = await resp.json();
+
     if (!resp.ok) {
       showAlert(data.error || 'Email sau parola incorecte.', 'error');
     } else {
-      saveSession({ token: data.token, email: data.email, name: data.name, tel: data.tel, created: data.created });
-      showToast('✅ Bine ai venit, ' + (data.name || '').split(' ')[0] + '!');
-      setTimeout(() => showDashboard(getSession()), 350);
+      // Verifica statusul contului
+      const accountStatus = data.accountStatus || 'active';
+      const now = new Date();
+
+      if (accountStatus === 'banned') {
+        // Cont banat
+        saveSession({ token: data.token, email: data.email, name: data.name, tel: data.tel, created: data.created });
+        showBlockedPage('banned', data.statusReason, data.name);
+      } else if (accountStatus === 'timeout' && data.timeoutUntil && new Date(data.timeoutUntil) > now) {
+        // Timeout activ
+        saveSession({ token: data.token, email: data.email, name: data.name, tel: data.tel, created: data.created });
+        showBlockedPage('timeout', data.statusReason, data.name, data.timeoutUntil);
+      } else if (accountStatus === 'pending') {
+        // Cont neaprobat
+        saveSession({ token: data.token, email: data.email, name: data.name, tel: data.tel, created: data.created });
+        showBlockedPage('pending', null, data.name);
+      } else {
+        // Cont activ sau timeout expirat - acces normal
+        saveSession({ token: data.token, email: data.email, name: data.name, tel: data.tel, created: data.created });
+        showToast('✅ Bine ai venit, ' + (data.name || '').split(' ')[0] + '!');
+        setTimeout(() => showDashboard(getSession()), 350);
+      }
     }
   } catch(err) {
     showAlert('Eroare de conexiune. Incearca din nou.', 'error');
   }
+
   btn.disabled = false;
   document.getElementById('loginBtnTxt').textContent = '🔐 Autentificare';
 }
@@ -814,8 +718,8 @@ async function doRegister() {
     if (!resp.ok) {
       showAlert(data.error || 'Eroare la inregistrare.', 'error');
     } else {
-      showAlert('Cont creat cu succes! Te poti autentifica acum.', 'success');
-      setTimeout(() => switchTab('login'), 1800);
+      showAlert('Cont creat! Asteapta aprobarea administratorului pentru a te putea autentifica.', 'success');
+      setTimeout(() => switchTab('login'), 2500);
     }
   } catch(err) {
     showAlert('Eroare de conexiune. Incearca din nou.', 'error');
@@ -864,9 +768,9 @@ async function doReset() {
   const pass2 = document.getElementById('rp-pass2').value;
   clearErr('rp-err-cod', 'rp-err-pass', 'rp-err-pass2');
   let ok = true;
-  if (!/^\d{6}$/.test(cod)) { setErr('rp-err-cod',   true); ok = false; }
-  if (pass.length < 6)      { setErr('rp-err-pass',   true); ok = false; }
-  if (pass !== pass2)       { setErr('rp-err-pass2',  true); ok = false; }
+  if (!/^\d{6}$/.test(cod)) { setErr('rp-err-cod',  true); ok = false; }
+  if (pass.length < 6)      { setErr('rp-err-pass',  true); ok = false; }
+  if (pass !== pass2)       { setErr('rp-err-pass2', true); ok = false; }
   if (!ok) return;
 
   const btn = document.getElementById('resetBtn');
@@ -899,23 +803,139 @@ async function doReset() {
 
 /* ===== LOGOUT ===== */
 function doLogout() {
+  stopStatusPolling();
   clearSession();
   currentView = 'active';
-  document.getElementById('dashboard').style.display  = 'none';
-  document.getElementById('authPage').style.display   = 'flex';
+  document.getElementById('dashboard').style.display    = 'none';
+  document.getElementById('blockedPage').style.display  = 'none';
+  document.getElementById('authPage').style.display     = 'flex';
   showToast('👋 Deconectat cu succes!');
+}
+
+/* ===== SALVEAZA PROFIL ===== */
+async function salveazaProfil() {
+  const newName = document.getElementById('editName').value.trim();
+  const newTel  = document.getElementById('editTel').value.trim();
+  const msg     = document.getElementById('editMsg');
+
+  if (!newName) { msg.textContent='❌ Introdu un nume valid.'; msg.style.color='var(--danger)'; msg.style.display='block'; return; }
+  if (!validatePhone(newTel)) { msg.textContent='❌ Introdu un telefon valid (minim 8 cifre).'; msg.style.color='var(--danger)'; msg.style.display='block'; return; }
+
+  const s = getSession();
+  try {
+    const resp = await fetch(WORKER + '/api/auth/update-profile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + s.token },
+      body: JSON.stringify({ name: newName, tel: newTel })
+    });
+    const data = await resp.json();
+    if (!resp.ok) { msg.textContent='❌ '+(data.error||'Eroare la salvare.'); msg.style.color='var(--danger)'; msg.style.display='block'; return; }
+  } catch(err) { msg.textContent='❌ Eroare de conexiune.'; msg.style.color='var(--danger)'; msg.style.display='block'; return; }
+
+  s.name = newName; s.tel = newTel;
+  saveSession(s);
+  const initials = newName.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('dashFullName').textContent = newName;
+  document.getElementById('dashTel').textContent      = newTel;
+  document.getElementById('dashName').textContent     = newName.split(' ')[0];
+  document.getElementById('dashAvatar').textContent   = initials;
+  msg.textContent = '✅ Profilul a fost actualizat!'; msg.style.color='var(--success)'; msg.style.display='block';
+  setTimeout(() => { msg.style.display='none'; }, 3500);
+  showToast('✅ Profil actualizat!');
+}
+
+/* ===== RENDER PROGRAMARI ===== */
+let _filteredCache = [];
+
+function belongsToUser(p, emailUser) {
+  return (p.userEmail||'').trim().toLowerCase() === emailUser || (p.email||'').trim().toLowerCase() === emailUser;
+}
+
+async function renderProgramari() {
+  const sesiune = getSession();
+  if (!sesiune || !sesiune.email) return;
+
+  try {
+    const resp = await fetch(WORKER + '/api/programari/get', { headers: { 'Authorization': 'Bearer ' + sesiune.token } });
+    if (resp.ok) {
+      const data = await resp.json();
+      const merged = mergeProgramari(Array.isArray(data.programari) ? data.programari : [], getProgramari());
+      saveProgramari(merged);
+    }
+  } catch (e) {}
+
+  const emailUser = sesiune.email.trim().toLowerCase();
+  const toate = getProgramari();
+
+  let modified = false;
+  toate.forEach((p, i) => {
+    const sid = p.id || p.ref || getProgramareKey(p) || ('prg_'+i+'_'+(p.created||Date.now()));
+    if (p.id !== sid) { p.id = sid; modified = true; }
+  });
+  if (modified) saveProgramari(toate);
+
+  const filtered = toate
+    .filter(p => { if (!belongsToUser(p, emailUser)) return false; return currentView === 'cos' ? !!p.deleted : !p.deleted; })
+    .sort((a, b) => new Date(b.created||0) - new Date(a.created||0));
+
+  _filteredCache = filtered;
+
+  const active = toate.filter(p => belongsToUser(p, emailUser) && !p.deleted);
+  document.getElementById('statTotal').textContent     = active.length;
+  document.getElementById('statConfirmed').textContent = active.filter(p => p.status==='confirmed').length;
+  document.getElementById('statDone').textContent      = active.filter(p => p.status==='done'||p.status==='finalizata').length;
+
+  const lista = document.getElementById('progList');
+
+  if (!filtered.length) {
+    lista.innerHTML = `<div class="empty-state"><div class="e-icon">${currentView==='cos'?'🗑️':'📅'}</div><h4>${currentView==='cos'?'Cosul de gunoi e gol':'Nicio programare inca'}</h4><p>${currentView==='cos'?'Nu ai programari sterse.':'Solicita-ti prima consultatie gratuita!<br>Apasa butonul de mai jos.'}</p>${currentView!=='cos'?'<a href="index.html#programari" class="btn-new-prog" style="margin:0 auto;display:inline-flex;">📅 Programeaza-te acum</a>':''}</div>`;
+    return;
+  }
+
+  const icons = {'Contabilitate primara':'📊','Salarizare & Pontaje':'💼','Consultanta in afaceri':'💡','Infiintare firma SRL':'🏢','Infiintare firma PFA':'👤','Infiintare ONG':'🤝','Optimizare fiscala':'📈','Consultanta TVA':'🧾','Alta / Nu stiu inca':'❓'};
+
+  lista.innerHTML = `<div class="table-wrap"><table><thead><tr><th>Serviciu</th><th>Data</th><th>Ora</th><th>Referinta</th><th>Actiune</th></tr></thead><tbody id="progTbody"></tbody></table></div>`;
+
+  const tbody = document.getElementById('progTbody');
+  filtered.forEach((p, localIdx) => {
+    const icon = icons[p.serviciu] || '📅';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="td-serviciu">${icon} ${p.serviciu||'—'}${p.mesaj?`<small>💬 ${p.mesaj.slice(0,50)}${p.mesaj.length>50?'…':''}</small>`:''}</td><td style="white-space:nowrap;">📅 ${p.data||'—'}</td><td style="white-space:nowrap;">🕐 ${p.ora||'—'}</td><td><span class="ref-badge">${p.ref||'—'}</span></td><td></td>`;
+    const btnTd = tr.querySelector('td:last-child');
+    const btn = document.createElement('button');
+    if (p.deleted) { btn.className='btn-restore'; btn.textContent='↩️ Restaureaza'; btn.addEventListener('click', ()=>actionProgramare(localIdx,'restore')); }
+    else           { btn.className='btn-del';     btn.textContent='🗑️ Sterge';       btn.addEventListener('click', ()=>actionProgramare(localIdx,'delete')); }
+    btnTd.appendChild(btn);
+    tbody.appendChild(tr);
+  });
+}
+
+function actionProgramare(localIdx, action) {
+  const target = _filteredCache[localIdx];
+  if (!target) return;
+  const toate = getProgramari();
+  const targetKey = getProgramareKey(target);
+  let changed = false;
+  toate.forEach(p => {
+    if (getProgramareKey(p) === targetKey) {
+      if (action === 'delete') p.deleted = true;
+      else delete p.deleted;
+      changed = true;
+    }
+  });
+  if (!changed) return;
+  saveProgramari(toate);
+  showToast(action === 'delete' ? '🗑️ Programare mutata in cos!' : '✅ Programare restaurata!');
+  renderProgramari();
 }
 
 /* ===== ENTER KEY ===== */
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Enter') {
-    const loginVisible  = document.getElementById('formLogin').style.display  !== 'none';
-    const forgotVisible = document.getElementById('formForgot').style.display !== 'none';
-    const resetVisible  = document.getElementById('formReset').style.display  !== 'none';
-    if (loginVisible)       doLogin();
-    else if (forgotVisible) doForgot();
-    else if (resetVisible)  doReset();
-    else                    doRegister();
+    if (document.getElementById('formLogin').style.display    !== 'none') doLogin();
+    else if (document.getElementById('formForgot').style.display !== 'none') doForgot();
+    else if (document.getElementById('formReset').style.display  !== 'none') doReset();
+    else doRegister();
   }
 });
 
@@ -923,7 +943,30 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
   try {
     const s = getSession();
-    if (s && s.email) showDashboard(s);
+    if (s && s.token && s.email) {
+      // Verifica statusul contului la auto-login
+      fetch(WORKER + '/api/auth/login-check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + s.token },
+        body: JSON.stringify({ email: s.email })
+      }).then(r => r.json()).then(data => {
+        if (!data.ok) { clearSession(); return; }
+        const now = new Date();
+        const status = data.accountStatus || 'active';
+        if (status === 'banned') {
+          showBlockedPage('banned', data.statusReason, s.name);
+        } else if (status === 'timeout' && data.timeoutUntil && new Date(data.timeoutUntil) > now) {
+          showBlockedPage('timeout', data.statusReason, s.name, data.timeoutUntil);
+        } else if (status === 'pending') {
+          showBlockedPage('pending', null, s.name);
+        } else {
+          showDashboard(s);
+        }
+      }).catch(() => {
+        // Daca nu merge request-ul, afisam dashboard-ul cu datele locale
+        showDashboard(s);
+      });
+    }
   } catch(e) { clearSession(); }
 });
 </script>
