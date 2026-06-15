@@ -5,141 +5,214 @@
 <title>Gestionare programari v4.0</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <style>
-:root{--primary:#14314d;--secondary:#ff7a18;--dark:#0b1b2b;--green:#22c55e;--red:#ef4444;--yellow:#f59e0b;--blue:#3b82f6;}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
-body{background:#f0f2f5;min-height:100vh;color:#333;}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+  --primary:#14314d;
+  --secondary:#ff7a18;
+  --dark:#0b1b2b;
+  --green:#16a34a;
+  --green-light:#dcfce7;
+  --red:#dc2626;
+  --red-light:#fee2e2;
+  --yellow:#d97706;
+  --yellow-light:#fef3c7;
+  --blue:#2563eb;
+  --blue-light:#dbeafe;
+  --purple:#7c3aed;
+  --purple-light:#ede9fe;
+  --bg:#f1f5f9;
+  --surface:#ffffff;
+  --border:#e2e8f0;
+  --text:#0f172a;
+  --muted:#64748b;
+  --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.06);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif;}
+body{background:var(--bg);min-height:100vh;color:var(--text);}
 
 /* ===== LOGIN ===== */
-#login-page{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,var(--primary),var(--dark));padding:20px;}
-.login-box{background:#fff;padding:36px 28px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.3);width:100%;max-width:380px;text-align:center;}
-.login-box h1{color:var(--primary);font-size:22px;margin-bottom:20px;}
-.login-box input{width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:12px;margin-bottom:14px;outline:none;font-size:15px;}
-.login-box button{width:100%;padding:14px;background:var(--secondary);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;}
+#login-page{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,var(--primary) 0%,var(--dark) 100%);padding:20px;}
+.login-box{background:var(--surface);padding:40px 32px;border-radius:20px;box-shadow:var(--shadow-lg);width:100%;max-width:380px;text-align:center;}
+.login-logo{width:56px;height:56px;background:linear-gradient(135deg,var(--secondary),#ff9a3c);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 20px;}
+.login-box h1{color:var(--primary);font-size:20px;font-weight:800;margin-bottom:6px;}
+.login-box p{color:var(--muted);font-size:13px;margin-bottom:24px;}
+.login-box input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;margin-bottom:12px;outline:none;font-size:14px;font-family:inherit;transition:.2s;background:#f8fafc;}
+.login-box input:focus{border-color:var(--secondary);background:#fff;box-shadow:0 0 0 3px rgba(255,122,24,.1);}
+.login-box button{width:100%;padding:13px;background:linear-gradient(135deg,var(--secondary),#ff9a3c);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;}
+.login-box button:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,122,24,.4);}
+
+/* ===== ADMIN PANEL ===== */
+#admin-panel{display:none;min-height:100vh;}
 
 /* ===== TOPBAR ===== */
-#admin-panel{display:none;}
-.topbar{background:linear-gradient(135deg,var(--primary),var(--dark));padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
-.topbar h1{color:#fff;font-size:17px;}
+.topbar{background:var(--primary);padding:0 20px;display:flex;justify-content:space-between;align-items:center;height:60px;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.2);}
+.topbar-left{display:flex;align-items:center;gap:12px;}
+.topbar-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--secondary),#ff9a3c);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.topbar h1{color:#fff;font-size:16px;font-weight:700;}
 .topbar h1 span{color:var(--secondary);}
-.logout-btn{background:rgba(255,255,255,0.1);color:#fff;border:none;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;white-space:nowrap;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.live-dot{display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.25);border-radius:20px;padding:4px 10px;font-size:11px;font-weight:700;}
+.live-pulse{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:livePulse 1.5s ease-in-out infinite;}
+.logout-btn{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.15);padding:7px 14px;border-radius:8px;cursor:pointer;font-weight:600;font-size:12px;white-space:nowrap;font-family:inherit;transition:.2s;}
+.logout-btn:hover{background:rgba(255,255,255,.2);}
 
 /* ===== TABS ===== */
-.tabs{display:flex;background:#fff;border-bottom:2px solid #e0e0e0;padding:0 8px;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
-.tabs::-webkit-scrollbar{display:none;}
-.tab{padding:14px 14px;cursor:pointer;font-weight:600;color:#888;border-bottom:3px solid transparent;position:relative;user-select:none;white-space:nowrap;font-size:13px;flex-shrink:0;}
+.tab-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab{padding:0 16px;height:48px;display:flex;align-items:center;gap:7px;cursor:pointer;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;font-size:13px;flex-shrink:0;transition:.2s;user-select:none;position:relative;}
+.tab:hover{color:var(--text);}
 .tab.active{color:var(--secondary);border-bottom-color:var(--secondary);}
-.tab .badge{position:absolute;top:6px;right:0px;background:var(--secondary);color:#fff;font-size:10px;padding:1px 6px;border-radius:20px;font-weight:700;}
+.tab-icon{font-size:14px;}
+.badge{background:var(--secondary);color:#fff;font-size:10px;padding:2px 7px;border-radius:20px;font-weight:800;min-width:20px;text-align:center;}
+.badge.green{background:var(--green);}
+.badge.blue{background:var(--blue);}
+.badge.red{background:var(--red);}
+.badge.gray{background:#94a3b8;}
 
 /* ===== CONTENT ===== */
-.content{padding:14px;max-width:1400px;margin:0 auto;}
+.content{padding:20px;max-width:1400px;margin:0 auto;}
 
 /* ===== STATS ===== */
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
-.stat-card{background:#fff;border-radius:12px;padding:16px;box-shadow:0 4px 15px rgba(0,0,0,0.08);border-left:5px solid var(--primary);}
-.stat-card h4{font-size:12px;color:#888;margin-bottom:4px;}
-.stat-card .num{font-size:28px;font-weight:800;color:var(--primary);}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;}
+.stat-card{background:var(--surface);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;}
+.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.stat-icon.orange{background:#fff7ed;}
+.stat-icon.green{background:var(--green-light);}
+.stat-icon.blue{background:var(--blue-light);}
+.stat-icon.red{background:var(--red-light);}
+.stat-icon.purple{background:var(--purple-light);}
+.stat-text h4{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;}
+.stat-text .num{font-size:26px;font-weight:800;color:var(--text);line-height:1;}
 
-/* ===== FORM ===== */
-.add-form{background:#fff;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 15px rgba(0,0,0,0.08);}
-.add-form h3{margin-bottom:14px;color:var(--primary);font-size:15px;}
+/* ===== ADD FORM ===== */
+.add-form{background:var(--surface);border-radius:var(--radius);padding:20px;margin-bottom:20px;box-shadow:var(--shadow);}
+.section-title{font-size:14px;font-weight:700;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.form-grid input, .form-grid select, .form-grid textarea{padding:11px 12px;border:2px solid #e8ecf4;border-radius:10px;font-size:14px;outline:none;transition:.2s;width:100%;}
-.form-grid input:focus, .form-grid select:focus{border-color:var(--secondary);}
+.form-grid input,.form-grid select,.form-grid textarea{padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;outline:none;transition:.2s;width:100%;font-family:inherit;background:#f8fafc;color:var(--text);}
+.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus{border-color:var(--secondary);background:#fff;box-shadow:0 0 0 3px rgba(255,122,24,.08);}
 .form-grid textarea{grid-column:span 2;min-height:70px;resize:vertical;}
-.form-save-btn{background:var(--green);color:#fff;border:none;padding:12px 28px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;margin-top:12px;width:100%;}
+.form-save-btn{background:linear-gradient(135deg,var(--secondary),#ff9a3c);color:#fff;border:none;padding:11px 28px;border-radius:10px;font-weight:700;cursor:pointer;font-size:13px;margin-top:12px;font-family:inherit;transition:.2s;}
+.form-save-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,122,24,.35);}
 
-/* ===== SEARCH ===== */
-.tools{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;}
-.search-box{padding:11px 16px;border:2px solid #e8ecf4;border-radius:10px;outline:none;background:#fff;font-size:14px;width:100%;}
-.orar-info{font-size:12px;font-weight:600;color:#888;}
+/* ===== TOOLS ===== */
+.tools{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.search-wrap{position:relative;}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none;}
+.search-box{padding:11px 16px 11px 38px;border:1.5px solid var(--border);border-radius:10px;outline:none;background:var(--surface);font-size:13px;width:100%;font-family:inherit;transition:.2s;}
+.search-box:focus{border-color:var(--secondary);box-shadow:0 0 0 3px rgba(255,122,24,.08);}
+.tools-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.reload-btn{background:var(--primary);color:#fff;border:none;padding:9px 16px;border-radius:9px;cursor:pointer;font-weight:600;font-size:12px;display:inline-flex;align-items:center;gap:6px;font-family:inherit;transition:.2s;}
+.reload-btn:hover{background:var(--dark);}
 
-/* ===== TABLE → CARDS on mobile ===== */
-.table-card{background:transparent;}
-table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.08);}
-th{background:#f8faff;padding:12px 14px;text-align:left;font-size:10px;text-transform:uppercase;color:#888;font-weight:800;}
-td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-size:13px;}
-.desktop-table{display:table;}
-.mobile-cards{display:none;}
-
-/* ===== MOBILE CARD ===== */
-.m-card{background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 4px 15px rgba(0,0,0,0.08);border-left:4px solid var(--secondary);}
-.m-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
-.m-card-name{font-size:16px;font-weight:800;color:var(--primary);}
-.m-card-ref{font-size:11px;font-weight:700;color:var(--secondary);margin-top:2px;}
-.m-card-body{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
-.m-card-field{font-size:12px;color:#555;}
-.m-card-field span{font-weight:700;color:#222;display:block;}
-.m-card-obs{font-size:11px;color:#888;margin-bottom:10px;font-style:italic;}
-.m-card-actions{display:flex;gap:8px;flex-wrap:wrap;}
-.m-card-actions button{flex:1;min-width:80px;padding:10px 8px;border:none;border-radius:10px;cursor:pointer;font-size:11px;font-weight:700;}
+/* ===== DESKTOP TABLE ===== */
+.table-wrap{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+thead{background:#f8fafc;border-bottom:1px solid var(--border);}
+th{padding:11px 16px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:700;}
+tbody tr{border-bottom:1px solid #f1f5f9;transition:background .1s;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:#f8fafc;}
+td{padding:14px 16px;vertical-align:middle;font-size:13px;}
 
 /* ===== STATUS TAGS ===== */
-.status-tag{padding:4px 8px;border-radius:6px;font-size:10px;font-weight:800;text-transform:uppercase;display:inline-block;}
-.st-active{background:#e0f2fe;color:#0369a1;}
-.st-done{background:#dcfce7;color:#16a34a;}
-.st-cancel{background:#fef3c7;color:#d97706;}
-.st-trash{background:#fee2e2;color:#dc2626;}
+.status-tag{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px;}
+.st-active{background:var(--blue-light);color:var(--blue);}
+.st-done{background:var(--green-light);color:var(--green);}
+.st-cancel{background:var(--yellow-light);color:var(--yellow);}
+.st-trash{background:var(--red-light);color:var(--red);}
 
 /* ===== ACTION BUTTONS ===== */
 .actions{display:flex;gap:6px;flex-wrap:nowrap;}
-.actions button{padding:7px 10px;border:none;border-radius:8px;cursor:pointer;font-size:10px;font-weight:700;transition:.2s;}
-.actions button:hover{opacity:.85;transform:translateY(-1px);}
-.btn-green{background:var(--green);color:#fff;}
-.btn-yellow{background:var(--yellow);color:#fff;}
-.btn-red{background:var(--red);color:#fff;}
-.btn-restore{background:#e2e8f0;color:#475569;}
+.actions button,.action-btn{padding:7px 11px;border:none;border-radius:8px;cursor:pointer;font-size:11px;font-weight:700;transition:.2s;font-family:inherit;white-space:nowrap;}
+.actions button:hover{transform:translateY(-1px);opacity:.9;}
+.btn-green{background:var(--green-light);color:var(--green);}
+.btn-yellow{background:var(--yellow-light);color:var(--yellow);}
+.btn-red{background:var(--red-light);color:var(--red);}
+.btn-restore{background:#f1f5f9;color:#475569;}
+.btn-dark{background:#1e293b;color:#fff;}
+
+/* ===== MOBILE CARD ===== */
+.mobile-cards{display:none;}
+.m-card{background:var(--surface);border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:var(--shadow);border-left:3px solid var(--secondary);}
+.m-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:8px;}
+.m-card-name{font-size:15px;font-weight:800;color:var(--primary);}
+.m-card-ref{font-size:11px;font-weight:700;color:var(--secondary);margin-top:2px;font-family:monospace;}
+.m-card-body{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.m-card-field{font-size:11px;color:var(--muted);font-weight:500;}
+.m-card-field span{font-weight:700;color:var(--text);display:block;margin-top:2px;font-size:12px;}
+.m-card-obs{font-size:11px;color:var(--muted);margin-bottom:10px;font-style:italic;background:#f8fafc;padding:8px 10px;border-radius:8px;}
+.m-card-actions{display:flex;gap:6px;flex-wrap:wrap;}
+.m-card-actions button{flex:1;min-width:72px;padding:9px 6px;border:none;border-radius:9px;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;}
+
+/* ===== EMPTY STATE ===== */
+.empty-state{text-align:center;padding:60px 20px;}
+.empty-icon{font-size:48px;margin-bottom:14px;}
+.empty-state h4{font-size:16px;font-weight:700;color:var(--primary);margin-bottom:6px;}
+.empty-state p{font-size:13px;color:var(--muted);}
 
 /* ===== TOAST ===== */
-#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:600;z-index:9999;display:none;box-shadow:0 8px 30px rgba(0,0,0,.3);border-left:4px solid var(--green);white-space:nowrap;max-width:90vw;text-align:center;}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#1e293b;color:#fff;padding:12px 20px;border-radius:50px;font-size:13px;font-weight:600;z-index:9999;box-shadow:var(--shadow-lg);border-left:4px solid var(--green);white-space:nowrap;max-width:90vw;text-align:center;transition:transform .35s cubic-bezier(.25,.46,.45,.94);pointer-events:none;}
+#toast.show{transform:translateX(-50%) translateY(0);}
 #toast.error{border-left-color:var(--red);}
-@keyframes livePulse{0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 0 0 rgba(34,197,94,0.5);}50%{opacity:0.8;transform:scale(1.2);box-shadow:0 0 0 5px rgba(34,197,94,0);}}
-@keyframes spin{to{transform:rotate(360deg);}}
 
 /* ===== MODAL ===== */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:flex-end;justify-content:center;padding:0;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:1000;align-items:flex-end;justify-content:center;padding:0;backdrop-filter:blur(4px);}
 .modal-overlay.open{display:flex;}
-.modal{background:#fff;border-radius:20px 20px 0 0;padding:24px 20px 32px;width:100%;max-width:500px;box-shadow:0 -8px 40px rgba(0,0,0,.2);}
-.modal h3{color:var(--primary);font-size:17px;margin-bottom:12px;}
-.modal input, .modal select{width:100%;padding:13px 12px;border:2px solid #e8ecf4;border-radius:10px;font-size:15px;outline:none;margin-bottom:12px;}
-.modal-info{border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;}
-.modal-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.modal-btns button{padding:13px;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;}
-.modal-cancel-btn{background:#e2e8f0;color:#475569;}
+.modal{background:var(--surface);border-radius:20px 20px 0 0;padding:24px 20px 36px;width:100%;max-width:500px;box-shadow:var(--shadow-lg);animation:slideUp .3s cubic-bezier(.25,.46,.45,.94);}
+@keyframes slideUp{from{transform:translateY(60px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.modal h3{color:var(--primary);font-size:16px;font-weight:800;margin-bottom:12px;}
+.modal input,.modal select{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;outline:none;margin-bottom:12px;font-family:inherit;background:#f8fafc;}
+.modal input:focus,.modal select:focus{border-color:var(--secondary);background:#fff;}
+.modal-info{border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:13px;font-weight:600;}
+.modal-info.warn{background:var(--yellow-light);color:#92400e;border:1px solid #fde68a;}
+.modal-info.success{background:var(--green-light);color:#166534;border:1px solid #bbf7d0;}
+.modal-btns{display:flex;gap:10px;margin-top:4px;}
+.modal-btns button{flex:1;padding:13px;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;font-family:inherit;transition:.2s;}
+.modal-cancel-btn{background:#f1f5f9;color:#475569;}
 .modal-confirm-btn{background:var(--secondary);color:#fff;}
+.modal-confirm-btn:hover{transform:translateY(-1px);}
 
-/* ===== DESKTOP OVERRIDES ===== */
+/* ===== CLIENT INFO CHIP ===== */
+.client-name{font-weight:700;color:var(--text);font-size:13px;}
+.client-ref{font-size:11px;color:var(--secondary);font-family:monospace;font-weight:700;margin-top:2px;}
+.contact-line{font-size:12px;color:var(--muted);margin-top:2px;}
+
+@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ===== DESKTOP ===== */
 @media(min-width:768px){
   .content{padding:24px;}
-  .stats{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px;}
-  .stat-card{padding:20px;}
-  .stat-card .num{font-size:32px;}
+  .stats{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px;}
+  .stat-card{padding:18px 20px;}
+  .stat-text .num{font-size:30px;}
   .add-form{padding:24px;margin-bottom:24px;}
-  .form-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+  .form-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;}
   .form-save-btn{width:auto;}
-  .tools{flex-direction:row;justify-content:space-between;align-items:center;}
-  .search-box{width:300px;}
-  .desktop-table{display:table;}
-  .mobile-cards{display:none;}
+  .tools{flex-direction:row;align-items:center;justify-content:space-between;}
+  .search-wrap{flex:1;max-width:340px;}
+  .desktop-table{display:block;}
+  .mobile-cards{display:none !important;}
   .modal-overlay{align-items:center;padding:20px;}
-  .modal{border-radius:16px;padding:30px;}
-  .modal-btns{display:flex;justify-content:flex-end;}
-  .modal-btns button{padding:10px 24px;width:auto;}
-  .topbar{padding:16px 24px;}
-  .topbar h1{font-size:20px;}
-  .tabs{padding:0 24px;}
-  .tab{padding:16px 20px;font-size:14px;}
+  .modal{border-radius:16px;padding:28px;}
+  .topbar h1{font-size:17px;}
+  .tab{padding:0 20px;height:52px;}
 }
-
 @media(max-width:767px){
   .desktop-table{display:none !important;}
   .mobile-cards{display:block;}
   .form-grid textarea{grid-column:span 2;}
+  .stats{grid-template-columns:1fr 1fr;}
 }
-
 @media(max-width:400px){
   .form-grid{grid-template-columns:1fr;}
   .form-grid textarea{grid-column:span 1;}
   .m-card-body{grid-template-columns:1fr;}
+  .stats{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -151,14 +224,12 @@ td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-siz
 <div class="modal-overlay" id="modal-cancel">
   <div class="modal">
     <h3>❌ Anulare Programare</h3>
-    <p style="color:#666;font-size:14px;margin-bottom:14px;">Introduceți motivul anulării. Se va trimite email clientului.</p>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:14px;">Introduceți motivul anulării. Se va trimite email clientului.</p>
     <input type="text" id="modal-cancel-motiv" placeholder="Motiv anulare" value="Nu a mai venit">
-    <div class="modal-info" style="background:#fff3cd;border:1px solid #f59e0b;color:#92400e;">
-      📧 Email la: <strong id="modal-cancel-email-preview">-</strong>
-    </div>
+    <div class="modal-info warn">📧 Email la: <strong id="modal-cancel-email-preview">-</strong></div>
     <div class="modal-btns">
       <button class="modal-cancel-btn" onclick="closeModal('modal-cancel')">Renunță</button>
-      <button class="modal-confirm-btn" onclick="confirmCancel()">ANULEAZĂ & EMAIL</button>
+      <button class="modal-confirm-btn" style="background:var(--red);" onclick="confirmCancel()">ANULEAZĂ & EMAIL</button>
     </div>
   </div>
 </div>
@@ -167,7 +238,7 @@ td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-siz
 <div class="modal-overlay" id="modal-done">
   <div class="modal">
     <h3>✅ Finalizare Programare</h3>
-    <p style="color:#666;font-size:14px;margin-bottom:14px;">Selectați ora de plecare. Se va trimite email clientului.</p>
+    <p style="color:var(--muted);font-size:13px;margin-bottom:14px;">Selectați ora de plecare. Se va trimite email clientului.</p>
     <select id="modal-done-ora">
       <option value="">Ora plecare...</option>
       <option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option>
@@ -177,30 +248,32 @@ td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-siz
       <option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option>
       <option>18:00</option>
     </select>
-    <div class="modal-info" style="background:#dcfce7;border:1px solid #22c55e;color:#166534;">
-      📧 Email la: <strong id="modal-done-email-preview">-</strong>
-    </div>
+    <div class="modal-info success">📧 Email la: <strong id="modal-done-email-preview">-</strong></div>
     <div class="modal-btns">
       <button class="modal-cancel-btn" onclick="closeModal('modal-done')">Renunță</button>
-      <button class="modal-confirm-btn" style="background:var(--green)" onclick="confirmDone()">FINALIZEAZĂ & EMAIL</button>
+      <button class="modal-confirm-btn" style="background:var(--green);" onclick="confirmDone()">FINALIZEAZĂ & EMAIL</button>
     </div>
   </div>
 </div>
+
 <!-- MODAL DETALII -->
 <div class="modal-overlay" id="modal-detail">
   <div class="modal" style="border-radius:16px;max-width:480px;">
     <div style="background:linear-gradient(135deg,var(--primary),var(--dark));margin:-24px -20px 20px;padding:20px 24px;border-radius:16px 16px 0 0;display:flex;justify-content:space-between;align-items:center;">
-      <h3 style="color:#fff;margin:0;">📋 Detalii Programare</h3>
-      <button onclick="closeModal('modal-detail')" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;">✕</button>
+      <h3 style="color:#fff;margin:0;font-size:15px;">📋 Detalii Programare</h3>
+      <button onclick="closeModal('modal-detail')" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;">✕</button>
     </div>
     <div id="detail-rows"></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;" id="detail-actions"></div>
   </div>
 </div>
+
 <!-- LOGIN -->
 <div id="login-page">
   <div class="login-box">
-    <h1>🔐 Gestionare Programări-d4riustaxadvice</h1>
+    <div class="login-logo">📋</div>
+    <h1>d4riusTAX Admin</h1>
+    <p>Gestionare Programări</p>
     <input type="text" id="log-user" placeholder="Utilizator" autocomplete="username" onkeydown="if(event.key==='Enter')checkAuth()">
     <input type="password" id="log-pass" placeholder="Parolă" autocomplete="current-password" onkeydown="if(event.key==='Enter')checkAuth()">
     <button onclick="checkAuth()">AUTENTIFICARE</button>
@@ -210,24 +283,59 @@ td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-siz
 <!-- ADMIN PANEL -->
 <div id="admin-panel">
   <div class="topbar">
-    <h1>📋 Gestionare Programări <span>d4riustaxadvice</span></h1>
-    <button class="logout-btn" onclick="location.reload()">IEȘIRE</button>
+    <div class="topbar-left">
+      <div class="topbar-icon">📋</div>
+      <h1>Programări <span>d4riusTAX</span></h1>
+    </div>
+    <div class="topbar-right">
+      <div class="live-dot"><div class="live-pulse"></div>Live</div>
+      <button class="logout-btn" onclick="location.reload()">IEȘIRE</button>
+    </div>
   </div>
 
-  <div class="tabs">
-    <div class="tab active" id="t-active" onclick="switchTab('active')">📊 Dashboard <span class="badge" id="b-active">0</span></div>
-    <div class="tab" id="t-ended" onclick="switchTab('ended')">✅ Finalizate/Anulate <span class="badge" id="b-ended">0</span></div>
-<div class="tab" id="t-trash" onclick="">🗑️ Coș <span class="badge" id="b-trash">0</span></div>
+  <div class="tab-bar">
+    <div class="tab active" id="t-active" onclick="switchTab('active')">
+      <span class="tab-icon">📊</span> Dashboard
+      <span class="badge" id="b-active">0</span>
+    </div>
+    <div class="tab" id="t-ended" onclick="switchTab('ended')">
+      <span class="tab-icon">✅</span> Finalizate
+      <span class="badge green" id="b-ended">0</span>
+    </div>
+    <div class="tab" id="t-cancel" onclick="switchTab('cancel')">
+      <span class="tab-icon">❌</span> Anulate
+      <span class="badge" style="background:var(--yellow);" id="b-cancel">0</span>
+    </div>
+    <div class="tab" id="t-trash" onclick="switchTab('trash')">
+      <span class="tab-icon">🗑️</span> Coș
+      <span class="badge gray" id="b-trash">0</span>
+    </div>
   </div>
 
   <div class="content">
+    <!-- STATS -->
     <div class="stats">
-      <div class="stat-card"><h4>Active</h4><div class="num" id="s-active">0</div></div>
-      <div class="stat-card" style="border-left-color:var(--green)"><h4>Total Servit</h4><div class="num" id="s-ended">0</div></div>
+      <div class="stat-card">
+        <div class="stat-icon orange">📊</div>
+        <div class="stat-text"><h4>Active</h4><div class="num" id="s-active">0</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">✅</div>
+        <div class="stat-text"><h4>Finalizate</h4><div class="num" id="s-ended">0</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:var(--yellow-light);">❌</div>
+        <div class="stat-text"><h4>Anulate</h4><div class="num" id="s-cancel">0</div></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon red">🗑️</div>
+        <div class="stat-text"><h4>Coș</h4><div class="num" id="s-trash">0</div></div>
+      </div>
     </div>
 
+    <!-- ADD FORM -->
     <div id="form-section" class="add-form">
-      <h3>➕ Adăugare Programare</h3>
+      <div class="section-title">➕ Adăugare Programare Nouă</div>
       <div class="form-grid">
         <input type="text" id="in-nume" placeholder="Nume Client *">
         <input type="text" id="in-ref" value="D4TAX-" oninput="if(!this.value.startsWith('D4TAX-'))this.value='D4TAX-'">
@@ -242,35 +350,44 @@ td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-siz
         </select>
         <textarea id="in-obs" placeholder="Note suplimentare..."></textarea>
       </div>
-      <div style="text-align:right;margin-top:12px;">
-        <button class="form-save-btn" onclick="saveClient()">SALVEAZĂ</button>
+      <div style="display:flex;justify-content:flex-end;">
+        <button class="form-save-btn" onclick="saveClient()">💾 SALVEAZĂ PROGRAMAREA</button>
       </div>
     </div>
 
+    <!-- TOOLS -->
     <div class="tools">
-      <input type="search" id="search-input" class="search-box" placeholder="🔍 Caută după nume sau REF..." oninput="render()">
-    <div style="display:flex;align-items:center;gap:12px;">
-  <button id="reload-btn" onclick="manualReload()" style="background:var(--primary);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px;">
-    <span id="reload-icon" style="display:inline-block;">↻</span> Reîncarcă
-  </button>
-  <div style="display:inline-flex;align-items:center;gap:5px;background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700;">
-    <div style="width:8px;height:8px;background:#22c55e;border-radius:50%;animation:livePulse 1.5s ease-in-out infinite;"></div>
-    Live
-  </div>
-  <div class="orar-info">Orar: <span style="color:var(--secondary)">08:00 - 18:00</span></div>
-</div>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="search-input" class="search-box" placeholder="Caută după nume sau REF..." oninput="render()">
+      </div>
+      <div class="tools-right">
+        <button class="reload-btn" id="reload-btn" onclick="manualReload()">
+          <span id="reload-icon" style="display:inline-block;">↻</span> Reîncarcă
+        </button>
+        <span style="font-size:12px;color:var(--muted);font-weight:500;">Orar: <strong style="color:var(--secondary)">08:00–18:00</strong></span>
+      </div>
     </div>
 
     <!-- DESKTOP TABLE -->
-    <div class="table-card desktop-table">
+    <div class="desktop-table table-wrap">
       <table>
         <thead>
           <tr>
-            <th>Identitate</th><th>Contact</th><th>Programare</th><th>Status</th><th>Acțiuni</th>
+            <th>Client & REF</th>
+            <th>Contact</th>
+            <th>Programare</th>
+            <th>Status</th>
+            <th>Acțiuni</th>
           </tr>
         </thead>
         <tbody id="table-body-desktop"></tbody>
       </table>
+      <div id="empty-desktop" style="display:none;" class="empty-state">
+        <div class="empty-icon">📭</div>
+        <h4>Nicio programare</h4>
+        <p>Nu există înregistrări în această secțiune.</p>
+      </div>
     </div>
 
     <!-- MOBILE CARDS -->
@@ -281,9 +398,6 @@ td{padding:13px 14px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-siz
 
 <script>
 const WORKER_URL = 'https://proud-union-a480d4rriustax.d4riusfn7.workers.dev';
-
-
-
 let _fail = 0, _lock = 0;
 
 async function checkAuth() {
@@ -310,10 +424,9 @@ async function checkAuth() {
       if (_fail >= 3) { _lock = Date.now() + 30000; _fail = 0; showToast('🔒 Blocat 30 secunde!', true); }
       else showToast('❌ Date incorecte! (' + _fail + '/3)', true);
     }
-  } catch(e) {
-    showToast('⚠️ Eroare conexiune!', true);
-  }
+  } catch(e) { showToast('⚠️ Eroare conexiune!', true); }
 }
+
 // ===== DATA =====
 let clients = [];
 let currentView = 'active';
@@ -327,26 +440,26 @@ async function loadFromCloud() {
     });
     const d = await r.json();
     if (d.ok) {
-const priority = {'done':4,'cancelled':3,'trash':2,'confirmed':1,'new':0};
-const byRef = {};
-for (const p of (d.programari || [])) {
-  const ref = p.ref || p.id;
-  const curr = priority[p.status] ?? 0;
-  const prev = priority[(byRef[ref] || {}).status] ?? -1;
-  if (!byRef[ref] || curr > prev) byRef[ref] = p;
-}
-clients = Object.values(byRef).map(p => ({
-  id: p.id || p.ref || Date.now(),
-  nume: [p.prenume, p.nume].filter(Boolean).join(' ') || p.nume || (p.email || '').split('@')[0],
-  ref: p.ref || '—',
-  email: p.email || p.userEmail || '',
-  tel: p.telefon || p.tel || '-',
-  data: p.data || '-',
-  ora: p.ora || '-',
-  obs: p.mesaj || '',
-  status: p.status === 'done' ? 'done' : p.status === 'cancelled' ? 'cancel' : p.status === 'trash' ? 'trash' : 'active',
-  meta_info: ''
-}));
+      const priority = {'done':4,'cancelled':3,'trash':2,'confirmed':1,'new':0};
+      const byRef = {};
+      for (const p of (d.programari || [])) {
+        const ref = p.ref || p.id;
+        const curr = priority[p.status] ?? 0;
+        const prev = priority[(byRef[ref] || {}).status] ?? -1;
+        if (!byRef[ref] || curr > prev) byRef[ref] = p;
+      }
+      clients = Object.values(byRef).map(p => ({
+        id: p.id || p.ref || Date.now(),
+        nume: [p.prenume, p.nume].filter(Boolean).join(' ') || p.nume || (p.email || '').split('@')[0],
+        ref: p.ref || '—',
+        email: p.email || p.userEmail || '',
+        tel: p.telefon || p.tel || '-',
+        data: p.data || '-',
+        ora: p.ora || '-',
+        obs: p.mesaj || '',
+        status: p.status === 'done' ? 'done' : p.status === 'cancelled' ? 'cancel' : p.status === 'trash' ? 'trash' : 'active',
+        meta_info: ''
+      }));
       try { localStorage.setItem('dtax_v4_backup', JSON.stringify(clients)); } catch(e) {}
     }
   } catch(e) {
@@ -360,7 +473,7 @@ async function saveToCloud() {
 }
 
 async function applyStatus(id, kvStatus) {
-const c = clients.find(x => String(x.id) === String(id));
+  const c = clients.find(x => String(x.id) === String(id));
   if (!c) return;
   try {
     const creds = btoa('d4riusadmin' + ':' + 'd4riustaxadvice2026!');
@@ -378,9 +491,10 @@ const c = clients.find(x => String(x.id) === String(id));
 // ===== TOAST =====
 function showToast(msg, isError=false) {
   const t = document.getElementById('toast');
-  t.textContent = msg; t.className = isError ? 'error' : '';
-  t.style.display = 'block';
-  setTimeout(() => t.style.display='none', 3500);
+  t.textContent = msg;
+  t.className = isError ? 'error show' : 'show';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 3500);
 }
 
 // ===== MODAL =====
@@ -392,18 +506,18 @@ async function saveClient() {
   const n = document.getElementById('in-nume').value.trim();
   const o = document.getElementById('in-ora').value;
   if (!n || !o) return showToast('⚠️ Numele și Ora sunt obligatorii!', true);
-  const ref = document.getElementById('in-ref').value;
+  const ref   = document.getElementById('in-ref').value;
   const email = document.getElementById('in-email').value.trim() || '';
   const newClient = {
     id: Date.now(), nume: n, ref, email,
-    tel:   document.getElementById('in-tel').value.trim() || '-',
-    data:  document.getElementById('in-data').value || '-',
+    tel:  document.getElementById('in-tel').value.trim() || '-',
+    data: document.getElementById('in-data').value || '-',
     ora: o, obs: document.getElementById('in-obs').value.trim() || '',
     status: 'active', meta_info: ''
   };
   clients.push(newClient);
   render();
-  document.querySelectorAll('.form-grid input:not(#in-ref), .form-grid select, .form-grid textarea').forEach(i => i.value='');
+  document.querySelectorAll('.form-grid input:not(#in-ref),.form-grid select,.form-grid textarea').forEach(i => i.value='');
   document.getElementById('in-ref').value = 'D4TAX-';
   try {
     const creds = btoa('d4riusadmin' + ':' + 'd4riustaxadvice2026!');
@@ -419,14 +533,14 @@ async function saveClient() {
       body: JSON.stringify(progData)
     });
     const d = await res.json();
-    d.ok ? showToast('✅ Programare salvată în cloud!') : showToast('⚠️ Salvat local, eroare cloud: ' + (d.error||''), true);
+    d.ok ? showToast('✅ Programare salvată!') : showToast('⚠️ Eroare cloud: ' + (d.error||''), true);
   } catch(e) { showToast('⚠️ Salvat local, fără cloud!', true); }
 }
 
 // ===== CHANGE STATUS =====
 async function changeStatus(id, newStatus) {
   pendingActionId = id;
-const c = clients.find(x => String(x.id) === String(id));
+  const c = clients.find(x => String(x.id) === String(id));
   if (!c) return;
   if (newStatus === 'cancel') {
     document.getElementById('modal-cancel-email-preview').textContent = c.email || 'fără email';
@@ -436,20 +550,20 @@ const c = clients.find(x => String(x.id) === String(id));
     document.getElementById('modal-done-email-preview').textContent = c.email || 'fără email';
     document.getElementById('modal-done-ora').value = '';
     openModal('modal-done');
-} else {
-   const kvStatus = newStatus === 'active' ? 'confirmed' : newStatus === 'trash' ? 'trash' : 'cancelled';
-   clients = clients.map(x => String(x.id)===String(id) ? {...x, status: newStatus, meta_info:''} : x);
+  } else {
+    const kvStatus = newStatus === 'active' ? 'confirmed' : newStatus === 'trash' ? 'trash' : 'cancelled';
+    clients = clients.map(x => String(x.id)===String(id) ? {...x, status: newStatus, meta_info:''} : x);
     render();
     await applyStatus(id, kvStatus);
   }
 }
 
 async function confirmCancel() {
-  const id = pendingActionId;
-const c  = clients.find(x => String(x.id) === String(id));
+  const id  = pendingActionId;
+  const c   = clients.find(x => String(x.id) === String(id));
   const motiv = document.getElementById('modal-cancel-motiv').value.trim() || 'Nu a mai venit';
   closeModal('modal-cancel');
-clients = clients.map(x => String(x.id)===String(id) ? {...x, status:'cancel', meta_info:motiv} : x);
+  clients = clients.map(x => String(x.id)===String(id) ? {...x, status:'cancel', meta_info:motiv} : x);
   render();
   await applyStatus(id, 'cancelled');
   if (c.email && c.email.includes('@')) {
@@ -458,17 +572,17 @@ clients = clients.map(x => String(x.id)===String(id) ? {...x, status:'cancel', m
       const r = await fetch(WORKER_URL+'/api/send-cancel', {method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({to_email:c.email, to_name:c.nume, ref_code:c.ref, data_programare:c.data, ora_programare:c.ora, motiv})});
       const d = await r.json();
-      d.ok ? showToast('✅ Email trimis la '+c.email) : showToast('⚠️ '+( d.error||'Eroare'), true);
+      d.ok ? showToast('✅ Email trimis la '+c.email) : showToast('⚠️ '+(d.error||'Eroare'), true);
     } catch(e){ showToast('⚠️ Eroare rețea', true); }
   } else showToast('ℹ️ Anulat (fără email)');
 }
 
 async function confirmDone() {
-  const id = pendingActionId;
-const c  = clients.find(x => String(x.id) === String(id));
+  const id  = pendingActionId;
+  const c   = clients.find(x => String(x.id) === String(id));
   const ora = document.getElementById('modal-done-ora').value || '-';
   closeModal('modal-done');
-clients = clients.map(x => String(x.id)===String(id) ? {...x, status:'done', meta_info:ora} : x);
+  clients = clients.map(x => String(x.id)===String(id) ? {...x, status:'done', meta_info:ora} : x);
   render();
   await applyStatus(id, 'done');
   if (c.email && c.email.includes('@')) {
@@ -483,132 +597,183 @@ clients = clients.map(x => String(x.id)===String(id) ? {...x, status:'done', met
 }
 
 function permanentDelete(id) {
-  if (confirm('Ștergi definitiv?')) { clients = clients.filter(c=>c.id!==id); update(); showToast('🗑️ Șters'); }
+  if (confirm('Ștergi definitiv această programare?')) {
+    clients = clients.filter(c => c.id !== id);
+    update();
+    showToast('🗑️ Șters definitiv');
+  }
 }
 
 // ===== TABS =====
 function switchTab(v) {
   currentView = v;
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('t-'+v).classList.add('active');
-  document.getElementById('form-section').style.display = v==='active' ? 'block' : 'none';
+  document.getElementById('form-section').style.display = v === 'active' ? 'block' : 'none';
   render();
 }
 
-// ===== RENDER =====
+// ===== HELPERS =====
 function statusHtml(c) {
-  if (c.status==='active') return '<span class="status-tag st-active">Confirmat</span>';
-  if (c.status==='done')   return `<span class="status-tag st-done">✅ Finalizat • ${c.meta_info}</span>`;
-  if (c.status==='cancel') return `<span class="status-tag st-cancel">❌ Anulat • ${c.meta_info}</span>`;
-  return '<span class="status-tag st-trash">Coș</span>';
-}
-function actionsHtml(c, mobile=false) {
-  if (c.status==='active') return `
-    <button class="btn-green" onclick="changeStatus('${c.id}','done')">✅ A VENIT</button>
-    <button class="btn-yellow" onclick="changeStatus('${c.id}','cancel')">❌ ANULAT</button>
-    <button class="btn-restore" onclick="openDetail('${c.id}')">📋 DETALII</button>
-    <button class="btn-red" onclick="changeStatus('${c.id}','trash')">🗑️</button>`;
-  if (c.status==='trash') return `
-    <button class="btn-restore" onclick="changeStatus('${c.id}','active')">♻️ RESTAURARE</button>
-    <button class="btn-red" style="background:#000" onclick="permanentDelete('${c.id}')">💀 DEL</button>`;
-  return `
-    <button class="btn-restore" onclick="changeStatus('${c.id}','active')">♻️ RESTAURARE</button>
-    <button class="btn-red" onclick="changeStatus('${c.id}','trash')">🗑️ COȘ</button>`;
+  if (c.status==='active') return '<span class="status-tag st-active">● Confirmat</span>';
+  if (c.status==='done')   return `<span class="status-tag st-done">✅ Finalizat ${c.meta_info ? '· '+c.meta_info : ''}</span>`;
+  if (c.status==='cancel') return `<span class="status-tag st-cancel">❌ Anulat ${c.meta_info ? '· '+c.meta_info : ''}</span>`;
+  return '<span class="status-tag st-trash">🗑️ Coș</span>';
 }
 
+function actionsHtml(c) {
+  if (c.status==='active') return `
+    <button class="btn-green" onclick="changeStatus('${c.id}','done')">✅ A Venit</button>
+    <button class="btn-yellow" onclick="changeStatus('${c.id}','cancel')">❌ Anulat</button>
+    <button class="btn-restore" onclick="openDetail('${c.id}')">📋 Detalii</button>
+    <button class="btn-red" onclick="changeStatus('${c.id}','trash')">🗑️</button>`;
+  if (c.status==='trash') return `
+    <button class="btn-restore" onclick="changeStatus('${c.id}','active')">♻️ Restaurare</button>
+    <button class="btn-dark" onclick="permanentDelete('${c.id}')">💀 Șterge</button>`;
+  return `
+    <button class="btn-restore" onclick="changeStatus('${c.id}','active')">♻️ Restaurare</button>
+    <button class="btn-red" onclick="changeStatus('${c.id}','trash')">🗑️ Coș</button>`;
+}
+
+// ===== RENDER =====
 function render() {
-  const search = document.getElementById('search-input').value.toLowerCase();
+  const search = (document.getElementById('search-input').value || '').toLowerCase();
+
   const filtered = clients.filter(c => {
-    const matchTab = currentView==='active' ? c.status==='active'
-      : currentView==='ended' ? (c.status==='done'||c.status==='cancel')
-      : c.status==='trash';
-    return matchTab && (c.nume.toLowerCase().includes(search)||c.ref.toLowerCase().includes(search));
+    const matchTab =
+      currentView==='active'  ? c.status==='active'  :
+      currentView==='ended'   ? c.status==='done'    :
+      currentView==='cancel'  ? c.status==='cancel'  :
+      c.status==='trash';
+    return matchTab && (c.nume.toLowerCase().includes(search) || c.ref.toLowerCase().includes(search));
   });
+
+  // Badges
+  document.getElementById('b-active').textContent  = clients.filter(x=>x.status==='active').length;
+  document.getElementById('b-ended').textContent   = clients.filter(x=>x.status==='done').length;
+  document.getElementById('b-cancel').textContent  = clients.filter(x=>x.status==='cancel').length;
+  document.getElementById('b-trash').textContent   = clients.filter(x=>x.status==='trash').length;
+
+  // Stats
+  document.getElementById('s-active').textContent  = clients.filter(x=>x.status==='active').length;
+  document.getElementById('s-ended').textContent   = clients.filter(x=>x.status==='done').length;
+  document.getElementById('s-cancel').textContent  = clients.filter(x=>x.status==='cancel').length;
+  document.getElementById('s-trash').textContent   = clients.filter(x=>x.status==='trash').length;
 
   // Desktop table
   const tb = document.getElementById('table-body-desktop');
+  const emptyD = document.getElementById('empty-desktop');
   tb.innerHTML = '';
-  filtered.forEach(c => {
-    const email = c.email&&c.email.includes('@') ? `📧 ${c.email}` : `<span style="color:#bbb;font-style:italic">fără email</span>`;
-    tb.innerHTML += `<tr>
-      <td><strong>${c.nume}</strong><br><small style="color:var(--secondary);font-weight:700">${c.ref}</small></td>
-      <td style="font-size:12px;">${email}<br>📞 ${c.tel}</td>
-      <td>📅 ${c.data}<br>🕒 <strong>${c.ora}</strong></td>
-      <td>${statusHtml(c)}<br><p style="font-size:11px;color:#666;margin-top:4px;">${c.obs}</p></td>
-      <td><div class="actions">${actionsHtml(c)}</div></td>
-    </tr>`;
-  });
+  if (filtered.length === 0) {
+    emptyD.style.display = 'block';
+  } else {
+    emptyD.style.display = 'none';
+    filtered.forEach(c => {
+      const emailHtml = c.email && c.email.includes('@')
+        ? `<a href="mailto:${c.email}" style="color:var(--secondary);text-decoration:none;font-size:12px;">${c.email}</a>`
+        : `<span style="color:#cbd5e1;font-size:12px;font-style:italic;">fără email</span>`;
+      tb.innerHTML += `<tr>
+        <td>
+          <div class="client-name">${c.nume}</div>
+          <div class="client-ref">${c.ref}</div>
+        </td>
+        <td>
+          <div>${emailHtml}</div>
+          <div class="contact-line">📞 ${c.tel}</div>
+        </td>
+        <td>
+          <div style="font-weight:700;font-size:13px;">📅 ${c.data}</div>
+          <div style="color:var(--muted);font-size:12px;margin-top:2px;">🕒 ${c.ora}</div>
+        </td>
+        <td>
+          ${statusHtml(c)}
+          ${c.obs ? `<div style="font-size:11px;color:var(--muted);margin-top:5px;">${c.obs}</div>` : ''}
+        </td>
+        <td><div class="actions">${actionsHtml(c)}</div></td>
+      </tr>`;
+    });
+  }
 
   // Mobile cards
   const mb = document.getElementById('mobile-cards-body');
   mb.innerHTML = '';
-  filtered.forEach(c => {
-    const email = c.email&&c.email.includes('@') ? c.email : 'fără email';
-    mb.innerHTML += `<div class="m-card">
-      <div class="m-card-header">
-        <div>
-          <div class="m-card-name">${c.nume}</div>
-          <div class="m-card-ref">${c.ref}</div>
+  if (filtered.length === 0) {
+    mb.innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div><h4>Nicio programare</h4><p>Nu există înregistrări în această secțiune.</p></div>`;
+  } else {
+    filtered.forEach(c => {
+      const emailDisplay = c.email && c.email.includes('@') ? c.email : 'fără email';
+      mb.innerHTML += `<div class="m-card">
+        <div class="m-card-header">
+          <div>
+            <div class="m-card-name">${c.nume}</div>
+            <div class="m-card-ref">${c.ref}</div>
+          </div>
+          ${statusHtml(c)}
         </div>
-        ${statusHtml(c)}
-      </div>
-      <div class="m-card-body">
-        <div class="m-card-field">📅 Data<span>${c.data}</span></div>
-        <div class="m-card-field">🕒 Ora<span>${c.ora}</span></div>
-        <div class="m-card-field">📧 Email<span style="font-size:11px;word-break:break-all">${email}</span></div>
-        <div class="m-card-field">📞 Tel<span>${c.tel}</span></div>
-      </div>
-      ${c.obs ? `<div class="m-card-obs">${c.obs}</div>` : ''}
-      <div class="m-card-actions">${actionsHtml(c, true)}</div>
-    </div>`;
-  });
-
-  // Badges & stats
-  document.getElementById('b-active').innerText  = clients.filter(x=>x.status==='active').length;
-  document.getElementById('b-ended').innerText   = clients.filter(x=>x.status==='done'||x.status==='cancel').length;
-  document.getElementById('b-trash').innerText   = clients.filter(x=>x.status==='trash').length;
-  document.getElementById('s-active').innerText  = clients.filter(x=>x.status==='active').length;
-  document.getElementById('s-ended').innerText   = clients.filter(x=>x.status==='done').length;
+        <div class="m-card-body">
+          <div class="m-card-field">📅 Data<span>${c.data}</span></div>
+          <div class="m-card-field">🕒 Ora<span>${c.ora}</span></div>
+          <div class="m-card-field">📧 Email<span style="font-size:11px;word-break:break-all;">${emailDisplay}</span></div>
+          <div class="m-card-field">📞 Tel<span>${c.tel}</span></div>
+        </div>
+        ${c.obs ? `<div class="m-card-obs">${c.obs}</div>` : ''}
+        <div class="m-card-actions">${actionsHtml(c)}</div>
+      </div>`;
+    });
+  }
 }
 
 function update() { render(); saveToCloud(); }
+
 async function manualReload() {
-  const btn = document.getElementById('reload-btn');
+  const btn  = document.getElementById('reload-btn');
   const icon = document.getElementById('reload-icon');
   btn.style.opacity = '0.7';
   btn.style.pointerEvents = 'none';
-  icon.style.animation = 'spin 0.7s linear infinite';
+  icon.style.animation = 'spin .7s linear infinite';
   await loadFromCloud();
   icon.style.animation = '';
   btn.style.opacity = '1';
   btn.style.pointerEvents = 'auto';
-  showToast('✅ Pagina a fost reîncărcată cu succes!');
+  showToast('✅ Reîncărcat cu succes!');
 }
+
 function openDetail(id) {
-const c = clients.find(x => String(x.id) === String(id));
+  const c = clients.find(x => String(x.id) === String(id));
   if (!c) return;
   const row = (label, val) => `
-    <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #f1f5f9;font-size:14px;">
-      <span style="color:#64748b;width:100px;flex-shrink:0;font-weight:500;">${label}</span>
-      <span style="color:#1e293b;font-weight:600;flex:1;">${val}</span>
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid #f1f5f9;font-size:13px;">
+      <span style="color:var(--muted);width:90px;flex-shrink:0;font-weight:500;font-size:12px;">${label}</span>
+      <span style="color:var(--text);font-weight:600;flex:1;">${val}</span>
     </div>`;
   document.getElementById('detail-rows').innerHTML =
-    row('Referință', `<span style="font-family:monospace;color:var(--primary);letter-spacing:.8px;">${c.ref}</span>`) +
+    row('Referință', `<span style="font-family:monospace;color:var(--secondary);letter-spacing:.8px;font-weight:800;">${c.ref}</span>`) +
     row('Client', c.nume) +
-    row('Email', c.email && c.email.includes('@') ? `<a href="mailto:${c.email}" style="color:var(--secondary);">${c.email}</a>` : 'fără email') +
+    row('Email', c.email && c.email.includes('@') ? `<a href="mailto:${c.email}" style="color:var(--secondary);">${c.email}</a>` : '<em style="color:#cbd5e1">fără email</em>') +
     row('Telefon', c.tel !== '-' ? `<a href="tel:${c.tel}" style="color:var(--secondary);">${c.tel}</a>` : '-') +
     row('Data', c.data) +
     row('Ora', c.ora) +
     row('Status', statusHtml(c)) +
-    row('Note', c.obs || '<em style="color:#aaa">fără note</em>');
+    row('Note', c.obs || '<em style="color:#cbd5e1">fără note</em>');
   document.getElementById('detail-actions').innerHTML = `
     ${c.status==='active' ? `
-      <button class="btn-green" style="padding:10px 16px;border:none;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;" onclick="closeModal('modal-detail');changeStatus('${c.id}','done')">✅ Finalizat</button>
-      <button class="btn-yellow" style="padding:10px 16px;border:none;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;" onclick="closeModal('modal-detail');changeStatus('${c.id}','cancel')">❌ Anulează</button>` : ''}
+      <button class="btn-green" style="padding:10px 16px;border:none;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;font-family:inherit;" onclick="closeModal('modal-detail');changeStatus('${c.id}','done')">✅ Finalizat</button>
+      <button class="btn-yellow" style="padding:10px 16px;border:none;border-radius:10px;cursor:pointer;font-weight:700;font-size:13px;font-family:inherit;" onclick="closeModal('modal-detail');changeStatus('${c.id}','cancel')">❌ Anulează</button>` : ''}
     <a href="tel:${c.tel}" style="padding:10px 16px;background:#f0f9ff;color:#0369a1;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;">📞 Sună</a>
     <a href="mailto:${c.email}" style="padding:10px 16px;background:#faf5ff;color:#7c3aed;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;">✉️ Email</a>`;
   openModal('modal-detail');
 }
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) closeModal(this.id);
+  });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
+  if (e.key === 'Enter' && document.getElementById('login-page').style.display !== 'none') checkAuth();
+});
 </script>
 </body>
 </html>
