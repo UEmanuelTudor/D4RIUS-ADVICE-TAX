@@ -719,6 +719,39 @@ body{
     height: 48px;
   }
 }
+
+#cookie-settings-btn {
+  position: fixed;
+  bottom: 168px;
+  right: 20px;
+  background: linear-gradient(135deg, #14314d, #0b1b2b);
+  color: #fff;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 9997;
+  box-shadow: 0 10px 30px rgba(20,49,77,.45);
+  transition: .3s;
+  border: none;
+}
+#cookie-settings-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 40px rgba(20,49,77,.65);
+}
+@media(max-width:600px) {
+  #cookie-settings-btn {
+    bottom: 148px;
+    right: 16px;
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+  }
+}
 </style>
 </head>
 <script src="cookie-consent.js" defer></script>
@@ -735,20 +768,7 @@ body{
       <li><a href="#contact">Contact</a></li>
       <li><a href="#programari" class="nav-prog">📅 Programeaza-te</a></li>
       <!-- Adauga DUPA linia cu Programeaza-te -->
-<li>
-  <a href="login.html" id="nav-auth-btn" 
-     style="display:inline-flex;align-items:center;justify-content:center;
-            width:38px;height:38px;border-radius:50%;
-            background:linear-gradient(135deg,#6366f1,#8b5cf6);
-            color:#fff;font-weight:800;font-size:14px;
-            text-decoration:none;transition:.3s;
-            box-shadow:0 4px 15px rgba(99,102,241,.4);"
-     title="Contul Meu"
-     onmouseover="this.style.transform='scale(1.1)'"
-     onmouseout="this.style.transform='scale(1)'">
-    👤
-  </a>
-</li>
+
     </ul>
   </nav>
   <div class="logo-box">
@@ -1092,7 +1112,7 @@ body{
           <div class="prog-success-icon">✓</div>
           <h3>Programare trimisa cu succes!</h3>
           <p>Am primit solicitarea ta. Vei fi contactat in maxim <strong>24 ore</strong> pentru confirmare.</p>
-          <p style="font-size:16px;font-weight:700;color:#c2410c;margin-top:14px;">⚠️ Atentie! Email-ul de confirmare poate ajunge in folderul Spam sau Promotii. Te rugam sa verifici si acolo.</p>
+        
           <div class="prog-success-ref" id="prog-ref-code">REF: #D4TAX-0000</div>
           <p style="font-size:13px;color:#9aa5b4;">Pastreaza codul de referinta pentru urmarire</p>
           <button class="prog-new-btn" onclick="resetForm()">➕ Alta programare</button>
@@ -1146,9 +1166,11 @@ body{
   <a href="#blog">📝 Blog</a>
   <a href="#contact">📞 Contact</a>
   <a href="#programari">📅 Programari</a>
-  <a href="politica-confidentialitate.html">Politică de confidențialitate</a>
+<a href="politica-confidentialitate.html">Politică de confidențialitate</a>
   <a href="politica-cookies.html">Politică de cookies</a>
+  <a href="#" onclick="window.openCookieBanner && window.openCookieBanner(); return false;">⚙️ Setări cookie-uri</a>
   <a href="termeni-si-conditii.html">Termeni și condiții</a>
+  
 </div>
 
   </div>
@@ -1162,6 +1184,10 @@ body{
     <path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.103 1.504 5.829L.057 23.012a.75.75 0 00.931.931l5.184-1.447A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.726 9.726 0 01-4.964-1.36l-.356-.211-3.084.861.861-3.084-.211-.356A9.726 9.726 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/>
   </svg>
 </a>
+
+<button id="cookie-settings-btn" title="Setări cookie-uri" onclick="window.openCookieBanner && window.openCookieBanner()">🍪</button>
+
+
 
 <div id="chatbot-btn">💬</div>
 
@@ -1540,52 +1566,50 @@ function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReade
 <div id="cookie-banner">
   <p>🍪 Acest site folosește cookie-uri și tehnologii similare necesare pentru funcționare și, după caz, pentru reținerea preferințelor tale. Poți afla mai multe în <a href="politica-cookies.html">Politica de cookies</a> și <a href="politica-confidentialitate.html">Politica de confidențialitate</a>.</p>
   <div class="cookie-btns">
-    <button class="cookie-refuse" onclick="cookieChoice(false)">Refuz</button>
-    <button class="cookie-accept" onclick="cookieChoice(true)">Accept</button>
+    <button class="cookie-refuse" onclick="window.cookieRefuseAll()">Refuz</button>
+    <button class="cookie-refuse" onclick="window.openCookieBanner()" style="border-color:var(--primary);color:var(--primary);">⚙️ Editează</button>
+    <button class="cookie-accept" onclick="window.cookieAcceptAll()">Accept</button>
   </div>
 </div>
-<script>
-// ===== AUTH AVATAR IN NAV =====
-(function() {
-  try {
-    const s = JSON.parse(localStorage.getItem('d4tax_session'));
-    const btn = document.getElementById('nav-auth-btn');
-    if (!btn) return;
-    if (s && s.token && s.name) {
-      // Logat — arata initialele
-      const initials = s.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
-      btn.textContent = initials;
-      btn.href = 'login.html';
-      btn.title = 'Contul lui ' + s.name.split(' ')[0];
-    } else {
-      // Nelogat — icon user
-      btn.innerHTML = '👤';
-      btn.href = 'login.html';
-      btn.title = 'Autentificare';
-    }
-  } catch(e) {}
-})();
 
-// ===== SALVEAZA EMAIL IN PROGRAMARE DACA E LOGAT =====
-document.addEventListener('DOMContentLoaded', function() {
-  try {
-    const s = JSON.parse(localStorage.getItem('d4tax_session'));
-    if (s && s.token && s.email) {
-      // Pre-completeaza emailul daca e logat
-      const emailField = document.getElementById('prog-email');
-      const numeField = document.getElementById('prog-nume');
-      const prenumeField = document.getElementById('prog-prenume');
-      const telField = document.getElementById('prog-tel');
-      if (emailField && !emailField.value) emailField.value = s.email;
-      if (s.name) {
-        const parts = s.name.split(' ');
-        if (numeField && !numeField.value && parts[1]) numeField.value = parts[1];
-        if (prenumeField && !prenumeField.value && parts[0]) prenumeField.value = parts[0];
-      }
-      if (telField && !telField.value && s.tel) telField.value = s.tel;
-    }
-  } catch(e) {}
-});
-</script>
+<div id="cookie-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px);">
+  <div id="cookie-modal-box" style="background:#fff;border-radius:24px;max-width:480px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.35);overflow:hidden;">
+    <div style="background:linear-gradient(135deg,var(--primary),var(--dark));padding:26px 28px;color:#fff;">
+      <h3 style="margin:0;font-size:19px;">🍪 Preferințe cookie-uri</h3>
+      <p style="margin:6px 0 0;font-size:13px;color:#cbd5e1;">Alege ce categorii de cookie-uri accepți.</p>
+    </div>
+    <div style="padding:26px 28px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid #eee;">
+        <div>
+          <strong style="display:block;color:var(--primary);font-size:14px;">Necesare</strong>
+          <span style="font-size:12px;color:#888;">Esențiale pentru funcționarea site-ului. Nu pot fi dezactivate.</span>
+        </div>
+        <input type="checkbox" checked disabled style="width:20px;height:20px;flex-shrink:0;">
+      </div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid #eee;">
+        <div>
+          <strong style="display:block;color:var(--primary);font-size:14px;">Funcționale</strong>
+          <span style="font-size:12px;color:#888;">Rețin preferințele tale (ex: sesiune cont, chat).</span>
+        </div>
+        <input type="checkbox" id="cookie-pref-functional" style="width:20px;height:20px;flex-shrink:0;">
+      </div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:14px 0;">
+        <div>
+          <strong style="display:block;color:var(--primary);font-size:14px;">Analiză / statistici</strong>
+          <span style="font-size:12px;color:#888;">Ne ajută să înțelegem cum este folosit site-ul.</span>
+        </div>
+        <input type="checkbox" id="cookie-pref-analytics" style="width:20px;height:20px;flex-shrink:0;">
+      </div>
+    </div>
+    <div style="padding:0 28px 26px;display:flex;flex-direction:column;gap:10px;">
+      <button onclick="window.cookieSavePrefs()" style="padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--secondary),#ff9a3c);color:#fff;font-weight:700;cursor:pointer;font-size:14px;font-family:'Inter',sans-serif;">💾 Salvează preferințele</button>
+      <div style="display:flex;gap:10px;">
+        <button onclick="window.cookieRefuseAll()" style="flex:1;padding:11px;border:2px solid #ddd;border-radius:12px;background:#fff;color:#333;font-weight:600;cursor:pointer;font-size:13px;font-family:'Inter',sans-serif;">Refuz tot</button>
+        <button onclick="window.cookieAcceptAll()" style="flex:1;padding:11px;border:none;border-radius:12px;background:var(--primary);color:#fff;font-weight:600;cursor:pointer;font-size:13px;font-family:'Inter',sans-serif;">Accept tot</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

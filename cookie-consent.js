@@ -1,6 +1,6 @@
 (function () {
-  var STORAGE_KEY = "cookie_consent";
-  var COOKIE_NAME = "cookie_consent";
+  var STORAGE_KEY = "cookie_consent_v2";
+  var COOKIE_NAME = "cookie_consent_v2";
   var COOKIE_DAYS = 180;
 
   function setCookie(name, value, days) {
@@ -26,88 +26,95 @@
     return "";
   }
 
-  function getConsent() {
+  function getPrefs() {
     try {
       var stored = localStorage.getItem(STORAGE_KEY);
-      if (stored === "accepted" || stored === "refused") {
-        return stored;
-      }
-    } catch (error) {}
-
+      if (stored) return JSON.parse(stored);
+    } catch (e) {}
     var cookieValue = getCookie(COOKIE_NAME);
-    if (cookieValue === "accepted" || cookieValue === "refused") {
-      return cookieValue;
+    if (cookieValue) {
+      try { return JSON.parse(cookieValue); } catch (e) {}
     }
-
-    return "";
+    return null;
   }
 
-  function persistConsent(value) {
-    try {
-      localStorage.setItem(STORAGE_KEY, value);
-    } catch (error) {}
+  function savePrefs(prefs) {
+    prefs.necessary = true;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); } catch (e) {}
+    setCookie(COOKIE_NAME, JSON.stringify(prefs), COOKIE_DAYS);
+    document.documentElement.setAttribute("data-cookie-consent", JSON.stringify(prefs));
+    applyServices(prefs);
+  }
 
-    setCookie(COOKIE_NAME, value, COOKIE_DAYS);
-    document.documentElement.setAttribute("data-cookie-consent", value);
+  function applyServices(prefs) {
+    // Aici pornesti scripturi optionale in functie de categoria acceptata.
+    // Exemplu: if (prefs.analytics) { /* incarca Google Analytics */ }
+    window.cookiePrefs = prefs;
   }
 
   function showBanner() {
     var banner = document.getElementById("cookie-banner");
-    if (banner) {
-      banner.style.display = "flex";
-    }
+    if (banner) banner.style.display = "flex";
   }
-
   function hideBanner() {
     var banner = document.getElementById("cookie-banner");
-    if (banner) {
-      banner.style.display = "none";
-    }
+    if (banner) banner.style.display = "none";
   }
 
-  function enableOptionalServices() {
-    // Aici pornești doar scripturile neesențiale.
-    // Exemplu: Google Analytics, Meta Pixel, Hotjar etc.
-    // Dacă nu folosești nimic din astea, lasă gol.
-    window.optionalCookiesEnabled = true;
+  function showModal() {
+    var modal = document.getElementById("cookie-modal-overlay");
+    if (!modal) return;
+    var prefs = getPrefs() || { necessary: true, functional: false, analytics: false };
+    var fEl = document.getElementById("cookie-pref-functional");
+    var aEl = document.getElementById("cookie-pref-analytics");
+    if (fEl) fEl.checked = !!prefs.functional;
+    if (aEl) aEl.checked = !!prefs.analytics;
+    modal.style.display = "flex";
+    hideBanner();
+  }
+  function hideModal() {
+    var modal = document.getElementById("cookie-modal-overlay");
+    if (modal) modal.style.display = "none";
   }
 
-  function disableOptionalServices() {
-    // Aici te asiguri că nu rulează servicii neesențiale.
-    window.optionalCookiesEnabled = false;
-  }
-
-  function applyConsent() {
-    var consent = getConsent();
-
-    if (!consent) {
-      disableOptionalServices();
-      showBanner();
-      return;
-    }
-
-    document.documentElement.setAttribute("data-cookie-consent", consent);
-
-    if (consent === "accepted") {
-      enableOptionalServices();
-    } else {
-      disableOptionalServices();
-    }
-
+  function init() {
+    var prefs = getPrefs();
+    if (!prefs) { showBanner(); return; }
+    document.documentElement.setAttribute("data-cookie-consent", JSON.stringify(prefs));
+    applyServices(prefs);
     hideBanner();
   }
 
-  window.cookieChoice = function (accepted) {
-    var value = accepted ? "accepted" : "refused";
-    persistConsent(value);
-    applyConsent();
+  // Butoane din banner
+  window.cookieAcceptAll = function () {
+    savePrefs({ necessary: true, functional: true, analytics: true });
+    hideBanner(); hideModal();
+  };
+  window.cookieRefuseAll = function () {
+    savePrefs({ necessary: true, functional: false, analytics: false });
+    hideBanner(); hideModal();
   };
 
-  window.getCookieConsent = getConsent;
+  // Buton "Salveaza preferintele" din meniul de editare
+  window.cookieSavePrefs = function () {
+    var fEl = document.getElementById("cookie-pref-functional");
+    var aEl = document.getElementById("cookie-pref-analytics");
+    savePrefs({
+      necessary: true,
+      functional: fEl ? fEl.checked : false,
+      analytics: aEl ? aEl.checked : false
+    });
+    hideBanner(); hideModal();
+  };
+
+  // Apelat de butonul plutitor si de linkul din footer -> deschide meniul de editare
+  window.openCookieBanner = function () { showModal(); };
+  window.closeCookieModal = function () { hideModal(); };
+  window.getCookieConsent = getPrefs;
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", applyConsent);
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    applyConsent();
+    init();
   }
 })();
